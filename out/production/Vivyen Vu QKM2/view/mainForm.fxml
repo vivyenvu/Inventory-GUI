@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1080" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
+   <children>
+      <Button fx:id="mainAddPartBtn" layoutX="173.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainAddPartBtn" text="Add" />
+      <Button fx:id="mainModPartBtn" layoutX="235.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainModPartBtn" text="Modify" />
+      <Button fx:id="mainDeletePartBtn" layoutX="308.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainDeletePartBtn" text="Delete" />
+      <Button fx:id="mainDeleteProdBtn" layoutX="832.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainDeleteProdBtn" text="Delete" />
+      <Button fx:id="mainModProdBtn" layoutX="714.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainModProdBtn" text="Modify" />
+      <Button fx:id="mainAddProdBtn" layoutX="645.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainAddProdBtn" text="Add" />
+      <Button fx:id="mainExitBtn" layoutX="664.0" layoutY="434.0" mnemonicParsing="false" onAction="#onClickMainExitBtn" text="Exit" />
+   </children>
+</AnchorPane>
