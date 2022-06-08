@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1080" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainForm">
+<AnchorPane prefHeight="500.0" prefWidth="1080" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
    <children>
       <Button fx:id="mainAddPartBtn" layoutX="173.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainAddPartBtn" text="Add" />
       <Button fx:id="mainModPartBtn" layoutX="235.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainModPartBtn" text="Modify" />
