@@ -3,9 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addPartController">
+<AnchorPane prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addPartController">
    <children>
       <Button layoutX="406.0" layoutY="276.0" mnemonicParsing="false" onAction="#addPartCancelBtn" text="Cancel" />
       <Button layoutX="291.0" layoutY="276.0" mnemonicParsing="false" text="Save" />
+      <RadioButton layoutX="143.0" layoutY="115.0" mnemonicParsing="false" onAction="#addPartInHouseBtn" selected="true" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="addPartToggle" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="300.0" layoutY="124.0" mnemonicParsing="false" onAction="#addPartOutsourcedBtn" text="Outsourced" toggleGroup="$addPartToggle" />
    </children>
 </AnchorPane>
