@@ -34,8 +34,8 @@
       <TextField layoutX="180.0" layoutY="195.0" prefWidth="120.0" />
       <TextField layoutX="180.0" layoutY="235.0" prefWidth="120.0" />
       <TextField layoutX="180.0" layoutY="275.0" prefWidth="120.0" />
-      <TextField fx:id="machineIDInput" layoutX="180.0" layoutY="315.0" prefWidth="120.0" />
-      <Label fx:id="machineIDLabel" layoutX="75.0" layoutY="320.0" text="Machine ID" />
+      <TextField fx:id="addPartMachineIDInput" layoutX="180.0" layoutY="315.0" prefWidth="120.0" />
+      <Label fx:id="addPartMachineIDLabel" layoutX="75.0" layoutY="320.0" text="Machine ID" />
       <TextField layoutX="395.0" layoutY="275.0" prefWidth="120.0" />
    </children>
 </AnchorPane>

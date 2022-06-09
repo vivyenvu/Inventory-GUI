@@ -17,8 +17,8 @@ import java.util.ResourceBundle;
 
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
-    public TextField machineIDInput;
-    public Label machineIDLabel;
+    public TextField addPartMachineIDInput;
+    public Label addPartMachineIDLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,12 +35,12 @@ public class addPartController implements Initializable {
     }
 
     public void onAddPartInHouseBtn(ActionEvent actionEvent) {
-        machineIDLabel.setText("Machine ID");
-        //THIS CHANGES THE NAME BUT NOT THE INPUT FIELD
+        addPartMachineIDLabel.setText("Machine ID");
+        //THIS CHANGES THE NAME BUT NOT THE INPUT FIELD. POSSIBLE SOLUTION IS TO WRITE AND IF...THEN STATEMENT SO DATA IS ASSIGNED TO MACHINE VS COMPANY VARIABLE
     }
 
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
-        machineIDLabel.setText("Company Name");
+        addPartMachineIDLabel.setText("Company Name");
         //ALSO NEED TO CHANGE THE INPUT FIELD TO ACCEPT DATA FOR COMPANY NAME INSTEAD
     }
 }

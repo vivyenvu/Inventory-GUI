@@ -2,10 +2,40 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500" prefWidth="1080" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.modPartController">
+<AnchorPane prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.modPartController">
     <children>
-        <Button layoutX="406.0" layoutY="276.0" mnemonicParsing="false" text="Cancel" />
-        <Button layoutX="291.0" layoutY="276.0" mnemonicParsing="false" text="Save" />
+        <Button layoutX="420.0" layoutY="383.0" mnemonicParsing="false" onAction="#modPartCancelBtn" text="Cancel" />
+        <Button layoutX="363.0" layoutY="383.0" mnemonicParsing="false" text="Save" />
+        <RadioButton fx:id="modPartInHouseBtn" layoutX="171.0" layoutY="65.0" mnemonicParsing="false" onAction="#onModPartInHouseBtn" selected="true" text="In-House">
+            <toggleGroup>
+                <ToggleGroup fx:id="addPartToggle" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="modPartOutsourcedBtn" layoutX="306.0" layoutY="65.0" mnemonicParsing="false" onAction="#onModPartOutsourcedBtn" text="Outsourced" toggleGroup="$addPartToggle" />
+        <Label layoutX="67.0" layoutY="65.0" text="Modify Part">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="75.0" layoutY="120.0" text="ID" />
+        <Label layoutX="75.0" layoutY="160.0" text="Name" />
+        <Label layoutX="75.0" layoutY="200.0" text="Inv" />
+        <Label layoutX="75.0" layoutY="240.0" text="Price/Cost" />
+        <Label layoutX="75.0" layoutY="280.0" text="Max" />
+        <Label layoutX="349.0" layoutY="280.0" text="Min" />
+        <TextField disable="true" editable="false" layoutX="180.0" layoutY="115.0" prefWidth="120.0" promptText="Auto Gen- Disabled">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </TextField>
+        <TextField layoutX="180.0" layoutY="155.0" prefWidth="120.0" />
+        <TextField layoutX="180.0" layoutY="195.0" prefWidth="120.0" />
+        <TextField layoutX="180.0" layoutY="235.0" prefWidth="120.0" />
+        <TextField layoutX="180.0" layoutY="275.0" prefWidth="120.0" />
+        <TextField fx:id="modPartMachineIDInput" layoutX="180.0" layoutY="315.0" prefWidth="120.0" />
+        <Label fx:id="modPartMachineIDLabel" layoutX="75.0" layoutY="320.0" text="Machine ID" />
+        <TextField layoutX="395.0" layoutY="275.0" prefWidth="120.0" />
     </children>
 </AnchorPane>
