@@ -24,18 +24,18 @@
       <Label layoutX="75.0" layoutY="200.0" text="Inv" />
       <Label layoutX="75.0" layoutY="240.0" text="Price/Cost" />
       <Label layoutX="75.0" layoutY="280.0" text="Max" />
-      <Label layoutX="337.0" layoutY="280.0" text="Min" />
-      <TextField editable="false" layoutX="155.0" layoutY="115.0" promptText="Auto Gen- Disabled">
+      <Label layoutX="349.0" layoutY="280.0" text="Min" />
+      <TextField disable="true" editable="false" layoutX="180.0" layoutY="115.0" prefWidth="120.0" promptText="Auto Gen- Disabled">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </TextField>
-      <TextField layoutX="155.0" layoutY="155.0" />
-      <TextField layoutX="155.0" layoutY="195.0" />
-      <TextField layoutX="155.0" layoutY="235.0" />
-      <TextField layoutX="155.0" layoutY="275.0" />
-      <TextField layoutX="155.0" layoutY="315.0" />
-      <Label layoutX="75.0" layoutY="320.0" text="Machine ID" />
-      <TextField layoutX="376.0" layoutY="275.0" />
+      <TextField layoutX="180.0" layoutY="155.0" prefWidth="120.0" />
+      <TextField layoutX="180.0" layoutY="195.0" prefWidth="120.0" />
+      <TextField layoutX="180.0" layoutY="235.0" prefWidth="120.0" />
+      <TextField layoutX="180.0" layoutY="275.0" prefWidth="120.0" />
+      <TextField fx:id="machineIDInput" layoutX="180.0" layoutY="315.0" prefWidth="120.0" />
+      <Label fx:id="machineIDLabel" layoutX="75.0" layoutY="320.0" text="Machine ID" />
+      <TextField layoutX="395.0" layoutY="275.0" prefWidth="120.0" />
    </children>
 </AnchorPane>

@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -15,6 +17,8 @@ import java.util.ResourceBundle;
 
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
+    public TextField machineIDInput;
+    public Label machineIDLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -31,8 +35,12 @@ public class addPartController implements Initializable {
     }
 
     public void onAddPartInHouseBtn(ActionEvent actionEvent) {
+        machineIDLabel.setText("Machine ID");
+        //THIS CHANGES THE NAME BUT NOT THE INPUT FIELD
     }
 
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
+        machineIDLabel.setText("Company Name");
+        //ALSO NEED TO CHANGE THE INPUT FIELD TO ACCEPT DATA FOR COMPANY NAME INSTEAD
     }
 }
