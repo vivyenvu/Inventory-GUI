@@ -18,11 +18,12 @@ public class addPartController implements Initializable {
 
     }
 
-    public void toMain(ActionEvent actionEvent) throws IOException {
+    public void addPartCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1080, 500);
         stage.setTitle("Back to Main Screen");
+        stage.setScene(scene);
         stage.show();
     }
 }
