@@ -2,18 +2,19 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1080" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
+<AnchorPane prefHeight="400" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainFormController">
    <children>
-      <Button fx:id="mainAddPartBtn" layoutX="173.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainAddPartBtn" text="Add" />
-      <Button fx:id="mainModPartBtn" layoutX="235.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainModPartBtn" text="Modify" />
-      <Button fx:id="mainDeletePartBtn" layoutX="308.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainDeletePartBtn" text="Delete" />
-      <Button fx:id="mainDeleteProdBtn" layoutX="832.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainDeleteProdBtn" text="Delete" />
-      <Button fx:id="mainModProdBtn" layoutX="714.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainModProdBtn" text="Modify" />
-      <Button fx:id="mainAddProdBtn" layoutX="645.0" layoutY="353.0" mnemonicParsing="false" onAction="#onClickMainAddProdBtn" text="Add" />
-      <Button fx:id="mainExitBtn" layoutX="664.0" layoutY="434.0" mnemonicParsing="false" onAction="#onClickMainExitBtn" text="Exit" />
-      <TableView fx:id="mainPartTable" layoutX="86.0" layoutY="103.0" prefHeight="200.0" prefWidth="400.0">
+      <Button fx:id="mainAddPartBtn" layoutX="325.0" layoutY="312.0" mnemonicParsing="false" onAction="#onClickMainAddPartBtn" text="Add" />
+      <Button fx:id="mainModPartBtn" layoutX="369.0" layoutY="312.0" mnemonicParsing="false" onAction="#onClickMainModPartBtn" text="Modify" />
+      <Button fx:id="mainDeletePartBtn" layoutX="429.0" layoutY="312.0" mnemonicParsing="false" onAction="#onClickMainDeletePartBtn" text="Delete" />
+      <Button fx:id="mainDeleteProdBtn" layoutX="937.0" layoutY="313.0" mnemonicParsing="false" onAction="#onClickMainDeleteProdBtn" text="Delete" />
+      <Button fx:id="mainModProdBtn" layoutX="877.0" layoutY="313.0" mnemonicParsing="false" onAction="#onClickMainModProdBtn" text="Modify" />
+      <Button fx:id="mainAddProdBtn" layoutX="833.0" layoutY="313.0" mnemonicParsing="false" onAction="#onClickMainAddProdBtn" text="Add" />
+      <Button fx:id="mainExitBtn" layoutX="939.0" layoutY="361.0" mnemonicParsing="false" onAction="#onClickMainExitBtn" prefHeight="25.0" prefWidth="51.0" text="Exit" />
+      <TableView fx:id="mainPartTable" layoutX="80.0" layoutY="105.0" prefHeight="200.0" prefWidth="400.0">
         <columns>
           <TableColumn fx:id="mainPartTableID" prefWidth="75.0" text="Part ID" />
           <TableColumn fx:id="mainPartTableName" prefWidth="75.0" text="Part Name" />
@@ -21,7 +22,7 @@
             <TableColumn fx:id="mainPartTablePrice" prefWidth="142.0" text="Price/Cost per Unit" />
         </columns>
       </TableView>
-      <TableView fx:id="mainProdTable" layoutX="632.0" layoutY="103.0" prefHeight="200.0" prefWidth="400.0">
+      <TableView fx:id="mainProdTable" layoutX="587.0" layoutY="106.0" prefHeight="200.0" prefWidth="400.0">
         <columns>
           <TableColumn fx:id="mainProdTableID" prefWidth="75.0" text="Product ID" />
           <TableColumn fx:id="mainProdTableName" prefWidth="95.0" text="Product Name" />
@@ -29,16 +30,23 @@
             <TableColumn fx:id="mainProdTablePrice" prefWidth="129.0" text="Price/cost per Unit" />
         </columns>
       </TableView>
-      <TextField alignment="CENTER" layoutX="306.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
-      <TextField alignment="CENTER" layoutX="853.0" layoutY="70.0" prefWidth="180.0" promptText="Search by Product ID or Name" />
-      <Label layoutX="106.0" layoutY="75.0" text="Parts">
+      <TextField alignment="CENTER" layoutX="300.0" layoutY="72.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
+      <TextField alignment="CENTER" layoutX="808.0" layoutY="73.0" prefWidth="180.0" promptText="Search by Product ID or Name" />
+      <Label layoutX="85.0" layoutY="77.0" text="Parts">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="638.0" layoutY="75.0" text="Products">
+      <Label layoutX="593.0" layoutY="78.0" text="Products">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+      <Label layoutX="40.0" layoutY="15.0" text="Inventory Management System">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="20.0" arcWidth="30.0" fill="TRANSPARENT" height="288.0" layoutX="60.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="440.0" />
+      <Rectangle arcHeight="20.0" arcWidth="30.0" fill="TRANSPARENT" height="288.0" layoutX="566.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="440.0" />
    </children>
 </AnchorPane>
