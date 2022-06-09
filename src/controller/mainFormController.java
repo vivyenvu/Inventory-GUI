@@ -65,12 +65,22 @@ public class mainFormController implements Initializable {
         System.out.println("Deleting product");
     }
 
-    public void onClickMainModProdBtn(ActionEvent actionEvent) {
-        System.out.println("Modifying product");
+    public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/modProd.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 600);
+        stage.setTitle("Modify Product");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onClickMainAddProdBtn(ActionEvent actionEvent) {
-        System.out.println("Adding product");
+    public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/addProd.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 600);
+        stage.setTitle("Add Product");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void onClickMainExitBtn(ActionEvent actionEvent) {
