@@ -2,16 +2,40 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addPartController">
    <children>
-      <Button layoutX="406.0" layoutY="276.0" mnemonicParsing="false" onAction="#addPartCancelBtn" text="Cancel" />
-      <Button layoutX="291.0" layoutY="276.0" mnemonicParsing="false" text="Save" />
-      <RadioButton layoutX="143.0" layoutY="115.0" mnemonicParsing="false" onAction="#addPartInHouseBtn" selected="true" text="In-House">
+      <Button layoutX="420.0" layoutY="383.0" mnemonicParsing="false" onAction="#addPartCancelBtn" text="Cancel" />
+      <Button layoutX="363.0" layoutY="383.0" mnemonicParsing="false" text="Save" />
+      <RadioButton fx:id="addPartInHouseBtn" layoutX="171.0" layoutY="65.0" mnemonicParsing="false" onAction="#onAddPartInHouseBtn" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="addPartToggle" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="300.0" layoutY="124.0" mnemonicParsing="false" onAction="#addPartOutsourcedBtn" text="Outsourced" toggleGroup="$addPartToggle" />
+      <RadioButton fx:id="addPartOutsourcedBtn" layoutX="306.0" layoutY="65.0" mnemonicParsing="false" onAction="#onAddPartOutsourcedBtn" text="Outsourced" toggleGroup="$addPartToggle" />
+      <Label layoutX="67.0" layoutY="65.0" text="Add Part">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="120.0" text="ID" />
+      <Label layoutX="75.0" layoutY="160.0" text="Name" />
+      <Label layoutX="75.0" layoutY="200.0" text="Inv" />
+      <Label layoutX="75.0" layoutY="240.0" text="Price/Cost" />
+      <Label layoutX="75.0" layoutY="280.0" text="Max" />
+      <Label layoutX="337.0" layoutY="280.0" text="Min" />
+      <TextField editable="false" layoutX="155.0" layoutY="115.0" promptText="Auto Gen- Disabled">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="155.0" layoutY="155.0" />
+      <TextField layoutX="155.0" layoutY="195.0" />
+      <TextField layoutX="155.0" layoutY="235.0" />
+      <TextField layoutX="155.0" layoutY="275.0" />
+      <TextField layoutX="155.0" layoutY="315.0" />
+      <Label layoutX="75.0" layoutY="320.0" text="Machine ID" />
+      <TextField layoutX="376.0" layoutY="275.0" />
    </children>
 </AnchorPane>

@@ -30,9 +30,9 @@ public class addPartController implements Initializable {
         stage.show();
     }
 
-    public void addPartInHouseBtn(ActionEvent actionEvent) {
+    public void onAddPartInHouseBtn(ActionEvent actionEvent) {
     }
 
-    public void addPartOutsourcedBtn(ActionEvent actionEvent) {
+    public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
     }
 }
