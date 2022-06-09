@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +23,16 @@ public class mainFormController implements Initializable {
     public Button mainModProdBtn;
     public Button mainAddProdBtn;
     public Button mainExitBtn;
+    public TableView mainPartTable;
+    public TableColumn mainPartTableID;
+    public TableColumn mainPartTableName;
+    public TableColumn mainPartTableInventory;
+    public TableColumn mainPartTablePrice;
+    public TableView mainProdTable;
+    public TableColumn mainProdTableID;
+    public TableColumn mainProdTableName;
+    public TableColumn mainProdTableInventory;
+    public TableColumn mainProdTablePrice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
