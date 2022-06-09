@@ -36,8 +36,13 @@ public class mainFormController implements Initializable {
         stage.show();
     }
 
-    public void onClickMainModPartBtn(ActionEvent actionEvent) {
-        System.out.println("Modifying part");
+    public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1080, 500);
+        stage.setTitle("Modify Part");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void onClickMainDeletePartBtn(ActionEvent actionEvent) {
