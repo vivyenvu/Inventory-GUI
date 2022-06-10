@@ -6,9 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,10 @@ public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
     public TextField addPartMachineIDInput;
     public Label addPartMachineIDLabel;
+    public Button addPartCancelBtn;
+    public Button addPartSaveBtn;
+    public RadioButton addPartInHouseBtn;
+    public RadioButton addPartOutsourcedBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -28,7 +30,7 @@ public class addPartController implements Initializable {
     public void addPartCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 500);
+        Scene scene = new Scene(root, 1080, 400);
         stage.setTitle("Back to Main Screen");
         stage.setScene(scene);
         stage.show();
@@ -42,5 +44,8 @@ public class addPartController implements Initializable {
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Company Name");
         //ALSO NEED TO CHANGE THE INPUT FIELD TO ACCEPT DATA FOR COMPANY NAME INSTEAD
+    }
+
+    public void onAddPartSaveBtn(ActionEvent actionEvent) {
     }
 }

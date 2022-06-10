@@ -83,6 +83,7 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainExitBtn(ActionEvent actionEvent) {
-        System.out.println("Exiting");
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

@@ -6,8 +6,8 @@
 
 <AnchorPane prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addPartController">
    <children>
-      <Button layoutX="420.0" layoutY="383.0" mnemonicParsing="false" onAction="#addPartCancelBtn" text="Cancel" />
-      <Button layoutX="363.0" layoutY="383.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="addPartCancelBtn" layoutX="420.0" layoutY="383.0" mnemonicParsing="false" onAction="#addPartCancelBtn" text="Cancel" />
+      <Button fx:id="addPartSaveBtn" layoutX="363.0" layoutY="383.0" mnemonicParsing="false" onAction="#onAddPartSaveBtn" text="Save" />
       <RadioButton fx:id="addPartInHouseBtn" layoutX="171.0" layoutY="65.0" mnemonicParsing="false" onAction="#onAddPartInHouseBtn" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="addPartToggle" />
