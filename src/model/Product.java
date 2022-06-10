@@ -69,5 +69,25 @@ public class Product {
         this.prodMax = prodMax;
     }
 
+    public void addAssociatedPart(Part part) {
+        associatedParts.add(part);
+    }
 
+    public boolean deleteAssociatedPart(Part selectedAssociatedPart){
+        for (int i = 0; i < ObservableList.length(); i++) {
+            if (ObservableList[i] == selectedAssociatedPart) {
+                delete ObservableList[i];
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    public ObservableList<Part> getAllAssociatedParts() {
+        for (Part parts: ObservableList<Part>) {
+            System.out.println(this.associatedPart[parts]);
+        }
+    }
 }
