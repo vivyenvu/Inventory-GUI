@@ -19,7 +19,7 @@ public abstract class Part {
         this.madeInHouse = madeInHouse;
     }
 
-    //getters
+    //Getters
      public int getID() {
         return partID;
      }
@@ -48,7 +48,7 @@ public abstract class Part {
         return madeInHouse;
      }
 
-     //setters
+     //Setters
     public void setID (int partID){
         this.partID = partID;
     }
