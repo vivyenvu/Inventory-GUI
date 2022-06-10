@@ -47,4 +47,33 @@ public abstract class Part {
      public boolean isPartMadeInHouse() {
         return partMadeInHouse;
      }
+
+     //setters
+    public void setID (int partID){
+        this.partID = partID;
+    }
+
+    public void setName(String partName) {
+        this.partName = partName;
+    }
+
+    public void setPrice(double partPrice) {
+        this.partPrice = partPrice;
+    }
+
+    public void setStock (int partStock) {
+        this.partStock = partStock;
+    }
+
+    public void setMin (int partMin) {
+        this.partMin = partMin;
+    }
+
+    public void setMax (int partMax) {
+        this.partMax = partMax;
+    }
+    
+    public void setPartMadeInHouse (boolean partMadeInHouse) {
+        this.partMadeInHouse = partMadeInHouse;
+    }
 }
