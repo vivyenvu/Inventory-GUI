@@ -7,7 +7,7 @@ public abstract class Part {
     private int partStock;
     private int partMin;
     private int partMax;
-    boolean partMadeInHouse;
+    boolean madeInHouse;
 
     public Part(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, boolean partMadeInHouse) {
         this.partID = partID;
@@ -16,7 +16,7 @@ public abstract class Part {
         this.partStock = partStock;
         this.partMin = partMin;
         this.partMax = partMax;
-        this.partMadeInHouse = partMadeInHouse;
+        this.madeInHouse = madeInHouse;
     }
 
     //getters
@@ -44,8 +44,8 @@ public abstract class Part {
         return partMax;
      }
 
-     public boolean isPartMadeInHouse() {
-        return partMadeInHouse;
+     public boolean isMadeInHouse() {
+        return madeInHouse;
      }
 
      //setters
@@ -73,7 +73,7 @@ public abstract class Part {
         this.partMax = partMax;
     }
     
-    public void setPartMadeInHouse (boolean partMadeInHouse) {
-        this.partMadeInHouse = partMadeInHouse;
+    public void setMadeInHouse (boolean madeInHouse) {
+        this.madeInHouse = madeInHouse;
     }
 }
