@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Outsourced;
 
 public class Main extends Application {
     @Override
@@ -19,7 +20,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         InHouse OPB = new InHouse(1, "OPB", 200, 15, 0, int 50, 1234, true);
         InHouse DB = new InHouse (2, "Deadlift Bar", 300, 10, 0, 40, 2468, true);
-
+        Outsourced plate = new Outsourced (3, "Eleiko plates", 180, 44, 0, 100, false);
+        Outsourced platform = new Outsourced (4, "Wood platform", 500, 12, 0, 20, false);
         launch(args);
     }
 }
