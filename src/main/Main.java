@@ -29,6 +29,8 @@ public class Main extends Application {
         Inventory.addPart(plate);
         Inventory.addPart(platform);
 
+        // fruitTable.setItems(FruitBowl.getTheBowl());
+        mainPartTable.setItems(Inventory.getAllParts());
         launch(args);
     }
 }
