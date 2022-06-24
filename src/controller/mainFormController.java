@@ -50,6 +50,8 @@ public class mainFormController implements Initializable {
         Inventory.addPart(plate);
         Inventory.addPart(platform);
 
+        mainPartTable.setItems(Inventory.getAllParts());
+
         mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         mainPartTableInventory.setCellValueFactory(new PropertyValueFactory<>("partStock"));
