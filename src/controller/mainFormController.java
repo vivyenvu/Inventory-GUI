@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.InHouse;
 import model.Inventory;
@@ -48,6 +49,8 @@ public class mainFormController implements Initializable {
         Inventory.addPart(DB);
         Inventory.addPart(plate);
         Inventory.addPart(platform);
+
+        mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
