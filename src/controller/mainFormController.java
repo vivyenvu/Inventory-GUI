@@ -50,7 +50,8 @@ public class mainFormController implements Initializable {
         Inventory.addPart(plate);
         Inventory.addPart(platform);
 
-        mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
     }
 
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
