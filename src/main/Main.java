@@ -12,14 +12,13 @@ import model.Outsourced;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        addTestData();
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         stage.setTitle("Main Form");
         stage.setScene(new Scene(root, 1080, 400));
         stage.show();
     }
-    private void addTestData() {
+    private static void addTestData() {
 
         InHouse OPB = new InHouse(1, "OPB", 200, 15, 0, 50, 1234, true);
         InHouse DB = new InHouse (2, "Deadlift Bar", 300, 10, 0, 40, 2468, true);
@@ -32,12 +31,7 @@ public class Main extends Application {
         Inventory.addPart(platform);
     }
     public static void main(String[] args) {
-
-
-
-
-        // fruitTable.setItems(FruitBowl.getTheBowl());
-        //mainPartTable.setItems(Inventory.getAllParts());
+        addTestData();
         launch(args);
     }
 }
