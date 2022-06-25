@@ -38,11 +38,9 @@ public class mainFormController implements Initializable {
     public TableColumn mainProdTableInventory;
     public TableColumn mainProdTablePrice;
 
-    private static boolean firstTime = true;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //addTestData();
 
         mainPartTable.setItems(Inventory.getAllParts());
 
