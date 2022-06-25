@@ -32,7 +32,7 @@
             <TableColumn fx:id="mainProdTablePrice" prefWidth="129.0" text="Price/cost per Unit" />
         </columns>
       </TableView>
-      <TextField alignment="CENTER" layoutX="300.0" layoutY="72.0" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
+      <TextField fx:id="queryPartSearch" alignment="CENTER" layoutX="300.0" layoutY="72.0" onAction="#onClickPartSearch" prefHeight="25.0" prefWidth="180.0" promptText="Search by Part ID or Name" />
       <TextField alignment="CENTER" layoutX="808.0" layoutY="73.0" prefWidth="180.0" promptText="Search by Product ID or Name" />
       <Label layoutX="85.0" layoutY="77.0" text="Parts">
          <font>

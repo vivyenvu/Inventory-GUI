@@ -18,6 +18,7 @@ import model.Inventory;
 import model.Outsourced;
 import model.Part;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,6 +41,7 @@ public class mainFormController implements Initializable {
     public TableColumn mainProdTableName;
     public TableColumn mainProdTableInventory;
     public TableColumn mainProdTablePrice;
+    public TextField queryPartSearch;
 
 
     @Override
@@ -106,9 +108,23 @@ public class mainFormController implements Initializable {
 
     }
 
+    public void getResultsHandler(ActionEvent actionEvent) {
+        String q = queryPartSearch.getText();
+
+        ObservableList<Part> parts = searchByPartName(q);
+        mainPartTable.setItems(parts);
+       // queryPartSearch.setText("");
+    }
     private ObservableList<Part> searchByPartName(String partialName) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for (Part p : allParts) {
+            if (p.getPartName().contains(partialName)) {
+                namedParts.add(p);
+            }
+
+        }
         return namedParts;
     }
 }
