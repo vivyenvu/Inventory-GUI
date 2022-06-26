@@ -106,6 +106,8 @@ public class mainFormController implements Initializable {
 
     public void onClickPartSearch(ActionEvent actionEvent) {
         String q = queryPartSearch.getText();
+        System.out.print(q);
+        /*
 
         ObservableList<Part> parts = searchByPartName(q);
 
@@ -118,7 +120,7 @@ public class mainFormController implements Initializable {
         }
         mainPartTable.setItems(parts);
         queryPartSearch.setText("");
-    }
+    }*/
 
     /*public void getResultsHandler(ActionEvent actionEvent) {
 
