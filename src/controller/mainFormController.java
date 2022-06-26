@@ -105,10 +105,6 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickPartSearch(ActionEvent actionEvent) {
-
-    }
-
-    public void getResultsHandler(ActionEvent actionEvent) {
         String q = queryPartSearch.getText();
 
         ObservableList<Part> parts = searchByPartName(q);
@@ -123,6 +119,10 @@ public class mainFormController implements Initializable {
         mainPartTable.setItems(parts);
         queryPartSearch.setText("");
     }
+
+    /*public void getResultsHandler(ActionEvent actionEvent) {
+
+    }*/
     private ObservableList<Part> searchByPartName(String partialName) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = Inventory.getAllParts();
