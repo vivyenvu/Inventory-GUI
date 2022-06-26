@@ -57,7 +57,7 @@ public class mainFormController implements Initializable {
 
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
         stage.setTitle("Add Part");
         stage.setScene(scene);
@@ -66,7 +66,7 @@ public class mainFormController implements Initializable {
 
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
         stage.setTitle("Modify Part");
         stage.setScene(scene);
@@ -83,7 +83,7 @@ public class mainFormController implements Initializable {
 
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/modProd.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 600);
         stage.setTitle("Modify Product");
         stage.setScene(scene);
@@ -92,7 +92,7 @@ public class mainFormController implements Initializable {
 
     public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addProd.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 600);
         stage.setTitle("Add Product");
         stage.setScene(scene);
@@ -100,7 +100,7 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainExitBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -113,10 +113,12 @@ public class mainFormController implements Initializable {
         for (Part p : allParts) {
             if (p.getPartName().contains(q)) {
                 namedParts.add(p);
-                System.out.print(q);
             }
-
+            mainPartTable.setItems(namedParts);
+            mainPartTable.refresh();
+        }
     }
+}
         /*
 
         ObservableList<Part> parts = searchByPartName(q);
@@ -156,5 +158,4 @@ public class mainFormController implements Initializable {
             }
         }
         return null;
-    }
-}*/
+    }*/
