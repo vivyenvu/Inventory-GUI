@@ -106,7 +106,17 @@ public class mainFormController implements Initializable {
 
     public void onClickPartSearch(ActionEvent actionEvent) {
         String q = queryPartSearch.getText();
-        System.out.print(q);
+
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for (Part p : allParts) {
+            if (p.getPartName().contains(q)) {
+                namedParts.add(p);
+                System.out.print(q);
+            }
+
+    }
         /*
 
         ObservableList<Part> parts = searchByPartName(q);
@@ -124,8 +134,8 @@ public class mainFormController implements Initializable {
 
     /*public void getResultsHandler(ActionEvent actionEvent) {
 
-    }*/
-    private ObservableList<Part> searchByPartName(String partialName) {
+    }
+    private  ObservableList<Part> searchByPartName(String partialName) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = Inventory.getAllParts();
 
@@ -147,4 +157,4 @@ public class mainFormController implements Initializable {
         }
         return null;
     }
-}
+}*/
