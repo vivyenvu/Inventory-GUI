@@ -13,10 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.InHouse;
-import model.Inventory;
-import model.Outsourced;
-import model.Part;
+import model.*;
 
 import javafx.scene.control.TextField;
 import java.io.IOException;
@@ -42,6 +39,7 @@ public class mainFormController implements Initializable {
     public TableColumn mainProdTableInventory;
     public TableColumn mainProdTablePrice;
     public TextField queryPartSearch;
+    public TextField queryProdSearch;
 
 
     @Override
@@ -125,6 +123,29 @@ public class mainFormController implements Initializable {
         }
         else {
             mainPartTable.setItems(allParts);
+        }
+    }
+    public void onClickProdSearch(ActionEvent actionEvent)  {
+        ObservableList<Product> namedProds = FXCollections.observableArrayList();
+        ObservableList<Product> allProds = Inventory.getAllProducts();
+
+        String q = queryProdSearch.getText();
+
+        if (!q.isEmpty()) {
+            for (Product p : allProds) {
+                if (p.getProdName().contains(q)) {
+                    namedProds.add(p);
+                }
+                if (q.contains(String.valueOf(p.getProdID()))){
+                    namedProds.add(p);
+                }
+                mainProdTable.setItems(namedProds);
+                mainProdTable.refresh();
+                // else "If part is not found, the application displays an error message in the UI or in a dialog box
+            }
+        }
+        else {
+            mainProdTable.setItems(allProds);
         }
     }
 }
