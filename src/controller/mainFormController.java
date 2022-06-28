@@ -8,16 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.*;
 
-import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class mainFormController implements Initializable {
@@ -79,7 +77,15 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainDeletePartBtn(ActionEvent actionEvent) {
-        System.out.println("Deleting part");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Parts");
+        alert.setContentText("Are you sure you want to delete this part?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+            Inventory.deletePart(p);
+        }
     }
 
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {
