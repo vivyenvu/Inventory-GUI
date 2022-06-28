@@ -21,6 +21,11 @@ public class addPartController implements Initializable {
     public Button addPartSaveBtn;
     public RadioButton addPartInHouseBtn;
     public RadioButton addPartOutsourcedBtn;
+    public TextField addPartName;
+    public TextField addPartStock;
+    public TextField addPartPrice;
+    public TextField addPartMax;
+    public TextField addPartMin;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +52,14 @@ public class addPartController implements Initializable {
     }
 
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
+        int partID =(int)(Math.random() * 100); //think of other ways to generate unique id
+        String name = addPartName.getText();
+        int stock = Integer.parseInt(addPartStock.getText());
+        double price = Double.parseDouble(addPartPrice.getText());
+        int min = Integer.parseInt(addPartMin.getText());
+        int max = Integer.parseInt(addPartMax.getText());
+        boolean madeInHouse = false;
+        String companyName;
 
 
 
