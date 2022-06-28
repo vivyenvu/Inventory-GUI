@@ -89,7 +89,16 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {
-        System.out.println("Deleting product");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Products");
+        alert.setContentText("Are you sure you want to delete this product?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Product p = (Product) mainProdTable.getSelectionModel().getSelectedItem();
+            Inventory.deleteProduct(p);
+            //  PUT IN ALERT THAT THIS CANNOT DELETE THE PRODUCT IF IT HAS ASSOCIATED PARTS
+        }
     }
 
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
