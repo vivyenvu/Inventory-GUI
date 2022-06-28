@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
-    public TextField addPartMachineIDInput;
+    public TextField addPartMachineID;
     public Label addPartMachineIDLabel;
     public Button addPartCancelBtn;
     public Button addPartSaveBtn;
@@ -46,6 +46,7 @@ public class addPartController implements Initializable {
         //ALSO NEED TO CHANGE THE INPUT FIELD TO ACCEPT DATA FOR COMPANY NAME INSTEAD
     }
 
-    public void onAddPartSaveBtn(ActionEvent actionEvent) {
+    public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
+
     }
 }
