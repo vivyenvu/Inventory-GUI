@@ -11,7 +11,7 @@ public class Inventory {
         allParts.add(newPart);
     }
 
-    public void addProduct(Product newProduct) {
+    public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 

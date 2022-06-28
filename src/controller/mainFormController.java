@@ -51,6 +51,13 @@ public class mainFormController implements Initializable {
         mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         mainPartTableInventory.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         mainPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+
+        mainProdTable.setItems(Inventory.getAllProducts());
+
+        mainProdTableID.setCellValueFactory(new PropertyValueFactory<>("prodID"));
+        mainProdTableName.setCellValueFactory(new PropertyValueFactory<>("prodName"));
+        mainProdTableInventory.setCellValueFactory(new PropertyValueFactory<>("prodStock"));
+        mainProdTablePrice.setCellValueFactory(new PropertyValueFactory<>("prodPrice"));
     }
 
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {

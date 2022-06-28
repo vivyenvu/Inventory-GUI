@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import model.InHouse;
 import model.Inventory;
 import model.Outsourced;
+import model.Product;
 
 public class Main extends Application {
     @Override
@@ -29,6 +30,12 @@ public class Main extends Application {
         Inventory.addPart(DB);
         Inventory.addPart(plate);
         Inventory.addPart(platform);
+
+        Product steel = new Product (11, "Steel Society", 65000, 1, 1, 3);
+        Product crunch = new Product (12, "Crunch Johns Creek", 10000, 3, 1, 10);
+
+        Inventory.addProduct(steel);
+        Inventory.addProduct(crunch);
     }
     public static void main(String[] args) {
         addTestData();
