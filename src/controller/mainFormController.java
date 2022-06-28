@@ -18,7 +18,7 @@ import model.Inventory;
 import model.Outsourced;
 import model.Part;
 
-import java.awt.*;
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -105,21 +105,33 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickPartSearch(ActionEvent actionEvent) {
-        String q = queryPartSearch.getText();
-
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = Inventory.getAllParts();
 
-        for (Part p : allParts) {
-            if (p.getPartName().contains(q)) {
-                namedParts.add(p);
+        String q = queryPartSearch.getText();
+
+        if (!q.isEmpty()) {
+            for (Part p : allParts) {
+                if (p.getPartName().contains(q)) {
+                    namedParts.add(p);
+                }
+                if (q.contains(String.valueOf(p.getPartID()))){
+                    namedParts.add(p);
+                }
+                mainPartTable.setItems(namedParts);
+                mainPartTable.refresh();
             }
-            mainPartTable.setItems(namedParts);
+        }
+        else {
             mainPartTable.refresh();
         }
     }
 }
         /*
+
+
+
+        }
 
         ObservableList<Part> parts = searchByPartName(q);
 
