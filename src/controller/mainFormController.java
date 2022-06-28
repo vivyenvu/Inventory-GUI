@@ -68,6 +68,7 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
