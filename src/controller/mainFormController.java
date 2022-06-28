@@ -120,54 +120,11 @@ public class mainFormController implements Initializable {
                 }
                 mainPartTable.setItems(namedParts);
                 mainPartTable.refresh();
+                // else "If part is not found, the application displays an error message in the UI or in a dialog box
             }
         }
         else {
-            mainPartTable.refresh();
+            mainPartTable.setItems(allParts);
         }
     }
 }
-        /*
-
-
-
-        }
-
-        ObservableList<Part> parts = searchByPartName(q);
-
-        if (parts.size() == 0) {
-            int id = Integer.parseInt(q);
-            Part p = getPartWithID(id);
-            if (p != null) {
-                parts.add(p);
-            }
-        }
-        mainPartTable.setItems(parts);
-        queryPartSearch.setText("");
-    }*/
-
-    /*public void getResultsHandler(ActionEvent actionEvent) {
-
-    }
-    private  ObservableList<Part> searchByPartName(String partialName) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        ObservableList<Part> allParts = Inventory.getAllParts();
-
-        for (Part p : allParts) {
-            if (p.getPartName().contains(partialName)) {
-                namedParts.add(p);
-            }
-
-        }
-        return namedParts;
-    }
-    private Part getPartWithID(int id) {
-        ObservableList<Part> allParts = Inventory.getAllParts();
-
-        for (Part p : allParts) {
-            if (p.getPartID() == id) {
-                return p;
-            }
-        }
-        return null;
-    }*/
