@@ -3,7 +3,7 @@ package model;
 public class Outsourced extends Part{
     private String companyName;
 
-    public Outsourced(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, boolean madeInHouse) {
+    public Outsourced(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, String companyName, boolean madeInHouse) {
         super(partID, partName, partPrice, partStock, partMin, partMax, madeInHouse);
         this.companyName = companyName;
     }
