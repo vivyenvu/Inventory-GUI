@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.InHouse;
+import model.Inventory;
+import model.Outsourced;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,8 +63,17 @@ public class addPartController implements Initializable {
         int max = Integer.parseInt(addPartMax.getText());
         boolean madeInHouse = false;
         String companyName;
+        int machineID = 0;
 
-
+        if (addPartInHouseBtn.isSelected()){
+            machineID = Integer.parseInt(addPartMachineIDLabel.getText());
+            madeInHouse = true;
+            Inventory.addPart(new InHouse(partID, name, price, stock, min, max, machineID, madeInHouse));
+        }
+        else if (addPartOutsourcedBtn.isSelected()){
+            companyName = addPartMachineIDLabel.getText();
+            Inventory.addPart(new Outsourced(partID, name, price, stock, min, max, companyName, madeInHouse));
+        }
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
