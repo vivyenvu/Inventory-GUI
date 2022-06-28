@@ -9,7 +9,7 @@ public abstract class Part {
     private int partMax;
     boolean madeInHouse;
 
-    public Part(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, boolean partMadeInHouse) {
+    public Part(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, boolean madeInHouse) {
         this.partID = partID;
         this.partName = partName;
         this.partPrice = partPrice;
