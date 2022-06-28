@@ -55,6 +55,7 @@ public class modPartController implements Initializable {
     }
 
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
+        //how to bring selected part from Main form to this modify form
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

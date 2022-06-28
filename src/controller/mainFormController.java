@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static model.Inventory.getAllParts;
+
 public class mainFormController implements Initializable {
     public Button mainAddPartBtn;
     public Button mainModPartBtn;
@@ -39,11 +41,15 @@ public class mainFormController implements Initializable {
     public TextField queryPartSearch;
     public TextField queryProdSearch;
 
+    private static Part modPart;
+    private static int modPartIndex;
+    private static Product modProd;
+    private static int modProdIndex;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        mainPartTable.setItems(Inventory.getAllParts());
+        mainPartTable.setItems(getAllParts());
 
         mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
@@ -68,6 +74,8 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
+        modPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+        modPartIndex = getAllParts().indexOf(modPart);
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -127,7 +135,7 @@ public class mainFormController implements Initializable {
 
     public void onClickPartSearch(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        ObservableList<Part> allParts = Inventory.getAllParts();
+        ObservableList<Part> allParts = getAllParts();
 
         String q = queryPartSearch.getText();
 
