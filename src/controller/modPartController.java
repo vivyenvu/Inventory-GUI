@@ -86,12 +86,12 @@ public class modPartController implements Initializable {
         }
     }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
-        int partID = Integer.parseInt(modPartID.getText());
+        String partID = modPartID.getText();
         String name = modPartName.getText();
-        int stock = Integer.parseInt(modPartStock.getText());
-        double price = Double.parseDouble(modPartPrice.getText());
-        int min = Integer.parseInt(modPartMin.getText());
-        int max = Integer.parseInt(modPartMax.getText());
+        String stock = modPartStock.getText();
+        String price = modPartPrice.getText();
+        String min = modPartMin.getText();
+        String max = modPartMax.getText();
         //int machineID;
         //String companyName;
 
@@ -104,6 +104,7 @@ public class modPartController implements Initializable {
                 alert.setContentText(exception);
                 alert.showAndWait();
             }
+            /*
             else {
                 if (modPartInHouseBtn.isSelected()){
                     InHouse inHousePart = new InHouse(partID, name, price, stock, min, max, Integer.parseInt(modPartMachineOrCompany.getText()),true);
@@ -113,7 +114,7 @@ public class modPartController implements Initializable {
                     Outsourced outsourcedPart = new Outsourced(partID, name, price, stock, min, max, modPartMachineOrCompany.getText(), false);
                     Inventory.updatePart(getModPartIndex(), outsourcedPart);
                 }
-            }
+            }*/
         }
         catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

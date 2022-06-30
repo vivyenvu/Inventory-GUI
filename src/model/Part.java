@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.control.Alert;
+
 public abstract class Part {
     private int partID;
     private String partName;
@@ -78,12 +80,37 @@ public abstract class Part {
     }
 
     //Error message for onModPartSaveBtn
-    public static String validPart(String name,double price, int stock, int min, int max) {
+    public static String validPart(String name,String price, String stock, String min, String max) {
         String invalid = "";
-        if (name == null) {
+        try {
+            Double.parseDouble(price);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Price must be a double. ";
+        }
+        try {
+            Integer.parseInt(stock);
+        }
+            catch (NumberFormatException e) {
+                invalid += "Inventory must be an integer. ";
+            }
+        try {
+            Integer.parseInt(min);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Min must be an integer. ";
+        }
+
+            try {
+                Integer.parseInt(max);
+            }
+            catch (NumberFormatException e) {
+                invalid += "Max must be an integer. ";
+
+        if (name.isEmpty()) {
             invalid += "Name field is required. ";
         }
-        if (price <= 0) {
+ /*       if (price <= 0) {
             invalid += "Price must be greater than $0 ";
         }
         if (stock < min || stock > max) {
@@ -94,7 +121,6 @@ public abstract class Part {
         }
         if (stock < 1){
             invalid += "Stock must be greater than 0. ";
-        }
+        } */
         return invalid;
-    }
-}
+    }}
