@@ -104,17 +104,17 @@ public class modPartController implements Initializable {
                 alert.setContentText(exception);
                 alert.showAndWait();
             }
-            /*
+
             else {
                 if (modPartInHouseBtn.isSelected()){
-                    InHouse inHousePart = new InHouse(partID, name, price, stock, min, max, Integer.parseInt(modPartMachineOrCompany.getText()),true);
+                    InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()),true);
                     Inventory.updatePart(getModPartIndex(), inHousePart);
                 }
                 if (modPartOutsourcedBtn.isSelected()){
-                    Outsourced outsourcedPart = new Outsourced(partID, name, price, stock, min, max, modPartMachineOrCompany.getText(), false);
+                    Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(),false);
                     Inventory.updatePart(getModPartIndex(), outsourcedPart);
                 }
-            }*/
+            }
         }
         catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

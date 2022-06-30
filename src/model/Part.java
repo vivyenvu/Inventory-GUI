@@ -81,46 +81,51 @@ public abstract class Part {
 
     //Error message for onModPartSaveBtn
     public static String validPart(String name,String price, String stock, String min, String max) {
+        double priced = 1.00;
+        int stocki = 1;
+        int mini = 0;
+        int maxi =1;
+
         String invalid = "";
         try {
-            Double.parseDouble(price);
+            priced = Double.parseDouble(price);
         }
         catch (NumberFormatException e) {
             invalid += "Price must be a double. ";
         }
         try {
-            Integer.parseInt(stock);
+            stocki = Integer.parseInt(stock);
         }
-            catch (NumberFormatException e) {
-                invalid += "Inventory must be an integer. ";
+        catch (NumberFormatException e) {
+            invalid += "Inventory must be an integer. ";
             }
         try {
-            Integer.parseInt(min);
+            mini = Integer.parseInt(min);
         }
         catch (NumberFormatException e) {
             invalid += "Min must be an integer. ";
         }
-
-            try {
-                Integer.parseInt(max);
-            }
-            catch (NumberFormatException e) {
-                invalid += "Max must be an integer. ";
+        try {
+            maxi = Integer.parseInt(max);
+         }
+         catch (NumberFormatException e) {
+             invalid += "Max must be an integer. ";
+         }
 
         if (name.isEmpty()) {
             invalid += "Name field is required. ";
         }
- /*       if (price <= 0) {
+        if (priced <= 0) {
             invalid += "Price must be greater than $0 ";
         }
-        if (stock < min || stock > max) {
+        if (stocki < mini || stocki > maxi) {
             invalid += "Stock must be between min and max values. ";
         }
-        if (min>max) {
+        if (stocki < 1){
+            invalid += "Stock must be greater than 0. ";
+        }
+        if (mini > maxi) {
             invalid += "Min must be less than max. ";
         }
-        if (stock < 1){
-            invalid += "Stock must be greater than 0. ";
-        } */
-        return invalid;
+            return invalid;
     }}
