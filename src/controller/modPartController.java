@@ -22,6 +22,13 @@ public class modPartController implements Initializable {
     public Label modPartMachineIDLabel;
     public Button modPartCancelBtn;
     public Button modPartSaveBtn;
+    public TextField modPartID;
+    public TextField modPartName;
+    public TextField modPartStock;
+    public TextField modPartPrice;
+    public TextField modPartMax;
+    public TextField modPartMachineOrCompany;
+    public TextField modPartMin;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
