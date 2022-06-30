@@ -73,16 +73,39 @@ public class mainFormController implements Initializable {
         stage.show();
     }
 
-    public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
-        modPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
-        modPartIndex = getAllParts().indexOf(modPart);
+    public static int getModPartIndex() {
+        return modPartIndex;
+    }
+    public static int getModProdIndex() {
+        return modProdIndex;
+    }
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 600, 600);
-        stage.setTitle("Modify Part");
-        stage.setScene(scene);
-        stage.show();
+    public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/modPart.fxml"));
+            loader.load();
+
+            modPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+            modPartIndex = getAllParts().indexOf(modPart);
+
+            modPartController modPartCtrl = loader.getController();
+            modPartCtrl.sendPart(modPartIndex, modPart);
+
+            //Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            //Scene scene = new Scene(root, 600, 600);
+            Parent scene = loader.getRoot();
+            stage.setTitle("Modify Part");
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void onClickMainDeletePartBtn(ActionEvent actionEvent) {

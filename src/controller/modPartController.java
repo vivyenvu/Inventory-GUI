@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controller.mainFormController.getModPartIndex;
+
 public class modPartController implements Initializable {
     public RadioButton modPartInHouseBtn;
     public ToggleGroup addPartToggle;
@@ -66,7 +68,7 @@ public class modPartController implements Initializable {
         stage.show();
     }
 
-    public void sendPart (Part part) {
+    public void sendPart (int index, Part part) {
         modPartID.setText(String.valueOf(part.getPartID()));
         modPartName.setText(part.getPartName());
         modPartStock.setText(String.valueOf(part.getPartStock()));
@@ -105,11 +107,11 @@ public class modPartController implements Initializable {
             else {
                 if (modPartInHouseBtn.isSelected()){
                     InHouse inHousePart = new InHouse(partID, name, price, stock, min, max, Integer.parseInt(modPartMachineOrCompany.getText()),true);
-                    Inventory.updatePart(/*I NEED INDEX*/ 10, inHousePart);
+                    Inventory.updatePart(getModPartIndex(), inHousePart);
                 }
                 if (modPartOutsourcedBtn.isSelected()){
                     Outsourced outsourcedPart = new Outsourced(partID, name, price, stock, min, max, modPartMachineOrCompany.getText(), false);
-                    Inventory.updatePart(/*I NEED INDEX*/ 10, outsourcedPart);
+                    Inventory.updatePart(getModPartIndex(), outsourcedPart);
                 }
             }
         }
