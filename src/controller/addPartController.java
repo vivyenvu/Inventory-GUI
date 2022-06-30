@@ -96,15 +96,6 @@ public class addPartController implements Initializable {
             alert.showAndWait();
         }
 
-        /*if (addPartOutsourcedBtn.isSelected()){
-            companyName = addPartMachineID.getText();
-            Inventory.addPart(new Outsourced(partID, name, price, stock, min, max, companyName, madeInHouse));
-        }
-        else if (addPartInHouseBtn.isSelected()){
-            machineID = Integer.parseInt(addPartMachineID.getText());
-            Inventory.addPart(new InHouse(partID, name, price, stock, min, max, machineID, true));
-        }*/
-
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1080, 400);
