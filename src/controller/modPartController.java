@@ -82,7 +82,16 @@ public class modPartController implements Initializable {
         }
     }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
-        //how to bring selected part from Main form to this modify form
+        try {
+            int partID = Integer.parseInt(modPartID.getText());
+            String name = modPartName.getText();
+            int stock = Integer.parseInt(modPartStock.getText());
+            double price = Double.parseDouble(modPartPrice.getText());
+            int min = Integer.parseInt(modPartMin.getText());
+            int max = Integer.parseInt(modPartMax.getText());
+            int machineID;
+            String companyName;
+        }
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
