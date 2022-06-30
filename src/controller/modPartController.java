@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +55,23 @@ public class modPartController implements Initializable {
         stage.show();
     }
 
+    public void sendPart (Part part) {
+        modPartID.setText(String.valueOf(part.getPartID()));
+        modPartName.setText(part.getPartName());
+        modPartStock.setText(String.valueOf(part.getPartStock()));
+        modPartPrice.setText(String.valueOf(part.getPartPrice()));
+        modPartMax.setText(String.valueOf(part.getPartMax()));
+        modPartMin.setText(String.valueOf(part.getPartMin()));
+
+        if (part instanceof InHouse) {
+            inHouseBtn.setSelected(true);
+            modPartSourceTxt.setText(String.valueOf(((InHouse) part).getMachineID()));
+        }
+        else {
+            outsourcedBtn.setSelected(true);
+            modPartSourceTxt.setText(((Outsource) part).getCompanyName());
+        }
+    }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
         //how to bring selected part from Main form to this modify form
 
