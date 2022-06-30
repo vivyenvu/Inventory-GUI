@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.InHouse;
+import model.Outsourced;
 import model.Part;
 
 import java.io.IOException;
@@ -71,12 +73,12 @@ public class modPartController implements Initializable {
         modPartMin.setText(String.valueOf(part.getPartMin()));
 
         if (part instanceof InHouse) {
-            inHouseBtn.setSelected(true);
-            modPartSourceTxt.setText(String.valueOf(((InHouse) part).getMachineID()));
+            modPartInHouseBtn.setSelected(true);
+            modPartMachineOrCompany.setText(String.valueOf(((InHouse) part).getMachineID()));
         }
         else {
-            outsourcedBtn.setSelected(true);
-            modPartSourceTxt.setText(((Outsource) part).getCompanyName());
+            modPartOutsourcedBtn.setSelected(true);
+            modPartMachineOrCompany.setText(((Outsourced) part).getCompanyName());
         }
     }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
