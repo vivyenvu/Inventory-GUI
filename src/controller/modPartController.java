@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.InHouse;
+import model.Inventory;
 import model.Outsourced;
 import model.Part;
 
@@ -89,8 +90,8 @@ public class modPartController implements Initializable {
         double price = Double.parseDouble(modPartPrice.getText());
         int min = Integer.parseInt(modPartMin.getText());
         int max = Integer.parseInt(modPartMax.getText());
-        int machineID;
-        String companyName;
+        //int machineID;
+        //String companyName;
 
         try {
             exception = Part.validPart(name, price, stock, min, max);
@@ -100,6 +101,16 @@ public class modPartController implements Initializable {
                 alert.setHeaderText("Error Modifying Part");
                 alert.setContentText(exception);
                 alert.showAndWait();
+            }
+            else {
+                if (modPartInHouseBtn.isSelected()){
+                    InHouse inHousePart = new InHouse(partID, name, price, stock, min, max, Integer.parseInt(modPartMachineOrCompany.getText()),true);
+                    Inventory.updatePart(/*I NEED INDEX*/ 10, inHousePart);
+                }
+                if (modPartOutsourcedBtn.isSelected()){
+                    Outsourced outsourcedPart = new Outsourced(partID, name, price, stock, min, max, modPartMachineOrCompany.getText(), false);
+                    Inventory.updatePart(/*I NEED INDEX*/ 10, outsourcedPart);
+                }
             }
         }
         catch (NumberFormatException e) {
