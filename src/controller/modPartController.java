@@ -93,10 +93,21 @@ public class modPartController implements Initializable {
         String companyName;
 
         try {
-            exception
+            exception = Part.validPart(name, price, stock, min, max);
+            if (exception != "") {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Part");
+                alert.setContentText(exception);
+                alert.showAndWait();
+            }
         }
         catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.)
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Modifying Part");
+            alert.setContentText("Form contains blank fields.");
+            alert.showAndWait();
         }
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
