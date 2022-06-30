@@ -66,13 +66,12 @@ public class addPartController implements Initializable {
         int machineID = 0;
 
         if (addPartOutsourcedBtn.isSelected()){ //Exception in thread "Java FX Application Thread" java lang
-            companyName = addPartMachineIDLabel.getText();
+            companyName = addPartMachineID.getText();
             Inventory.addPart(new Outsourced(partID, name, price, stock, min, max, companyName, madeInHouse));
         }
         else if (addPartInHouseBtn.isSelected()){
-            machineID = Integer.parseInt(addPartMachineIDLabel.getText());
-            madeInHouse = true;
-            Inventory.addPart(new InHouse(partID, name, price, stock, min, max, machineID, madeInHouse));
+            machineID = Integer.parseInt(addPartMachineID.getText());
+            Inventory.addPart(new InHouse(partID, name, price, stock, min, max, machineID, true));
         }
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
