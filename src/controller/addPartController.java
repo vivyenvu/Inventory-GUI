@@ -11,10 +11,13 @@ import javafx.stage.Stage;
 import model.InHouse;
 import model.Inventory;
 import model.Outsourced;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static controller.mainFormController.getModPartIndex;
 
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
@@ -29,7 +32,7 @@ public class addPartController implements Initializable {
     public TextField addPartPrice;
     public TextField addPartMax;
     public TextField addPartMin;
-
+    private String exception = "";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -57,22 +60,50 @@ public class addPartController implements Initializable {
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
         int partID =(int)(Math.random() * 100); //think of other ways to generate unique id
         String name = addPartName.getText();
-        int stock = Integer.parseInt(addPartStock.getText());
-        double price = Double.parseDouble(addPartPrice.getText());
-        int min = Integer.parseInt(addPartMin.getText());
-        int max = Integer.parseInt(addPartMax.getText());
+        String stock = addPartStock.getText();
+        String price = addPartPrice.getText();
+        String min = addPartMin.getText();
+        String max = addPartMax.getText();
         boolean madeInHouse = false;
         String companyName;
         int machineID = 0;
+        try {
+            exception = Part.validPart(name, price, stock, min, max);
+            if (exception != "") {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Part");
+                alert.setContentText(exception);
+                alert.showAndWait();
+            }
 
-        if (addPartOutsourcedBtn.isSelected()){ //Exception in thread "Java FX Application Thread" java lang
+            else {
+                if (addPartInHouseBtn.isSelected()){
+                    InHouse inHousePart = new InHouse(partID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(addPartMachineID.getText()),true);
+                    Inventory.addPart(inHousePart);
+                }
+                if (addPartOutsourcedBtn.isSelected()){
+                    Outsourced outsourcedPart = new Outsourced(partID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), addPartMachineID.getText(),false);
+                    Inventory.addPart(outsourcedPart);
+                }
+            }
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Modifying Part");
+            alert.setContentText("Form contains blank fields.");
+            alert.showAndWait();
+        }
+
+        /*if (addPartOutsourcedBtn.isSelected()){
             companyName = addPartMachineID.getText();
             Inventory.addPart(new Outsourced(partID, name, price, stock, min, max, companyName, madeInHouse));
         }
         else if (addPartInHouseBtn.isSelected()){
             machineID = Integer.parseInt(addPartMachineID.getText());
             Inventory.addPart(new InHouse(partID, name, price, stock, min, max, machineID, true));
-        }
+        }*/
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
