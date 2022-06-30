@@ -20,7 +20,6 @@ public class modPartController implements Initializable {
     public RadioButton modPartInHouseBtn;
     public ToggleGroup addPartToggle;
     public RadioButton modPartOutsourcedBtn;
-    public TextField modPartMachineIDInput;
     public Label modPartMachineIDLabel;
     public Button modPartCancelBtn;
     public Button modPartSaveBtn;
@@ -31,6 +30,8 @@ public class modPartController implements Initializable {
     public TextField modPartMax;
     public TextField modPartMachineOrCompany;
     public TextField modPartMin;
+
+    private String exception = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,15 +83,20 @@ public class modPartController implements Initializable {
         }
     }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
+        int partID = Integer.parseInt(modPartID.getText());
+        String name = modPartName.getText();
+        int stock = Integer.parseInt(modPartStock.getText());
+        double price = Double.parseDouble(modPartPrice.getText());
+        int min = Integer.parseInt(modPartMin.getText());
+        int max = Integer.parseInt(modPartMax.getText());
+        int machineID;
+        String companyName;
+
         try {
-            int partID = Integer.parseInt(modPartID.getText());
-            String name = modPartName.getText();
-            int stock = Integer.parseInt(modPartStock.getText());
-            double price = Double.parseDouble(modPartPrice.getText());
-            int min = Integer.parseInt(modPartMin.getText());
-            int max = Integer.parseInt(modPartMax.getText());
-            int machineID;
-            String companyName;
+            exception
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.)
         }
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));

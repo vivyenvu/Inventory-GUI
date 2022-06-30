@@ -76,4 +76,25 @@ public abstract class Part {
     public void setMadeInHouse (boolean madeInHouse) {
         this.madeInHouse = madeInHouse;
     }
+
+    //Error message for onModPartSaveBtn
+    public static String validPart(String name,double price, int stock, int min, int max) {
+        String invalid = "";
+        if (name == null) {
+            invalid += "Name field is required. ";
+        }
+        if (price <= 0) {
+            invalid += "Price must be greater than $0 ";
+        }
+        if (stock < min || stock > max) {
+            invalid += "Stock must be between min and max values. ";
+        }
+        if (min>max) {
+            invalid += "Min must be less than max. ";
+        }
+        if (stock < 1){
+            invalid += "Stock must be greater than 0. ";
+        }
+        return invalid;
+    }
 }
