@@ -39,6 +39,7 @@ public class modProdController implements Initializable {
     public TextField modProdPrice;
     public TextField modProdMax;
     public TextField modProdMin;
+    public TextField modProdID;
     private String exception = "";
     private ObservableList<Part> ascParts = FXCollections.observableArrayList();
 
@@ -87,23 +88,15 @@ public class modProdController implements Initializable {
     public void onModProdRemoveBtn(ActionEvent actionEvent) {
     }
 
-    public void sendProd (int index, Part part) {
-        modPartID.setText(String.valueOf(part.getPartID()));
-        modPartName.setText(part.getPartName());
-        modPartStock.setText(String.valueOf(part.getPartStock()));
-        modPartPrice.setText(String.valueOf(part.getPartPrice()));
-        modPartMax.setText(String.valueOf(part.getPartMax()));
-        modPartMin.setText(String.valueOf(part.getPartMin()));
+    public void sendPart (int index, Part part) {
+        modProdID.setText(String.valueOf(part.getPartID()));
+        modProdName.setText(part.getPartName());
+        modProdStock.setText(String.valueOf(part.getPartStock()));
+        modProdPrice.setText(String.valueOf(part.getPartPrice()));
+        modProdMax.setText(String.valueOf(part.getPartMax()));
+        modProdMin.setText(String.valueOf(part.getPartMin()));
+        }
 
-        if (part instanceof InHouse) {
-            modPartInHouseBtn.setSelected(true);
-            modPartMachineOrCompany.setText(String.valueOf(((InHouse) part).getMachineID()));
-        }
-        else {
-            modPartOutsourcedBtn.setSelected(true);
-            modPartMachineOrCompany.setText(((Outsourced) part).getCompanyName());
-        }
-    }
     public void onModProdSaveBtn(ActionEvent actionEvent) {
         int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
         String name = modProdName.getText();
