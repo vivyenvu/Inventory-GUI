@@ -24,20 +24,20 @@
         <Button fx:id="modProdSaveBtn" layoutX="690.0" layoutY="527.0" mnemonicParsing="false" onAction="#onModProdSaveBtn" text="Save" />
         <Button fx:id="modProdCancelBtn" layoutX="780.0" layoutY="527.0" mnemonicParsing="false" onAction="#onModProdCancelBtn" text="Cancel" />
         <TextField layoutX="697.0" layoutY="43.0" prefHeight="25.0" prefWidth="159.0" promptText="Search by Part ID or Name" />
-        <TableView layoutX="502.0" layoutY="110.0" prefHeight="158.0" prefWidth="355.0">
+        <TableView fx:id="modProdMainTable" layoutX="502.0" layoutY="110.0" prefHeight="158.0" prefWidth="355.0">
             <columns>
-                <TableColumn prefWidth="56.0" text="Part ID" />
-                <TableColumn prefWidth="66.0" text="Part Name" />
-                <TableColumn prefWidth="100.0" text="Inventory Level" />
-                <TableColumn prefWidth="132.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="modProdMainTableID" prefWidth="56.0" text="Part ID" />
+                <TableColumn fx:id="modProdMainTableName" prefWidth="66.0" text="Part Name" />
+                <TableColumn fx:id="modProdMainTableStock" prefWidth="100.0" text="Inventory Level" />
+                <TableColumn fx:id="modProdMainTablePrice" prefWidth="132.0" text="Price/Cost per Unit" />
             </columns>
         </TableView>
-        <TableView layoutX="502.0" layoutY="319.0" prefHeight="158.0" prefWidth="355.0">
+        <TableView fx:id="modProdAscPartTable" layoutX="502.0" layoutY="319.0" prefHeight="158.0" prefWidth="355.0">
             <columns>
-                <TableColumn prefWidth="56.0" text="Part ID" />
-                <TableColumn prefWidth="66.0" text="Part Name" />
-                <TableColumn prefWidth="100.0" text="Inventory Level" />
-                <TableColumn prefWidth="132.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="modProdAscPartTableID" prefWidth="56.0" text="Part ID" />
+                <TableColumn fx:id="modProdAscPartTableName" prefWidth="66.0" text="Part Name" />
+                <TableColumn fx:id="modProdAscPartTableStock" prefWidth="100.0" text="Inventory Level" />
+                <TableColumn fx:id="modProdAscPartTablePrice" prefWidth="132.0" text="Price/Cost per Unit" />
             </columns>
         </TableView>
         <TextField disable="true" layoutX="140.0" layoutY="145.0" promptText="Auto Gen - Disabled" />

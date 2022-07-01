@@ -52,6 +52,7 @@ public class addProdController implements Initializable {
         prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
 
         prodAscPartTable.setItems(ascParts);
+
         ascPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         ascPartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         ascPartStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
