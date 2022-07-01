@@ -26,10 +26,10 @@
       <TextField fx:id="queryPartSearchProd" layoutX="697.0" layoutY="43.0" onAction="#onClickPartSearchProd" prefHeight="25.0" prefWidth="159.0" promptText="Search by Part ID or Name" />
       <TableView fx:id="prodPartMainTable" layoutX="502.0" layoutY="110.0" prefHeight="158.0" prefWidth="355.0">
         <columns>
-          <TableColumn prefWidth="56.0" text="Part ID" />
-          <TableColumn prefWidth="66.0" text="Part Name" />
-            <TableColumn prefWidth="100.0" text="Inventory Level" />
-            <TableColumn prefWidth="132.0" text="Price/Cost per Unit" />
+          <TableColumn fx:id="prodPartMainTableID" prefWidth="56.0" text="Part ID" />
+          <TableColumn fx:id="prodPartMainTableName" prefWidth="66.0" text="Part Name" />
+            <TableColumn fx:id="prodPartMainTableStock" prefWidth="100.0" text="Inventory Level" />
+            <TableColumn fx:id="prodPartMainTablePrice" prefWidth="132.0" text="Price/Cost per Unit" />
         </columns>
       </TableView>
       <TableView layoutX="502.0" layoutY="319.0" prefHeight="158.0" prefWidth="355.0">

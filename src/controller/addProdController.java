@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Part;
 
@@ -29,10 +30,19 @@ public class addProdController implements Initializable {
     public TextField queryPartSearchProd;
     public TableView prodPartMainTable;
     public TableColumn prodAscPartTable;
+    public TableColumn prodPartMainTableID;
+    public TableColumn prodPartMainTableName;
+    public TableColumn prodPartMainTableStock;
+    public TableColumn prodPartMainTablePrice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        prodPartMainTable.setItems(getAllParts());
 
+        prodPartMainTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
+        prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
+        prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
     }
 
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
