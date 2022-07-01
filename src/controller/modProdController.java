@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,6 +67,18 @@ public class modProdController implements Initializable {
     }
 
     public void onModProdAddBtn(ActionEvent actionEvent) {
+        try {
+            Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
+            ascParts.add(part);
+            modProdMainTable.setItems(ascParts);
+            //prodAscPartTable.refresh();
+        }
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void onModProdRemoveBtn(ActionEvent actionEvent) {
