@@ -140,7 +140,7 @@ public class mainFormController implements Initializable {
             loader.setLocation(getClass().getResource("/view/modProd.fxml"));
             loader.load();
 
-            modProd = (Product) mainPartTable.getSelectionModel().getSelectedItem();
+            modProd = (Product) mainProdTable.getSelectionModel().getSelectedItem();
             modProdIndex = getAllProducts().indexOf(modProd);
 
             modProdController modProdCtrl = loader.getController();
@@ -157,7 +157,7 @@ public class mainFormController implements Initializable {
         catch (NullPointerException e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setContentText("Please select a part. ");
+            alert.setContentText("Please select a product. ");
             alert.show();
         }
     }

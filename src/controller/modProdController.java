@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static controller.mainFormController.getModPartIndex;
+import static controller.mainFormController.getModProdIndex;
 import static model.Inventory.getAllParts;
 
 public class modProdController implements Initializable {
@@ -41,6 +42,7 @@ public class modProdController implements Initializable {
     public TextField modProdMax;
     public TextField modProdMin;
     public TextField modProdID;
+    public TextField queryModProdPartSearch;
     private String exception = "";
     private ObservableList<Part> ascParts = FXCollections.observableArrayList();
 
@@ -96,10 +98,11 @@ public class modProdController implements Initializable {
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
+
         }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
-        int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
+        int prodID = Integer.parseInt(modProdID.getText());
         String name = modProdName.getText();
         String stock = modProdStock.getText();
         String price = modProdPrice.getText();
@@ -118,7 +121,7 @@ public class modProdController implements Initializable {
 
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                Inventory.updateProduct(getModPartIndex(), prod);
+                Inventory.updateProduct(getModProdIndex(), prod);
             }
         }
         catch (NumberFormatException e) {
@@ -135,5 +138,29 @@ public class modProdController implements Initializable {
         stage.setTitle("Back to Main Screen");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onClickModProdPartSearch(ActionEvent actionEvent) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        ObservableList<Part> allParts = getAllParts();
+
+        String q = queryModProdPartSearch.getText();
+
+        if (!q.isEmpty()) {
+            for (Part p : allParts) {
+                if (p.getPartName().contains(q)) {
+                    namedParts.add(p);
+                }
+                if (q.contains(String.valueOf(p.getPartID()))){
+                    namedParts.add(p);
+                }
+                modProdMainTable.setItems(namedParts);
+                modProdMainTable.refresh();
+                // else "If part is not found, the application displays an error message in the UI or in a dialog box
+            }
+        }
+        else {
+            modProdMainTable.setItems(allParts);
+        }
     }
 }
