@@ -89,13 +89,13 @@ public class modProdController implements Initializable {
     public void onModProdRemoveBtn(ActionEvent actionEvent) {
     }
 
-    public void sendPart (int index, Part part) {
-        modProdID.setText(String.valueOf(part.getPartID()));
-        modProdName.setText(part.getPartName());
-        modProdStock.setText(String.valueOf(part.getPartStock()));
-        modProdPrice.setText(String.valueOf(part.getPartPrice()));
-        modProdMax.setText(String.valueOf(part.getPartMax()));
-        modProdMin.setText(String.valueOf(part.getPartMin()));
+    public void sendProd (int index, Product prod) {
+        modProdID.setText(String.valueOf(prod.getProdID()));
+        modProdName.setText(prod.getProdName());
+        modProdStock.setText(String.valueOf(prod.getProdStock()));
+        modProdPrice.setText(String.valueOf(prod.getProdPrice()));
+        modProdMax.setText(String.valueOf(prod.getProdMax()));
+        modProdMin.setText(String.valueOf(prod.getProdMin()));
         }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{

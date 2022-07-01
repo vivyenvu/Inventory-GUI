@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static model.Inventory.getAllParts;
+import static model.Inventory.getAllProducts;
 
 public class mainFormController implements Initializable {
     public Button mainAddPartBtn;
@@ -56,7 +57,7 @@ public class mainFormController implements Initializable {
         mainPartTableInventory.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         mainPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
 
-        mainProdTable.setItems(Inventory.getAllProducts());
+        mainProdTable.setItems(getAllProducts());
 
         mainProdTableID.setCellValueFactory(new PropertyValueFactory<>("prodID"));
         mainProdTableName.setCellValueFactory(new PropertyValueFactory<>("prodName"));
@@ -139,11 +140,11 @@ public class mainFormController implements Initializable {
             loader.setLocation(getClass().getResource("/view/modProd.fxml"));
             loader.load();
 
-            modPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
-            modPartIndex = getAllParts().indexOf(modPart);
+            modProd = (Product) mainPartTable.getSelectionModel().getSelectedItem();
+            modProdIndex = getAllProducts().indexOf(modProd);
 
-            modPartController modPartCtrl = loader.getController();
-            modPartCtrl.sendPart(modPartIndex, modPart);
+            modProdController modProdCtrl = loader.getController();
+            modProdCtrl.sendProd(modProdIndex, modProd);
 
             //Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -200,7 +201,7 @@ public class mainFormController implements Initializable {
     }
     public void onClickProdSearch(ActionEvent actionEvent)  {
         ObservableList<Product> namedProds = FXCollections.observableArrayList();
-        ObservableList<Product> allProds = Inventory.getAllProducts();
+        ObservableList<Product> allProds = getAllProducts();
 
         String q = queryProdSearch.getText();
 

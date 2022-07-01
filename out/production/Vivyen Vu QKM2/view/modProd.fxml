@@ -40,11 +40,11 @@
                 <TableColumn fx:id="modProdAscPartTablePrice" prefWidth="132.0" text="Price/Cost per Unit" />
             </columns>
         </TableView>
-        <TextField disable="true" layoutX="140.0" layoutY="145.0" promptText="Auto Gen - Disabled" />
-        <TextField layoutX="140.0" layoutY="185.0" />
-        <TextField layoutX="140.0" layoutY="225.0" prefWidth="100.0" />
-        <TextField layoutX="140.0" layoutY="265.0" prefWidth="100.0" />
-        <TextField layoutX="140.0" layoutY="305.0" prefWidth="100.0" />
-        <TextField layoutX="303.0" layoutY="305.0" prefWidth="100.0" />
+        <TextField fx:id="modProdID" disable="true" layoutX="140.0" layoutY="145.0" promptText="Auto Gen - Disabled" />
+        <TextField fx:id="modProdName" layoutX="140.0" layoutY="185.0" />
+        <TextField fx:id="modProdStock" layoutX="140.0" layoutY="225.0" prefWidth="100.0" />
+        <TextField fx:id="modProdPrice" layoutX="140.0" layoutY="265.0" prefWidth="100.0" />
+        <TextField fx:id="modProdMax" layoutX="140.0" layoutY="305.0" prefWidth="100.0" />
+        <TextField fx:id="modProdMin" layoutX="303.0" layoutY="305.0" prefWidth="100.0" />
     </children>
 </AnchorPane>
