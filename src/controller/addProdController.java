@@ -81,7 +81,7 @@ public class addProdController implements Initializable {
             }
 
             else {
-                    Product prod = new Product(prodID, Double.parseDouble(name), Integer.parseInt(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max);
+                    Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
                     Inventory.addProduct(prod);
             }
         }
@@ -93,11 +93,12 @@ public class addProdController implements Initializable {
             alert.showAndWait();
         }
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 400);
+        //Scene scene = new Scene(root, 1080, 400);
+        Parent scene = loader.getRoot();
         stage.setTitle("Back to Main Screen");
-        stage.setScene(scene);
+        stage.setScene(new Scene(scene));
         stage.show();
     }
 
