@@ -134,12 +134,31 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/modProd.fxml"));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 600);
-        stage.setTitle("Modify Product");
-        stage.setScene(scene);
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/modProd.fxml"));
+            loader.load();
+
+            modPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+            modPartIndex = getAllParts().indexOf(modPart);
+
+            modPartController modPartCtrl = loader.getController();
+            modPartCtrl.sendPart(modPartIndex, modPart);
+
+            //Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            //Scene scene = new Scene(root, 600, 600);
+            Parent scene = loader.getRoot();
+            stage.setTitle("Modify Product");
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
