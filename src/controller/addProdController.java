@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,17 +9,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static model.Inventory.getAllParts;
 
 public class addProdController implements Initializable {
     public Button addProdAddBtn;
     public Button addProdRemoveBtn;
     public Button addProdSaveBtn;
     public Button addProdCancelBtn;
+    public TextField queryPartSearchProd;
+    public TableView prodPartMainTable;
+    public TableColumn prodAscPartTable;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,5 +51,29 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdSaveBtn(ActionEvent actionEvent) {
+    }
+
+    public void onClickPartSearchProd(ActionEvent actionEvent) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        ObservableList<Part> allParts = getAllParts();
+
+        String q = queryPartSearchProd.getText();
+
+        if (!q.isEmpty()) {
+            for (Part p : allParts) {
+                if (p.getPartName().contains(q)) {
+                    namedParts.add(p);
+                }
+                if (q.contains(String.valueOf(p.getPartID()))){
+                    namedParts.add(p);
+                }
+                prodPartMainTable.setItems(namedParts);
+                prodPartMainTable.refresh();
+                // else "If part is not found, the application displays an error message in the UI or in a dialog box
+            }
+        }
+        else {
+            prodPartMainTable.setItems(allParts);
+        }
     }
 }
