@@ -62,7 +62,7 @@ public class addProdController implements Initializable {
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
     }
 
-    public void onAddProdSaveBtn(ActionEvent actionEvent) {
+    public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
         String name = prodName.getText();
         String stock = prodStock.getText();
@@ -93,12 +93,11 @@ public class addProdController implements Initializable {
             alert.showAndWait();
         }
 
-        //Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        //Scene scene = new Scene(root, 1080, 400);
-        Parent scene = loader.getRoot();
+        Scene scene = new Scene(root, 1080, 400);
         stage.setTitle("Back to Main Screen");
-        stage.setScene(new Scene(scene));
+        stage.setScene(scene);
         stage.show();
     }
 
