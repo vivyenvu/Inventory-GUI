@@ -21,10 +21,10 @@ public class Main extends Application {
     }
     private static void addTestData() {
 
-        InHouse OPB = new InHouse(1, "OPB", 200, 15, 0, 50, 1234, true);
-        InHouse DB = new InHouse (2, "Deadlift Bar", 300, 10, 0, 40, 2468, true);
-        Outsourced plate = new Outsourced (3, "Eleiko plates", 180, 44, 0, 100, "Eleiko", false);
-        Outsourced platform = new Outsourced (4, "Wood platform", 500, 12, 0, 20, "Woodies", false);
+        InHouse OPB = new InHouse(1, "OPB", 20.543, 15, 0, 50, 1234, true);
+        InHouse DB = new InHouse (2, "Deadlift Bar", 30.10, 10, 0, 40, 2468, true);
+        Outsourced plate = new Outsourced (3, "Eleiko plates", 10.00, 44, 0, 100, "Eleiko", false);
+        Outsourced platform = new Outsourced (4, "Wood platform", 50, 12, 0, 20, "Woodies", false);
 
         Inventory.addPart(OPB);
         Inventory.addPart(DB);

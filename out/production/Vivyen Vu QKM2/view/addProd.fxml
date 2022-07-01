@@ -19,10 +19,10 @@
       <Label layoutX="90.0" layoutY="270.0" text="Price" />
       <Label layoutX="90.0" layoutY="310.0" text="Max" />
       <Label layoutX="268.0" layoutY="310.0" text="Min" />
-      <Button fx:id="addProdAddBtn" layoutX="779.0" layoutY="279.0" mnemonicParsing="false" onAction="#onAddProdAddBtn" text="Add" />
+      <Button layoutX="779.0" layoutY="279.0" mnemonicParsing="false" onAction="#onAddProdAddPartBtn" text="Add" />
       <Button fx:id="addProdRemoveBtn" layoutX="689.0" layoutY="490.0" mnemonicParsing="false" onAction="#onAddProdRemoveBtn" text="Remove Associated Part" />
-      <Button fx:id="addProdSaveBtn" layoutX="690.0" layoutY="527.0" mnemonicParsing="false" onAction="#onAddProdSaveBtn" text="Save" />
-      <Button fx:id="addProdCancelBtn" layoutX="780.0" layoutY="527.0" mnemonicParsing="false" onAction="#onAddProdCancelBtn" text="Cancel" />
+      <Button layoutX="690.0" layoutY="527.0" mnemonicParsing="false" onAction="#onAddProdSaveBtn" text="Save" />
+      <Button layoutX="780.0" layoutY="527.0" mnemonicParsing="false" onAction="#onAddProdCancelBtn" text="Cancel" />
       <TextField fx:id="queryPartSearchProd" layoutX="697.0" layoutY="43.0" onAction="#onClickPartSearchProd" prefHeight="25.0" prefWidth="159.0" promptText="Search by Part ID or Name" />
       <TableView fx:id="prodPartMainTable" layoutX="502.0" layoutY="110.0" prefHeight="158.0" prefWidth="355.0">
         <columns>
@@ -40,11 +40,11 @@
             <TableColumn prefWidth="132.0" text="Price/Cost per Unit" />
          </columns>
       </TableView>
-      <TextField disable="true" layoutX="140.0" layoutY="145.0" promptText="Auto Gen - Disabled" />
-      <TextField layoutX="140.0" layoutY="185.0" />
-      <TextField layoutX="140.0" layoutY="225.0" prefWidth="100.0" />
-      <TextField layoutX="140.0" layoutY="265.0" prefWidth="100.0" />
-      <TextField layoutX="140.0" layoutY="305.0" prefWidth="100.0" />
-      <TextField layoutX="303.0" layoutY="305.0" prefWidth="100.0" />
+      <TextField fx:id="prodID" disable="true" layoutX="140.0" layoutY="145.0" promptText="Auto Gen - Disabled" />
+      <TextField fx:id="prodName" layoutX="140.0" layoutY="185.0" />
+      <TextField fx:id="prodStock" layoutX="140.0" layoutY="225.0" prefWidth="100.0" />
+      <TextField fx:id="prodPrice" layoutX="140.0" layoutY="265.0" prefWidth="100.0" />
+      <TextField fx:id="prodMax" layoutX="140.0" layoutY="305.0" prefWidth="100.0" />
+      <TextField fx:id="prodMin" layoutX="303.0" layoutY="305.0" prefWidth="100.0" />
    </children>
 </AnchorPane>

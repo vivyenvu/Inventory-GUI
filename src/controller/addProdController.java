@@ -8,13 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Part;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,8 +22,6 @@ import static model.Inventory.getAllParts;
 public class addProdController implements Initializable {
     public Button addProdAddBtn;
     public Button addProdRemoveBtn;
-    public Button addProdSaveBtn;
-    public Button addProdCancelBtn;
     public TextField queryPartSearchProd;
     public TableView prodPartMainTable;
     public TableColumn prodAscPartTable;
@@ -34,6 +29,13 @@ public class addProdController implements Initializable {
     public TableColumn prodPartMainTableName;
     public TableColumn prodPartMainTableStock;
     public TableColumn prodPartMainTablePrice;
+    public TextField prodName;
+    public TextField prodStock;
+    public TextField prodPrice;
+    public TextField prodMax;
+    public TextField prodMin;
+    public TextField prodID;
+    private String exception = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,14 +56,51 @@ public class addProdController implements Initializable {
         stage.show();
     }
 
-    public void onAddProdAddBtn(ActionEvent actionEvent) {
+    public void onAddProdAddPartBtn(ActionEvent actionEvent) {
     }
 
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
     }
 
     public void onAddProdSaveBtn(ActionEvent actionEvent) {
+        int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
+        String name = prodName.getText();
+        String stock = prodStock.getText();
+        String price = prodPrice.getText();
+        String min = prodMin.getText();
+        String max = prodMax.getText();
+
+        try {
+            exception = Product.validProd(name, price, stock, min, max);
+            if (exception != "") {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding Product");
+                alert.setContentText(exception);
+                alert.showAndWait();
+            }
+
+            else {
+                    Product prod = new Product(prodID, Double.parseDouble(name), Integer.parseInt(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max);
+                    Inventory.addProduct(prod);
+            }
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Adding Product");
+            alert.setContentText("Form contains blank fields.");
+            alert.showAndWait();
+        }
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1080, 400);
+        stage.setTitle("Back to Main Screen");
+        stage.setScene(scene);
+        stage.show();
     }
+
 
     public void onClickPartSearchProd(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();

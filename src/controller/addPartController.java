@@ -58,12 +58,10 @@ public class addPartController implements Initializable {
 
     public void onAddPartInHouseBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Machine ID");
-        //THIS CHANGES THE NAME BUT NOT THE INPUT FIELD. POSSIBLE SOLUTION IS TO WRITE AND IF...THEN STATEMENT SO DATA IS ASSIGNED TO MACHINE VS COMPANY VARIABLE
     }
 
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Company Name");
-        //ALSO NEED TO CHANGE THE INPUT FIELD TO ACCEPT DATA FOR COMPANY NAME INSTEAD
     }
 
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {

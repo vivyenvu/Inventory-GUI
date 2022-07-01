@@ -81,4 +81,54 @@ public class Product {
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
     }
+
+    public static String validProd(String name,String price, String stock, String min, String max) {
+        double priced = 1.00;
+        int stocki = 1;
+        int mini = 0;
+        int maxi =1;
+
+        String invalid = "";
+        try {
+            priced = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Price must be a double. ";
+        }
+        try {
+            stocki = Integer.parseInt(stock);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Inventory must be an integer. ";
+        }
+        try {
+            mini = Integer.parseInt(min);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Min must be an integer. ";
+        }
+        try {
+            maxi = Integer.parseInt(max);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Max must be an integer. ";
+        }
+
+        if (name.isEmpty()) {
+            invalid += "Name field is required. ";
+        }
+        if (priced <= 0) {
+            invalid += "Price must be greater than $0 ";
+        }
+        if (stocki < mini || stocki > maxi) {
+            invalid += "Stock must be between min and max values. ";
+        }
+        if (stocki < 1){
+            invalid += "Stock must be greater than 0. ";
+        }
+        if (mini > maxi) {
+            invalid += "Min must be less than max. ";
+        }
+        return invalid;
+    }
 }
