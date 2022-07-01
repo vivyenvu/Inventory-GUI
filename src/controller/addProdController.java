@@ -24,7 +24,6 @@ public class addProdController implements Initializable {
     public Button addProdRemoveBtn;
     public TextField queryPartSearchProd;
     public TableView prodPartMainTable;
-    public TableColumn prodAscPartTable;
     public TableColumn prodPartMainTableID;
     public TableColumn prodPartMainTableName;
     public TableColumn prodPartMainTableStock;
@@ -35,7 +34,13 @@ public class addProdController implements Initializable {
     public TextField prodMax;
     public TextField prodMin;
     public TextField prodID;
+    public TableView prodAscPartTable;
+    public TableColumn ascPartID;
+    public TableColumn ascPartName;
+    public TableColumn ascPartStock;
+    public TableColumn ascPartPrice;
     private String exception = "";
+    private ObservableList<Part> ascParts = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,6 +50,12 @@ public class addProdController implements Initializable {
         prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+
+        prodAscPartTable.setItems(ascParts);
+        ascPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        ascPartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
+        ascPartStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
+        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
     }
 
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
@@ -57,6 +68,18 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
+        try {
+            Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
+            ascParts.add(part);
+            prodAscPartTable.setItems(ascParts);
+            //prodAscPartTable.refresh();
+        }
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
