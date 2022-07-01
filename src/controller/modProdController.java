@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controller.mainFormController.getModPartIndex;
 import static model.Inventory.getAllParts;
 
 public class modProdController implements Initializable {
@@ -97,7 +98,7 @@ public class modProdController implements Initializable {
         modProdMin.setText(String.valueOf(part.getPartMin()));
         }
 
-    public void onModProdSaveBtn(ActionEvent actionEvent) {
+    public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
         String name = modProdName.getText();
         String stock = modProdStock.getText();
@@ -117,7 +118,7 @@ public class modProdController implements Initializable {
 
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                Inventory.updateProduct(index, prod);
+                Inventory.updateProduct(getModPartIndex(), prod);
             }
         }
         catch (NumberFormatException e) {
