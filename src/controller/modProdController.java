@@ -45,6 +45,7 @@ public class modProdController implements Initializable {
     public TextField queryModProdPartSearch;
     private String exception = "";
     private ObservableList<Part> ascParts = FXCollections.observableArrayList();
+    private int prodIndex = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,8 +78,8 @@ public class modProdController implements Initializable {
         try {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
             ascParts.add(part);
-            modProdMainTable.setItems(ascParts);
-            //prodAscPartTable.refresh();
+            modProdAscPartTable.setItems(ascParts);
+            //modProdAscPartTable.refresh();
         }
         catch (NullPointerException e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -92,14 +93,17 @@ public class modProdController implements Initializable {
     }
 
     public void sendProd (int index, Product prod) {
+        prodIndex = index;
         modProdID.setText(String.valueOf(prod.getProdID()));
         modProdName.setText(prod.getProdName());
         modProdStock.setText(String.valueOf(prod.getProdStock()));
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
-
-        }
+        /*for (Part p : prod.getAllAssociatedParts()) {
+            ascParts.add(p);
+        }*/
+    }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID = Integer.parseInt(modProdID.getText());
