@@ -110,7 +110,7 @@ public class addProdController implements Initializable {
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID =(int)(Math.random() * 100);
         for (int i = 0; i < Inventory.getAllProducts().size(); i++) {
-            if (Inventory.getAllParts().get(i).getPartID() == prodID) {
+            if (Inventory.getAllProducts().get(i).getProdID() == prodID) {
                 prodID = (int)(Math.random() * 100);
                 i=0;
             }
