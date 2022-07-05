@@ -100,9 +100,9 @@ public class modProdController implements Initializable {
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
-        /*for (Part p : prod.getAllAssociatedParts()) {
-            ascParts.add(p);
-        }*/
+        for (Part p : prod.getAllAssociatedParts()) {
+            ascParts.addAssociatedParts(p);
+        }
     }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{

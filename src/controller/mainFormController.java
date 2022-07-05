@@ -141,7 +141,7 @@ public class mainFormController implements Initializable {
             loader.load();
 
             modProd = (Product) mainProdTable.getSelectionModel().getSelectedItem();
-            modProdIndex = getAllProducts().indexOf(modProd);
+            modProdIndex = mainProdTable.getSelectionModel().getSelectedIndex();
 
             modProdController modProdCtrl = loader.getController();
             modProdCtrl.sendProd(modProdIndex, modProd);
