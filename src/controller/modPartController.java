@@ -50,20 +50,13 @@ public class modPartController implements Initializable {
     }
 
     public void onModPartCancelBtn(ActionEvent actionEvent) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirm Cancel");
-        alert.setHeaderText("Confirm Cancel");
-        alert.setContentText("Are you sure you want to cancel modifying this part?");
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == ButtonType.OK) {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1080, 400);
             stage.setTitle("Back to Main Screen");
             stage.setScene(scene);
             stage.show();
-        }
+
     }
 
     public void sendPart (int index, Part part) {

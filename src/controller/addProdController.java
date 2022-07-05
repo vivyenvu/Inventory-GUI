@@ -84,6 +84,7 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
+
         try {
             Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
             if (ascParts.contains(p)) {
