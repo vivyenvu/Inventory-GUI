@@ -226,16 +226,20 @@ public class mainFormController implements Initializable {
                 if (p.getProdName().contains(q)) {
                     namedProds.add(p);
                 }
-                if (q.contains(String.valueOf(p.getProdID()))){
+                if (q.contains(String.valueOf(p.getProdID()))) {
                     namedProds.add(p);
                 }
-                mainProdTable.setItems(namedProds);
-                mainProdTable.refresh();
-                // else "If part is not found, the application displays an error message in the UI or in a dialog box
             }
+            if (namedProds.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Product not found.");
+                alert.show();
+            }
+            mainProdTable.setItems(namedProds);
+            mainProdTable.refresh();
         }
         else {
             mainProdTable.setItems(allProds);
         }
-    }
-}
+    }}
