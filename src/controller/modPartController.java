@@ -70,10 +70,12 @@ public class modPartController implements Initializable {
         if (part instanceof InHouse) {
             modPartInHouseBtn.setSelected(true);
             modPartMachineOrCompany.setText(String.valueOf(((InHouse) part).getMachineID()));
+            modPartMachineIDLabel.setText("Machine ID");
         }
         else {
             modPartOutsourcedBtn.setSelected(true);
             modPartMachineOrCompany.setText(((Outsourced) part).getCompanyName());
+            modPartMachineIDLabel.setText("Company Name");
         }
     }
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
@@ -83,11 +85,19 @@ public class modPartController implements Initializable {
         String price = modPartPrice.getText();
         String min = modPartMin.getText();
         String max = modPartMax.getText();
+        String machOrComp = modPartMachineOrCompany.getText();
+        boolean madeInHouse = true;
+        if (modPartInHouseBtn.isSelected()) {
+            madeInHouse = true;
+        }
+        else if (modPartOutsourcedBtn.isSelected()){
+            madeInHouse = false;
+        }
         //int machineID;
         //String companyName;
 
         try {
-            exception = Part.validPart(name, price, stock, min, max);
+            exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
             if (exception != "") {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");

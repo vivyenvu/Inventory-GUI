@@ -80,13 +80,14 @@ public abstract class Part {
     }
 
     //Error message for onModPartSaveBtn
-    public static String validPart(String name,String price, String stock, String min, String max) {
+    public static String validPart(String name,String price, String stock, String min, String max, String machOrComp, boolean madeInHouse) {
         double priced = 1.00;
         int stocki = 1;
         int mini = 0;
         int maxi =1;
-
+        int compi = 0;
         String invalid = "";
+
         try {
             priced = Double.parseDouble(price);
         }
@@ -111,6 +112,12 @@ public abstract class Part {
          catch (NumberFormatException e) {
              invalid += "Max must be an integer. ";
          }
+        try {
+            compi = Integer.parseInt(machOrComp);
+        }
+        catch (NumberFormatException e) {
+            invalid += "Max must be an integer. ";
+        }
 
         if (name.isEmpty()) {
             invalid += "Name field is required. ";

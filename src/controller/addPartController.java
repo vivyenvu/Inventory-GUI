@@ -70,11 +70,17 @@ public class addPartController implements Initializable {
         String price = addPartPrice.getText();
         String min = addPartMin.getText();
         String max = addPartMax.getText();
-        boolean madeInHouse = false;
-        String companyName;
-        int machineID = 0;
+        String machOrComp = addPartMachineID.getText();
+        boolean madeInHouse = true;
+        if (addPartInHouseBtn.isSelected()) {
+            madeInHouse = true;
+        }
+        else if (addPartOutsourcedBtn.isSelected()){
+            madeInHouse = false;
+        }
+
         try {
-            exception = Part.validPart(name, price, stock, min, max);
+            exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
             if (exception != "") {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
