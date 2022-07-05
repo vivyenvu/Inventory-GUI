@@ -122,6 +122,8 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {
+        Product prod = (Product) mainProdTable.getSelectionModel().getSelectedItem();
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Products");
         alert.setContentText("Are you sure you want to delete this product?");
@@ -129,8 +131,15 @@ public class mainFormController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             Product p = (Product) mainProdTable.getSelectionModel().getSelectedItem();
-            Inventory.deleteProduct(p);
-            //  PUT IN ALERT THAT THIS CANNOT DELETE THE PRODUCT IF IT HAS ASSOCIATED PARTS
+            if (!p.getAllAssociatedParts().isEmpty()) {
+                Alert partsAsc = new Alert(Alert.AlertType.ERROR);
+                    partsAsc.setTitle("Error");
+                    partsAsc.setContentText("Can't delete product that has parts associated.");
+                    partsAsc.showAndWait();
+                }
+            else {
+                Inventory.deleteProduct(p);
+            }
         }
     }
 
