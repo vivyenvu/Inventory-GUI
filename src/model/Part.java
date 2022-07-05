@@ -85,7 +85,7 @@ public abstract class Part {
         int stocki = 1;
         int mini = 0;
         int maxi =1;
-        int compi = 0;
+        int machi;
         String invalid = "";
 
         try {
@@ -112,13 +112,18 @@ public abstract class Part {
          catch (NumberFormatException e) {
              invalid += "Max must be an integer. ";
          }
-        try {
-            compi = Integer.parseInt(machOrComp);
-        }
-        catch (NumberFormatException e) {
-            invalid += "Max must be an integer. ";
+        if (madeInHouse == true) {
+            try {
+                machi = Integer.parseInt(machOrComp);
+            }
+            catch (NumberFormatException e) {
+                invalid += "Machine ID must be an integer. ";
+            }
         }
 
+        if (madeInHouse == false && machOrComp.isEmpty()) {
+                invalid += "Machine ID must be an integer. ";
+        }
         if (name.isEmpty()) {
             invalid += "Name field is required. ";
         }
