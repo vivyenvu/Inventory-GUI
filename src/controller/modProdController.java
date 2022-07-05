@@ -63,7 +63,6 @@ public class modProdController implements Initializable {
         modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
-
     }
 
     public void onModProdCancelBtn(ActionEvent actionEvent) throws IOException {
@@ -121,6 +120,8 @@ public class modProdController implements Initializable {
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
+        ascParts.clear();
+        modProdAscPartTable.getItems().clear();
         for (Part p : prod.getAllAssociatedParts()) {
             ascParts.add(p);
         }

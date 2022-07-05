@@ -44,6 +44,10 @@ public class Product {
     public int getProdMax() {
         return prodMax;
     }
+
+    public ObservableList<Part> getAllAssociatedParts() {
+        return associatedParts;
+    }
     //Setters
 
     public void setProdID (int prodID) {
@@ -81,10 +85,6 @@ public class Product {
     public static boolean deleteAssociatedPart(Part selectedAssociatedPart){
         associatedParts.remove(selectedAssociatedPart);
         return true;
-    }
-
-    public ObservableList<Part> getAllAssociatedParts() {
-        return associatedParts;
     }
 
     public static String validProd(String name,String price, String stock, String min, String max) {
