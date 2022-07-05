@@ -192,7 +192,7 @@ public class mainFormController implements Initializable {
         String q = queryPartSearch.getText();
 
         if (!q.isEmpty()) {
-            for (Part p : allParts) {
+            for (Part p : allParts) { //if you get to the end of q and can't find a part, then set the alert
                 if (p.getPartName().contains(q)) {
                     namedParts.add(p);
                 }
@@ -201,10 +201,13 @@ public class mainFormController implements Initializable {
                 }
                 mainPartTable.setItems(namedParts);
                 mainPartTable.refresh();
-                // else "If part is not found, the application displays an error message in the UI or in a dialog box
             }
         }
         else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Part not found.");
+            alert.show();
             mainPartTable.setItems(allParts);
         }
     }

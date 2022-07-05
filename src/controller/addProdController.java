@@ -15,6 +15,7 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static model.Inventory.getAllParts;
@@ -84,21 +85,25 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Products");
+        alert.setContentText("Are you sure you want to remove this part?");
 
-        try {
-            Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
-            if (ascParts.contains(p)) {
-                Product.deleteAssociatedPart(p);
-                ascParts.remove(p);
-                prodAscPartTable.setItems(ascParts);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
+                if (ascParts.contains(p)) {
+                    Product.deleteAssociatedPart(p);
+                    ascParts.remove(p);
+                    prodAscPartTable.setItems(ascParts);
+                }
+            } catch (NullPointerException e) {
+                Alert err = new Alert(Alert.AlertType.ERROR);
+                err.setTitle("Error");
+                err.setContentText("Please select a part. ");
+                err.show();
             }
-        }
-
-        catch (NullPointerException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Please select a part. ");
-            alert.show();
         }
     }
 
