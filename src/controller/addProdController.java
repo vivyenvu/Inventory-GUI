@@ -84,6 +84,21 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
+        try {
+            Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
+            if (ascParts.contains(p)) {
+                Product.deleteAssociatedPart(p);
+                ascParts.remove(p);
+                prodAscPartTable.setItems(ascParts);
+            }
+        }
+
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
@@ -105,8 +120,9 @@ public class addProdController implements Initializable {
             }
 
             else {
-                    Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                    Inventory.addProduct(prod);
+                Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                prod.setProdParts(ascParts);
+                Inventory.addProduct(prod);
             }
         }
         catch (NumberFormatException e) {

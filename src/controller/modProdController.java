@@ -90,6 +90,21 @@ public class modProdController implements Initializable {
     }
 
     public void onModProdRemoveBtn(ActionEvent actionEvent) {
+        try {
+            Part p = (Part) modProdAscPartTable.getSelectionModel().getSelectedItem();
+            if (ascParts.contains(p)) {
+                Product.deleteAssociatedPart(p);
+                ascParts.remove(p);
+                modProdAscPartTable.setItems(ascParts);
+            }
+        }
+
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Please select a part. ");
+            alert.show();
+        }
     }
 
     public void sendProd (int index, Product prod) {
@@ -125,11 +140,8 @@ public class modProdController implements Initializable {
 
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                prod.setProdParts(ascParts);
                 Inventory.updateProduct(getModProdIndex(), prod);
-
-                for (Part p : ascParts) {
-                    prod.addAssociatedPart(p);
-                }
             }
         }
         catch (NumberFormatException e) {

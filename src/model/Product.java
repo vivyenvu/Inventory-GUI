@@ -10,7 +10,7 @@ public class Product {
     private int prodStock;
     private int prodMin;
     private int prodMax;
-    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
     public Product(int prodID, String prodName, double prodPrice, int prodStock, int prodMin, int prodMax) {
         this.prodID = prodID;
@@ -70,11 +70,15 @@ public class Product {
         this.prodMax = prodMax;
     }
 
+    public void setProdParts (ObservableList<Part> parts) {
+        this.associatedParts = parts;
+    }
+
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }
 
-    public boolean deleteAssociatedPart(Part selectedAssociatedPart){
+    public static boolean deleteAssociatedPart(Part selectedAssociatedPart){
         associatedParts.remove(selectedAssociatedPart);
         return true;
     }
