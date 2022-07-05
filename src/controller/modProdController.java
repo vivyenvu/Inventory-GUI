@@ -101,7 +101,7 @@ public class modProdController implements Initializable {
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
         for (Part p : prod.getAllAssociatedParts()) {
-            ascParts.addAssociatedParts(p);
+            ascParts.add(p);
         }
     }
 
@@ -126,6 +126,10 @@ public class modProdController implements Initializable {
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
                 Inventory.updateProduct(getModProdIndex(), prod);
+
+                for (Part p : ascParts) {
+                    prod.addAssociatedPart(p);
+                }
             }
         }
         catch (NumberFormatException e) {
