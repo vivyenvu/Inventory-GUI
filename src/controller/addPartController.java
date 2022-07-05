@@ -58,7 +58,13 @@ public class addPartController implements Initializable {
     }
 
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
-        int partID =(int)(Math.random() * 100); //think of other ways to generate unique id
+        int partID =(int)(Math.random() * 100);
+        for (int i = 0; i < Inventory.getAllParts().size(); i++) {
+            if (Inventory.getAllParts().get(i).getPartID() == partID) {
+                partID = (int)(Math.random() * 100);
+                i=0;
+            }
+        }
         String name = addPartName.getText();
         String stock = addPartStock.getText();
         String price = addPartPrice.getText();

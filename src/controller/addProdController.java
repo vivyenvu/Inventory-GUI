@@ -108,7 +108,13 @@ public class addProdController implements Initializable {
     }
 
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
-        int prodID =(int)(Math.random() * 100); //think of other ways to generate unique id
+        int prodID =(int)(Math.random() * 100);
+        for (int i = 0; i < Inventory.getAllProducts().size(); i++) {
+            if (Inventory.getAllParts().get(i).getPartID() == prodID) {
+                prodID = (int)(Math.random() * 100);
+                i=0;
+            }
+        }
         String name = prodName.getText();
         String stock = prodStock.getText();
         String price = prodPrice.getText();
@@ -168,7 +174,6 @@ public class addProdController implements Initializable {
                 alert.setTitle("Error");
                 alert.setContentText("Part not found.");
                 alert.show();
-                //mainPartTable.refresh();
             }
             prodPartMainTable.setItems(namedParts);
             prodPartMainTable.refresh();

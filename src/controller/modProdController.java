@@ -177,13 +177,18 @@ public class modProdController implements Initializable {
                 if (p.getPartName().contains(q)) {
                     namedParts.add(p);
                 }
-                if (q.contains(String.valueOf(p.getPartID()))){
+                if (q.contains(String.valueOf(p.getPartID()))) {
                     namedParts.add(p);
                 }
-                modProdMainTable.setItems(namedParts);
-                modProdMainTable.refresh();
-                // else "If part is not found, the application displays an error message in the UI or in a dialog box
             }
+            if (namedParts.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Part not found.");
+                alert.show();
+            }
+            modProdMainTable.setItems(namedParts);
+            modProdMainTable.refresh();
         }
         else {
             modProdMainTable.setItems(allParts);
