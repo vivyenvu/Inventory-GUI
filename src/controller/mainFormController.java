@@ -192,22 +192,27 @@ public class mainFormController implements Initializable {
         String q = queryPartSearch.getText();
 
         if (!q.isEmpty()) {
-            for (Part p : allParts) { //if you get to the end of q and can't find a part, then set the alert
+            for (Part p : allParts) {
+
+                //if you get to the end of q and can't find a part, then set the alert
                 if (p.getPartName().contains(q)) {
                     namedParts.add(p);
                 }
                 if (q.contains(String.valueOf(p.getPartID()))){
                     namedParts.add(p);
                 }
+                if (!p.getPartName().contains(q) || !q.contains(String.valueOf(p.getPartID()))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Part not found.");
+                    alert.show();
+                }
                 mainPartTable.setItems(namedParts);
                 mainPartTable.refresh();
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Part not found.");
-            alert.show();
+
             mainPartTable.setItems(allParts);
         }
     }
