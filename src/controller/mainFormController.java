@@ -110,15 +110,24 @@ public class mainFormController implements Initializable {
     }
 
     public void onClickMainDeletePartBtn(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Parts");
-        alert.setContentText("Are you sure you want to delete this part?");
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Parts");
+            alert.setContentText("Are you sure you want to delete this part?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
-            Inventory.deletePart(p);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+                Inventory.deletePart(p);
+            }
         }
+        catch (NullPointerException e){
+            Alert partsAsc = new Alert(Alert.AlertType.ERROR);
+            partsAsc.setTitle("Error");
+            partsAsc.setContentText("Can't delete because not part was selected.");
+            partsAsc.show();
+        }
+
     }
 
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {

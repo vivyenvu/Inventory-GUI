@@ -90,12 +90,13 @@ public class addPartController implements Initializable {
             }
 
             else {
+                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
                 if (addPartInHouseBtn.isSelected()){
-                    InHouse inHousePart = new InHouse(partID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(addPartMachineID.getText()),true);
+                    InHouse inHousePart = new InHouse(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(addPartMachineID.getText()),true);
                     Inventory.addPart(inHousePart);
                 }
-                if (addPartOutsourcedBtn.isSelected()){
-                    Outsourced outsourcedPart = new Outsourced(partID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), addPartMachineID.getText(),false);
+                else if (addPartOutsourcedBtn.isSelected()){
+                    Outsourced outsourcedPart = new Outsourced(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), addPartMachineID.getText(),false);
                     Inventory.addPart(outsourcedPart);
                 }
             }

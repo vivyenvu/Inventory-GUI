@@ -79,6 +79,10 @@ public class modProdController implements Initializable {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
             ascParts.add(part);
             modProdAscPartTable.setItems(ascParts);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(part.getPartName());
+
+            alert.showAndWait();
             //modProdAscPartTable.refresh();
         }
         catch (NullPointerException e){
@@ -120,11 +124,12 @@ public class modProdController implements Initializable {
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
-        ascParts.clear();
-        modProdAscPartTable.getItems().clear();
-        for (Part p : prod.getAllAssociatedParts()) {
+        ascParts = null;
+        ascParts = prod.getAllAssociatedParts();
+        //modProdAscPartTable.getItems().clear();
+        /*for (Part p : prod.getAllAssociatedParts()) {
             ascParts.add(p);
-        }
+        }*/
     }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{

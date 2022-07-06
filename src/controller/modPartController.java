@@ -107,12 +107,13 @@ public class modPartController implements Initializable {
             }
 
             else {
+                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
                 if (modPartInHouseBtn.isSelected()){
-                    InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()),true);
+                    InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()),true);
                     Inventory.updatePart(getModPartIndex(), inHousePart);
                 }
-                if (modPartOutsourcedBtn.isSelected()){
-                    Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(),false);
+                else if (modPartOutsourcedBtn.isSelected()){
+                    Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(),false);
                     Inventory.updatePart(getModPartIndex(), outsourcedPart);
                 }
             }
