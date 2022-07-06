@@ -45,8 +45,9 @@ public class modProdController implements Initializable {
     public TextField modProdID;
     public TextField queryModProdPartSearch;
     private String exception = "";
-    private ObservableList<Part> ascParts = FXCollections.observableArrayList();
+    //private ObservableList<Part> ascParts = FXCollections.observableArrayList();
     private int prodIndex = 0;
+    private Product currentProd;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,7 +58,7 @@ public class modProdController implements Initializable {
         modProdMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         modProdMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
 
-        modProdAscPartTable.setItems(ascParts);
+        modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
 
         modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
@@ -77,12 +78,8 @@ public class modProdController implements Initializable {
     public void onModProdAddBtn(ActionEvent actionEvent) {
         try {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
-            ascParts.add(part);
-            modProdAscPartTable.setItems(ascParts);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(part.getPartName());
-
-            alert.showAndWait();
+            currentProd.addAssociatedPart(part);
+            modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
             //modProdAscPartTable.refresh();
         }
         catch (NullPointerException e){
@@ -102,10 +99,9 @@ public class modProdController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 Part p = (Part) modProdAscPartTable.getSelectionModel().getSelectedItem();
-                if (ascParts.contains(p)) {
+                if (currentProd.getAllAssociatedParts().contains(p)) {
                     Product.deleteAssociatedPart(p);
-                    ascParts.remove(p);
-                    modProdAscPartTable.setItems(ascParts);
+                    modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
                 }
             } catch (NullPointerException e) {
                 Alert err = new Alert(Alert.AlertType.ERROR);
@@ -117,6 +113,7 @@ public class modProdController implements Initializable {
     }
 
     public void sendProd (int index, Product prod) {
+        currentProd = prod;
         prodIndex = index;
         modProdID.setText(String.valueOf(prod.getProdID()));
         modProdName.setText(prod.getProdName());
@@ -124,12 +121,6 @@ public class modProdController implements Initializable {
         modProdPrice.setText(String.valueOf(prod.getProdPrice()));
         modProdMax.setText(String.valueOf(prod.getProdMax()));
         modProdMin.setText(String.valueOf(prod.getProdMin()));
-        ascParts = null;
-        ascParts = prod.getAllAssociatedParts();
-        //modProdAscPartTable.getItems().clear();
-        /*for (Part p : prod.getAllAssociatedParts()) {
-            ascParts.add(p);
-        }*/
     }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
@@ -152,7 +143,6 @@ public class modProdController implements Initializable {
 
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                prod.setProdParts(ascParts);
                 Inventory.updateProduct(getModProdIndex(), prod);
             }
         }
