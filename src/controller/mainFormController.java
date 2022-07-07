@@ -47,9 +47,11 @@ public class mainFormController implements Initializable {
     private static Product modProd;
     private static int modProdIndex;
 
+    /**
+     * Starts the scene by populating the Part and Product Table with the test data
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         mainPartTable.setItems(getAllParts());
 
         mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
@@ -65,6 +67,9 @@ public class mainFormController implements Initializable {
         mainProdTablePrice.setCellValueFactory(new PropertyValueFactory<>("prodPrice"));
     }
 
+    /**
+     * When you click "Add" on the Part side, it'll redirect you to the Add Part menu
+     */
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -74,13 +79,25 @@ public class mainFormController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Gives you the index of the part that you're modifying
+     */
     public static int getModPartIndex() {
         return modPartIndex;
     }
+
+    /**
+     * Gives you the index of the product that you're modifying
+     */
     public static int getModProdIndex() {
         return modProdIndex;
     }
 
+    /**
+     * When you click "Modify" on the Part side, it'll call the sendPart method to take
+     * the data of the selected part, and send it to the Modify Part scene, as well as
+     * redirect the page to that scene. If you didn't select a part, an error will pop up.
+     */
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -109,6 +126,11 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /**
+     * Removes part from inventory and updates the part table to show that it has been deleted.
+     * Confirmation pop up to make sure user wants to delete part, and error pop up if
+     * part cannot be deleted
+     */
     public void onClickMainDeletePartBtn(ActionEvent actionEvent) {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -136,6 +158,11 @@ public class mainFormController implements Initializable {
 
     }
 
+    /**
+     * Removes product from inventory and updates the part table to show that it has been deleted.
+     * Confirmation pop up to make sure user wants to delete product, and error pop up if
+     * product cannot be deleted
+     */
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {
         Product prod = (Product) mainProdTable.getSelectionModel().getSelectedItem();
 
@@ -164,6 +191,11 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /**
+     * When you click the Modify button on the Product side, it'll call the sendProd method to take
+     * the data of the selected product, and send it to the Modify Product scene, as well as
+     * redirect the page to that scene. If you didn't select a product, an error will pop up.
+     */
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -176,9 +208,7 @@ public class mainFormController implements Initializable {
             modProdController modProdCtrl = loader.getController();
             modProdCtrl.sendProd(modProdIndex, modProd);
 
-            //Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            //Scene scene = new Scene(root, 600, 600);
             Parent scene = loader.getRoot();
             stage.setTitle("Modify Product");
             stage.setScene(new Scene(scene));
@@ -192,6 +222,9 @@ public class mainFormController implements Initializable {
         }
     }
 
+    /**
+     * Redirects you to the Add Product menu
+     */
     public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addProd.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -201,11 +234,20 @@ public class mainFormController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Closes the whole stage, ending the application
+     */
     public void onClickMainExitBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Takes partial name or partial id to search for the part in the Inventory.allParts List
+     * An error pops up if part is not found
+     * Table is refreshed to display what parts are around based off partial search
+     * If search field is empty, the table displays all of the parts in the Inventory
+     */
     public void onClickPartSearch(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = getAllParts();
@@ -214,7 +256,6 @@ public class mainFormController implements Initializable {
 
         if (!q.isEmpty()) {
             for (Part p : allParts) {
-                //if you get to the end of q and can't find a part, then set the alert
                 if (p.getPartName().contains(q)) {
                     namedParts.add(p);
                 }
@@ -236,6 +277,13 @@ public class mainFormController implements Initializable {
             mainPartTable.setItems(allParts);
         }
     }
+
+    /**
+     * Takes partial name or partial id to search for the product in the Inventory.allProds List
+     * An error pops up if product is not found
+     * Table is refreshed to display what products are around based off partial search
+     * If search field is empty, the table displays all of the products in the Inventory
+     */
     public void onClickProdSearch(ActionEvent actionEvent)  {
         ObservableList<Product> namedProds = FXCollections.observableArrayList();
         ObservableList<Product> allProds = getAllProducts();

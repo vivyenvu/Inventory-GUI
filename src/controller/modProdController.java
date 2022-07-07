@@ -71,6 +71,7 @@ public class modProdController implements Initializable {
     public void onModProdAddBtn(ActionEvent actionEvent) {
         try {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
+            //Product.addAssociatedPart(part);
             currentProd.addAssociatedPart(part);
             modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
             modProdAscPartTable.refresh();
@@ -117,7 +118,7 @@ public class modProdController implements Initializable {
         modProdMin.setText(String.valueOf(currentProd.getProdMin()));
 
         modProdAscPartTable.getItems().clear();
-        modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
+        modProdAscPartTable.setItems(prod.getAllAssociatedParts());
 
         modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
