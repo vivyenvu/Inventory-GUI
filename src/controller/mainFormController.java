@@ -42,9 +42,24 @@ public class mainFormController implements Initializable {
     public TextField queryPartSearch;
     public TextField queryProdSearch;
 
+    /**
+     * Holds part to be sent to Modify Part Scene using sendPart method
+     */
     private static Part modPart;
+
+    /**
+     * Holds part index to be sent to Modify Part Scene using sendPart method
+     */
     private static int modPartIndex;
+
+    /**
+     * Holds product to be sent to Modify Product Scene using sendProd method
+     */
     private static Product modProd;
+
+    /**
+     * Holds product index to be sent to Modify Product Scene using sendProd method
+     */
     private static int modProdIndex;
 
     /**
