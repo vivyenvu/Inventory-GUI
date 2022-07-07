@@ -146,13 +146,14 @@ public class modProdController implements Initializable {
             }
 
             else {
-                Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
+                Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
                 /*TEST
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText(currentProd.getProdName());
                 alert.showAndWait();*/
-                prod.setProdParts(currentProd.getAllAssociatedParts());
-                //prod.setProdParts(modProdAscPartTable.getItems());
+                //prod.setProdParts(currentProd.getAllAssociatedParts());
+                prod.setProdParts(modProdAscPartTable.getItems());
                 Inventory.updateProduct(getModProdIndex(), prod);
             }
         }

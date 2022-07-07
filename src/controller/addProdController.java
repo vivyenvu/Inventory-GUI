@@ -132,7 +132,8 @@ public class addProdController implements Initializable {
             }
 
             else {
-                Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
+                Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
                 prod.setProdParts(ascParts);
                 Inventory.addProduct(prod);
             }
