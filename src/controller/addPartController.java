@@ -33,12 +33,20 @@ public class addPartController implements Initializable {
     public TextField addPartPrice;
     public TextField addPartMax;
     public TextField addPartMin;
+
+    /**
+     * Empty string to hold validation errors from Part.validPart() in the
+     * onAddPartSaveBtn method
+     */
     private String exception = "";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * When you hit Cancel, you'll be redirected to the Main Menu
+     */
     public void addPartCancelBtn(ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -49,14 +57,25 @@ public class addPartController implements Initializable {
 
     }
 
+    /**
+     * When the radio button "In House" is selected, the bottom label will say "Machine ID"
+     */
     public void onAddPartInHouseBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Machine ID");
     }
 
+    /**
+     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name"
+     */
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Company Name");
     }
 
+    /**
+     * When you press "Save", this will take the data in the fields, validate them, and determine
+     * if the part is In House or Outsourced. If all data is present and valid, a new part will be
+     * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up
+     */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
         int partID =(int)(Math.random() * 100);
         for (int i = 0; i < Inventory.getAllParts().size(); i++) {
