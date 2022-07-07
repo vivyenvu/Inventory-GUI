@@ -116,9 +116,15 @@ public class mainFormController implements Initializable {
             alert.setContentText("Are you sure you want to delete this part?");
 
             Optional<ButtonType> result = alert.showAndWait();
+            Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
+                //Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
                 Inventory.deletePart(p);
+            }
+            if (Inventory.getAllParts().contains(p)) {
+                Alert delError = new Alert(Alert.AlertType.ERROR);
+                delError.setTitle("Error");
+                delError.setContentText("Part could not be deleted.");
             }
         }
         catch (NullPointerException e){
@@ -148,6 +154,12 @@ public class mainFormController implements Initializable {
                 }
             else {
                 Inventory.deleteProduct(p);
+
+                if (Inventory.getAllProducts().contains(p)) {
+                    Alert delError = new Alert(Alert.AlertType.ERROR);
+                    delError.setTitle("Error");
+                    delError.setContentText("Product could not be deleted.");
+                }
             }
         }
     }
