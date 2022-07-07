@@ -57,13 +57,6 @@ public class modProdController implements Initializable {
         modProdMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         modProdMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         modProdMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
-
-        modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
-
-        modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
     }
 
     public void onModProdCancelBtn(ActionEvent actionEvent) throws IOException {
@@ -80,7 +73,7 @@ public class modProdController implements Initializable {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
             currentProd.addAssociatedPart(part);
             modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
-            //modProdAscPartTable.refresh();
+            modProdAscPartTable.refresh();
         }
         catch (NullPointerException e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -113,14 +106,25 @@ public class modProdController implements Initializable {
     }
 
     public void sendProd (int index, Product prod) {
+        //ascParts = prod.getAllAssociatedParts();
         currentProd = prod;
         prodIndex = index;
-        modProdID.setText(String.valueOf(prod.getProdID()));
-        modProdName.setText(prod.getProdName());
-        modProdStock.setText(String.valueOf(prod.getProdStock()));
-        modProdPrice.setText(String.valueOf(prod.getProdPrice()));
-        modProdMax.setText(String.valueOf(prod.getProdMax()));
-        modProdMin.setText(String.valueOf(prod.getProdMin()));
+        modProdID.setText(String.valueOf(currentProd.getProdID()));
+        modProdName.setText(currentProd.getProdName());
+        modProdStock.setText(String.valueOf(currentProd.getProdStock()));
+        modProdPrice.setText(String.valueOf(currentProd.getProdPrice()));
+        modProdMax.setText(String.valueOf(currentProd.getProdMax()));
+        modProdMin.setText(String.valueOf(currentProd.getProdMin()));
+
+        modProdAscPartTable.getItems().clear();
+        modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
+
+        modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
+        modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
+        modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
+        modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        modProdAscPartTable.refresh();
+
     }
 
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
@@ -143,6 +147,12 @@ public class modProdController implements Initializable {
 
             else {
                 Product prod = new Product(prodID, name, Double.parseDouble(price), Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                /*TEST
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(currentProd.getProdName());
+                alert.showAndWait();*/
+                prod.setProdParts(currentProd.getAllAssociatedParts());
+                //prod.setProdParts(modProdAscPartTable.getItems());
                 Inventory.updateProduct(getModProdIndex(), prod);
             }
         }
