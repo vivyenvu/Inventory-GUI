@@ -74,7 +74,8 @@ public class addPartController implements Initializable {
     /**
      * When you press "Save", this will take the data in the fields, validate them, and determine
      * if the part is In House or Outsourced. If all data is present and valid, a new part will be
-     * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up
+     * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up.
+     * After completion, you are redirected back to the Main screen
      */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
         int partID =(int)(Math.random() * 100);

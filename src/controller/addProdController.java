@@ -40,9 +40,22 @@ public class addProdController implements Initializable {
     public TableColumn ascPartName;
     public TableColumn ascPartStock;
     public TableColumn ascPartPrice;
+
+    /**
+     * Empty string to hold validation errors from Product.validProd() in the
+     * onAddProdSaveBtn method
+     */
     private String exception = "";
+
+    /**
+     * List of associated parts with each product
+     */
     private ObservableList<Part> ascParts = FXCollections.observableArrayList();
 
+    /**
+     * Populate the top table with all the Parts in the inventory
+     * Populate the bottom table with all the associated parts to that Product
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         prodPartMainTable.setItems(getAllParts());
@@ -60,6 +73,9 @@ public class addProdController implements Initializable {
         ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
     }
 
+    /**
+     * Hitting the Cancel button will redirect you to the main menu
+     */
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -69,21 +85,22 @@ public class addProdController implements Initializable {
         stage.show();
     }
 
+    /**
+     * When you hit Add, the selected part will be added to the product's List of
+     * associated parts (ascParts) and the bottom table will reflect this addition.
+     */
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
-        try {
             Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
             ascParts.add(part);
             prodAscPartTable.setItems(ascParts);
             //prodAscPartTable.refresh();
-        }
-        catch (NullPointerException e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Please select a part. ");
-            alert.show();
-        }
     }
 
+    /**
+     * When you press the Remove Associated Part button, a confirmation will pop up. If you press OK,
+     * that part will be removed from the associated parts List and the bottom table will update to
+     * reflect this deletion.
+     */
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Products");
@@ -91,22 +108,20 @@ public class addProdController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
                 Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
                 if (ascParts.contains(p)) {
                     Product.deleteAssociatedPart(p);
                     ascParts.remove(p);
                     prodAscPartTable.setItems(ascParts);
                 }
-            } catch (NullPointerException e) {
-                Alert err = new Alert(Alert.AlertType.ERROR);
-                err.setTitle("Error");
-                err.setContentText("Please select a part. ");
-                err.show();
-            }
         }
     }
 
+    /**
+     * When you press the Save button, validProd will be called to validate all the data entered into the text fields
+     * If all the data is valid, then a new Product will be created and added to the Inventory.allProducts List.
+     * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen
+     */
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID =(int)(Math.random() * 100);
         for (int i = 0; i < Inventory.getAllProducts().size(); i++) {
@@ -154,7 +169,12 @@ public class addProdController implements Initializable {
         stage.show();
     }
 
-
+    /**
+     * Takes partial name or partial id to search for the part in the Inventory.allParts List
+     * An error pops up if part is not found
+     * Table is refreshed to display what parts are around based off partial search
+     * If search field is empty, the table displays all of the parts in the Inventory
+     */
     public void onClickPartSearchProd(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = getAllParts();
