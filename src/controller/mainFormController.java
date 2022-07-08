@@ -78,7 +78,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Button to transition from Main Form to Add Part Menu
+     * Add button to transition from Main Form to Add Part Menu
      */
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
@@ -90,7 +90,8 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Button to send part information to Modify Part Menu and transition to that scene
+     * Modify button to send part information to Modify Part Menu and transition to that scene
+     * Pop up error if part is not selected
      */
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
         try {
@@ -121,7 +122,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Button to remove part from inventory and update the part table to show that it has been deleted.
+     * Delete Button to remove part from inventory and update the part table to show that it has been deleted.
      * Confirmation pop up to make sure user wants to delete part, and error pop up if
      * part cannot be deleted
      */
@@ -152,7 +153,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Removes product from inventory and updates the part table to show that it has been deleted.
+     * Delete button removes product from inventory and updates the part table to show that it has been deleted.
      * Confirmation pop up to make sure user wants to delete product, and error pop up if
      * product cannot be deleted
      */
@@ -190,9 +191,9 @@ public class mainFormController implements Initializable {
 
 
     /**
-     * When you click the Modify button on the Product side, it'll call the sendProd method to take
-     * the data of the selected product, and send it to the Modify Product scene, as well as
-     * redirect the page to that scene. If you didn't select a product, an error will pop up.
+     * Modify button calls sendProd method to take the data of the selected product
+     * and send it to the Modify Product scene. Scene changes to Modify Product scene.
+     * Pop up error if no product is selected.
      */
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
         /**
@@ -225,7 +226,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Redirects you to the Add Product menu
+     * Transitions to Add Product menu
      */
     public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addProd.fxml"));
@@ -248,7 +249,7 @@ public class mainFormController implements Initializable {
      * Takes partial name or partial id to search for the part in the Inventory.allParts List
      * An error pops up if part is not found
      * Table is refreshed to display what parts are around based off partial search
-     * If search field is empty, the table displays all of the parts in the Inventory
+     * If search field is empty, the table displays all the parts in the Inventory
      */
     public void onClickPartSearch(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
@@ -284,7 +285,7 @@ public class mainFormController implements Initializable {
      * Takes partial name or partial id to search for the product in the Inventory.allProds List
      * An error pops up if product is not found
      * Table is refreshed to display what products are around based off partial search
-     * If search field is empty, the table displays all of the products in the Inventory
+     * If search field is empty, the table displays all the products in the Inventory
      */
     public void onClickProdSearch(ActionEvent actionEvent)  {
         ObservableList<Product> namedProds = FXCollections.observableArrayList();
