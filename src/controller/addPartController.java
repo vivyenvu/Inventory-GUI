@@ -34,7 +34,7 @@ public class addPartController implements Initializable {
 
     /**
      * Empty string to hold validation errors from Part.validPart() in the
-     * onAddPartSaveBtn method
+     * onAddPartSaveBtn method.
      */
     private String exception = "";
     @Override
@@ -72,7 +72,7 @@ public class addPartController implements Initializable {
      * Save button will take the data in the fields, validate them, and determine
      * if the part is In House or Outsourced. If all data is present and valid, a new part will be
      * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up.
-     * After completion, scene transitions the Main screen
+     * After completion, scene transitions the Main screen.
      */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
         int partID =Inventory.getAllParts().size() + 1;

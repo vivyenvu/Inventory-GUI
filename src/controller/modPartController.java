@@ -108,7 +108,7 @@ public class modPartController implements Initializable {
      * Save button will take the data in the fields, validate them, and determine
      * if the part is In House or Outsourced. If all data is present and valid, a new part will be
      * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up.
-     * After completion, scene transitions to the Main screen
+     * After completion, scene transitions to the Main screen.
      */
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
         String partID = modPartID.getText();

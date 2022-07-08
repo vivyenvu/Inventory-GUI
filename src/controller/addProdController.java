@@ -56,8 +56,8 @@ public class addProdController implements Initializable {
     private ObservableList<Part> ascParts = FXCollections.observableList(partsList);
 
     /**
-     * Populate the top table with all the Parts in the inventory
-     * Populate the bottom table with all the associated parts to that Product
+     * Populates the top table with all the Parts in the inventory
+     * Populates the bottom table with all the associated parts to that Product
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,10 +126,10 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Save button will call validProd to validate all the data entered into the text fields
+     * Save button will call validProd to validate all the data entered into the text fields.
      * If all the data is valid, then a new Product will be created with its own List of associated parts, and
      * that will be added to the Inventory.allProducts List.
-     * Otherwise, error messages will pop up. After completion, scene transitions back to the Main screen
+     * Otherwise, error messages will pop up. After completion, scene transitions back to the Main screen.
      */
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID = Inventory.getAllProducts().size() + 9;
@@ -179,10 +179,10 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Takes partial name or partial id to search for the part in the Inventory.allParts List
-     * An error pops up if part is not found
-     * Table is refreshed to display what parts match the partial search
-     * If search field is empty, the table displays all the parts in the Inventory
+     * Takes partial name or partial id to search for the part in the Inventory.allParts List.
+     * An error pops up if part is not found.
+     * Table is refreshed to display what parts match the partial search.
+     * If search field is empty, the table displays all the parts in the Inventory.
      */
     public void onClickPartSearchProd(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
