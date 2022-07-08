@@ -67,13 +67,13 @@ public class addProdController implements Initializable {
         prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
-/*
+
         prodAscPartTable.setItems(ascParts);
 
         ascPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         ascPartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         ascPartStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));*/
+        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
     }
 
     /**
@@ -94,9 +94,17 @@ public class addProdController implements Initializable {
      */
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
             Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
+        if (part == null) {
+            Alert err = new Alert(Alert.AlertType.ERROR);
+            err.setTitle("Error");
+            err.setContentText("Please select a part. ");
+            err.show();
+        }
+        else {
             ascParts.add(part);
             prodAscPartTable.setItems(ascParts);
-            //prodAscPartTable.refresh();
+            prodAscPartTable.refresh();
+        }
     }
 
     /**

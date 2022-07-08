@@ -56,11 +56,6 @@ public class modProdController implements Initializable {
     private ObservableList<Part> ascPartsDisplay = FXCollections.observableList(partsList);
 
     /**
-     * Index of current product that was selected from the mainFormController's method onClickMainModProdBtn
-     */
-    //private int prodIndex = 0;
-
-    /**
      * Reference to product that was selected from the mainFormController's method onClickMainModProdBtn
      */
     private Product currentProd;
@@ -136,18 +131,21 @@ public class modProdController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                Part p = (Part) modProdAscPartTable.getSelectionModel().getSelectedItem();
+            List<Part> displayList = new ArrayList<Part>();
+            ObservableList<Part> deleteDisplayList = FXCollections.observableList(displayList);
+            deleteDisplayList.addAll(currentProd.getAllAssociatedParts());
+
+            Part p = (Part) modProdAscPartTable.getSelectionModel().getSelectedItem();
                 if (currentProd.getAllAssociatedParts().contains(p)) {
-                    currentProd.deleteAssociatedPart(p);
-                    modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
+                    Product display = new Product (currentProd.getProdID(), currentProd.getProdName(), currentProd.getProdPrice(), currentProd.getProdStock(), currentProd.getProdMin(), currentProd.getProdMax());
+                    display.setProdParts(deleteDisplayList);
+                    display.deleteAssociatedPart(p);
+                    //currentProd.deleteAssociatedPart(p);
+
+                    ascPartsDisplay = display.getAllAssociatedParts();
+                    //ascPartsDisplay.addAll(currentProd.getAllAssociatedParts());
+                    modProdAscPartTable.setItems(ascPartsDisplay);
                 }
-            } catch (NullPointerException e) {
-                Alert err = new Alert(Alert.AlertType.ERROR);
-                err.setTitle("Error");
-                err.setContentText("Please select a part. ");
-                err.show();
-            }
         }
     }
 
@@ -160,7 +158,6 @@ public class modProdController implements Initializable {
     public void sendProd (int index, Product prod) {
         ascPartsDisplay.addAll(prod.getAllAssociatedParts());
         currentProd = prod;
-        //prodIndex = index;
         modProdID.setText(String.valueOf(currentProd.getProdID()));
         modProdName.setText(currentProd.getProdName());
         modProdStock.setText(String.valueOf(currentProd.getProdStock()));
@@ -176,7 +173,6 @@ public class modProdController implements Initializable {
         modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
         modProdAscPartTable.refresh();
-
     }
 
     /**
@@ -212,11 +208,6 @@ public class modProdController implements Initializable {
                 currentProd.setProdMin(Integer.parseInt(min));
                 currentProd.setProdMax(Integer.parseInt(max));
                 currentProd.setProdParts(ascPartsDisplay);
-
-
-                //prod.setProdParts(currentProd.getAllAssociatedParts());
-                //prod.setProdParts(modProdAscPartTable.getItems());
-                //Inventory.updateProduct(prodIndex, prod); // or getModProdIndex()
             }
         }
         catch (NumberFormatException e) {
