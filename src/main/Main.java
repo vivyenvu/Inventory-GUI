@@ -24,7 +24,7 @@ public class Main extends Application {
     }
 
     /**
-     *
+     * Example data to test application on
      */
     private static void addTestData() {
 
@@ -44,6 +44,11 @@ public class Main extends Application {
         Inventory.addProduct(steel);
         Inventory.addProduct(crunch);
     }
+
+    /**
+     * Starts the program by adding the test data
+     * @param args argument to launch application with
+     */
     public static void main(String[] args) {
         addTestData();
         launch(args);
