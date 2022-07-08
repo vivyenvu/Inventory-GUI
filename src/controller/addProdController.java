@@ -172,8 +172,8 @@ public class addProdController implements Initializable {
     /**
      * Takes partial name or partial id to search for the part in the Inventory.allParts List
      * An error pops up if part is not found
-     * Table is refreshed to display what parts are around based off partial search
-     * If search field is empty, the table displays all of the parts in the Inventory
+     * Table is refreshed to display what parts match the partial search
+     * If search field is empty, the table displays all the parts in the Inventory
      */
     public void onClickPartSearchProd(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
