@@ -134,7 +134,13 @@ public class addProdController implements Initializable {
      * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen
      */
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
-        int prodID = Inventory.getAllParts().size() + 9;
+        int prodID = Inventory.getAllProducts().size() + 9;
+        for (int i = 0; i < Inventory.getAllProducts().size(); i++) {
+            if (Inventory.getAllProducts().get(i).getProdID() == prodID) {
+                prodID ++;
+                i=0;
+            }
+        }
         String name = prodName.getText();
         String stock = prodStock.getText();
         String price = prodPrice.getText();

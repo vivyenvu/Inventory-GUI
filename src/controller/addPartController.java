@@ -78,6 +78,12 @@ public class addPartController implements Initializable {
      */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
         int partID =Inventory.getAllParts().size() + 1;
+        for (int i = 0; i < Inventory.getAllParts().size(); i++) {
+            if (Inventory.getAllParts().get(i).getPartID() == partID) {
+                partID++;
+                i = 0;
+            }
+        }
         String name = addPartName.getText();
         String stock = addPartStock.getText();
         String price = addPartPrice.getText();
