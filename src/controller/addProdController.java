@@ -77,7 +77,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Hitting the Cancel button will redirect you to the main menu
+     * Cancel button changes scene to Main menu
      */
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -89,8 +89,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * When you hit Add, the selected part will be added to the product's List of
-     * associated parts (ascParts) and the bottom table will reflect this addition.
+     * Add button adds selected part to the bottom table
      */
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
             Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
@@ -108,9 +107,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * When you press the Remove Associated Part button, a confirmation will pop up. If you press OK,
-     * that part will be removed from the associated parts List and the bottom table will update to
-     * reflect this deletion.
+     * Remove Associated Part button will remove that part from the bottom table
      */
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -129,9 +126,10 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * When you press the Save button, validProd will be called to validate all the data entered into the text fields
-     * If all the data is valid, then a new Product will be created and added to the Inventory.allProducts List.
-     * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen
+     * Save button will call validProd to validate all the data entered into the text fields
+     * If all the data is valid, then a new Product will be created with its own List of associated parts, and
+     * that will be added to the Inventory.allProducts List.
+     * Otherwise, error messages will pop up. After completion, scene transitions back to the Main screen
      */
     public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID = Inventory.getAllProducts().size() + 9;
