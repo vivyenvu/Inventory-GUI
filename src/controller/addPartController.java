@@ -54,7 +54,6 @@ public class addPartController implements Initializable {
             stage.setTitle("Back to Main Screen");
             stage.setScene(scene);
             stage.show();
-
     }
 
     /**
@@ -78,13 +77,7 @@ public class addPartController implements Initializable {
      * After completion, you are redirected back to the Main screen
      */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
-        int partID =(int)(Math.random() * 100);
-        for (int i = 0; i < Inventory.getAllParts().size(); i++) {
-            if (Inventory.getAllParts().get(i).getPartID() == partID) {
-                partID = (int)(Math.random() * 100);
-                i=0;
-            }
-        }
+        int partID =Inventory.getAllParts().size() + 1;
         String name = addPartName.getText();
         String stock = addPartStock.getText();
         String price = addPartPrice.getText();
