@@ -78,7 +78,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * When you click "Add" on the Part side, it'll redirect you to the Add Part menu
+     * Button to transition from Main Form to Add Part Menu
      */
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
@@ -90,9 +90,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * When you click "Modify" on the Part side, it'll call the sendPart method to take
-     * the data of the selected part, and send it to the Modify Part scene, as well as
-     * redirect the page to that scene. If you didn't select a part, an error will pop up.
+     * Button to send part information to Modify Part Menu and transition to that scene
      */
     public void onClickMainModPartBtn(ActionEvent actionEvent) throws IOException {
         try {
@@ -123,7 +121,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Removes part from inventory and updates the part table to show that it has been deleted.
+     * Button to remove part from inventory and update the part table to show that it has been deleted.
      * Confirmation pop up to make sure user wants to delete part, and error pop up if
      * part cannot be deleted
      */
