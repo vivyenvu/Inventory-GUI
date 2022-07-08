@@ -79,7 +79,10 @@ public abstract class Part {
         this.madeInHouse = madeInHouse;
     }
 
-    //Error message for onModPartSaveBtn
+    /**
+     * FUTURE ENHANCEMENT: Incorporate validation in setters to improve readability
+     * and modularity of code.
+     */
     public static String validPart(String name,String price, String stock, String min, String max, String machOrComp, boolean madeInHouse) {
         double priced = 1.00;
         int stocki = 1;
