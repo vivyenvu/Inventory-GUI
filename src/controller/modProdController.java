@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static controller.mainFormController.getModPartIndex;
-import static controller.mainFormController.getModProdIndex;
 import static model.Inventory.getAllParts;
 
 public class modProdController implements Initializable {
@@ -155,7 +153,7 @@ public class modProdController implements Initializable {
      * can modify that product's information.It will also display that product's
      * associated parts in the bottom table
      */
-    public void sendProd (int index, Product prod) {
+    public void sendProd (Product prod) {
         ascPartsDisplay.addAll(prod.getAllAssociatedParts());
         currentProd = prod;
         modProdID.setText(String.valueOf(currentProd.getProdID()));

@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static controller.mainFormController.getModPartIndex;
 
 public class modPartController implements Initializable {
     public RadioButton modPartInHouseBtn;

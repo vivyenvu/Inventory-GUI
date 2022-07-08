@@ -58,11 +58,6 @@ public class mainFormController implements Initializable {
     private static Product modProd;
 
     /**
-     * Holds product index to be sent to Modify Product Scene using sendProd method
-     */
-    private static int modProdIndex;
-
-    /**
      * Starts the scene by populating the Part and Product Table with the test data
      */
     @Override
@@ -92,20 +87,6 @@ public class mainFormController implements Initializable {
         stage.setTitle("Add Part");
         stage.setScene(scene);
         stage.show();
-    }
-
-    /**
-     * Gives you the index of the part that you're modifying
-     */
-    public static int getModPartIndex() {
-        return modPartIndex;
-    }
-
-    /**
-     * Gives you the index of the product that you're modifying
-     */
-    public static int getModProdIndex() {
-        return modProdIndex;
     }
 
     /**
@@ -227,10 +208,9 @@ public class mainFormController implements Initializable {
             loader.load();
 
             modProd = (Product) mainProdTable.getSelectionModel().getSelectedItem();
-            modProdIndex = mainProdTable.getSelectionModel().getSelectedIndex();
 
             modProdController modProdCtrl = loader.getController();
-            modProdCtrl.sendProd(modProdIndex, modProd);
+            modProdCtrl.sendProd(modProd);
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
