@@ -98,14 +98,19 @@ public class modProdController implements Initializable {
      */
     public void onModProdAddBtn(ActionEvent actionEvent) {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
-            //Product.addAssociatedPart(part);
-            //currentProd.addAssociatedPart(part);
-            //modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
-            ascPartsDisplay.add(part);
-            modProdAscPartTable.setItems(ascPartsDisplay);
-            modProdAscPartTable.refresh();
-
-
+            if (part == null) {
+                Alert err = new Alert(Alert.AlertType.ERROR);
+                err.setTitle("Error");
+                err.setContentText("Please select a part. ");
+                err.show();
+            }
+            else {
+                ascPartsDisplay.add(part);
+                modProdAscPartTable.setItems(ascPartsDisplay);
+                modProdAscPartTable.refresh();
+            }
+            /*
+            Debugging
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText(Integer.toHexString(System.identityHashCode(currentProd.getAllAssociatedParts())));
             alert1.showAndWait();
@@ -116,7 +121,7 @@ public class modProdController implements Initializable {
 
             Alert aler = new Alert(Alert.AlertType.INFORMATION);
             aler.setContentText(currentProd.getProdName());
-            aler.showAndWait();
+            aler.showAndWait();*/
     }
 
     /**
