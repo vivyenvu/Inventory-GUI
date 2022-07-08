@@ -81,7 +81,7 @@ public class modPartController implements Initializable {
      * It takes data from that selected part to bring over to this screen so that
      * part's data can be modified
      * @param index is the index of the part in Inventory.getAllParts()
-     * @param part is the part from Inventory.getAllParts()
+     * @param part is the part that was selected from the main screen
      */
     public void sendPart (int index, Part part) {
         modPartID.setText(String.valueOf(part.getPartID()));

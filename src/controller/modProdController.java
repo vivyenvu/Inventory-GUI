@@ -50,6 +50,10 @@ public class modProdController implements Initializable {
      * onModProdSaveBtn method
      */
     private String exception = "";
+
+    /**
+     * List of associated parts with each product
+     */
     List<Part> partsList = new ArrayList<Part>();
     private ObservableList<Part> ascPartsDisplay = FXCollections.observableList(partsList);
 
@@ -74,7 +78,7 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * When you hit Cancel, you'll be redirected to the Main Menu
+     * Cancel button will transition scene to the Main Menu
      */
     public void onModProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -86,8 +90,7 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * When you hit Add, the selected part will be added to the product's List of
-     * associated parts and the bottom table will reflect this addition.
+     * Add button adds selected part to the bottom table
      */
     public void onModProdAddBtn(ActionEvent actionEvent) {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
@@ -118,9 +121,7 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * When you press the Remove Associated Part button, a confirmation will pop up. If you press OK,
-     * that part will be removed from the associated parts List and the bottom table will update to
-     * reflect this deletion.
+     * Remove Associated Parts button will remove the selected part from the bottom table.
      */
     public void onModProdRemoveBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -149,9 +150,9 @@ public class modProdController implements Initializable {
 
     /**
      * onClickMainModProdBtn in the mainFormController.java will call this method.
-     * It takes data from that selected product to bring over to this screen, so you
-     * can modify that product's information.It will also display that product's
-     * associated parts in the bottom table
+     * It takes data from that selected product to bring over to this screen so its
+     * data can be modified. That product's associated parts will be displayed in the bottom table
+     * @param prod the product that was selected from the main screen
      */
     public void sendProd (Product prod) {
         ascPartsDisplay.addAll(prod.getAllAssociatedParts());
@@ -174,10 +175,9 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * When you press the Save button, validProd will be called to validate all the data entered into the text fields
-     * If all the data is valid, then a new Product will be created to updated the currentProd at
-     * prodIndex in the Inventory.allProducts List.
-     * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen
+     * Save button calls validProd to validate all the data entered into the text fields.
+     * If all the data is valid, then that product's information will be updated.
+     * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen.
      */
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID = Integer.parseInt(modProdID.getText());
