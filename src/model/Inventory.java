@@ -16,7 +16,7 @@ public class Inventory {
     }
 
     public static Part lookupPart(int partID) {
-        for (Part part: allParts) {
+        for (Part part : allParts) {
             if (part.getPartID() == partID) {
                 return part;
             }

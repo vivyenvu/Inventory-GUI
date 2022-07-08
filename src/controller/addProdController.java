@@ -15,6 +15,8 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -50,7 +52,8 @@ public class addProdController implements Initializable {
     /**
      * List of associated parts with each product
      */
-    private ObservableList<Part> ascParts = FXCollections.observableArrayList();
+    List<Part> partsList = new ArrayList<Part>();
+    private ObservableList<Part> ascParts = FXCollections.observableList(partsList);
 
     /**
      * Populate the top table with all the Parts in the inventory
@@ -64,13 +67,13 @@ public class addProdController implements Initializable {
         prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
-
+/*
         prodAscPartTable.setItems(ascParts);
 
         ascPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         ascPartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         ascPartStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));*/
     }
 
     /**
@@ -110,7 +113,7 @@ public class addProdController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
                 Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
                 if (ascParts.contains(p)) {
-                    Product.deleteAssociatedPart(p);
+                    //deleteAssociatedPart(p);
                     ascParts.remove(p);
                     prodAscPartTable.setItems(ascParts);
                 }

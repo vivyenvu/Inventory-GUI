@@ -15,6 +15,8 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -50,12 +52,13 @@ public class modProdController implements Initializable {
      * onModProdSaveBtn method
      */
     private String exception = "";
-    //private ObservableList<Part> ascParts = FXCollections.observableArrayList();
+    List<Part> partsList = new ArrayList<Part>();
+    private ObservableList<Part> ascPartsDisplay = FXCollections.observableList(partsList);
 
     /**
      * Index of current product that was selected from the mainFormController's method onClickMainModProdBtn
      */
-    private int prodIndex = 0;
+    //private int prodIndex = 0;
 
     /**
      * Reference to product that was selected from the mainFormController's method onClickMainModProdBtn
@@ -73,6 +76,8 @@ public class modProdController implements Initializable {
         modProdMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
         modProdMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
         modProdMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+
+        //modProdAscPartTable.getItems().clear();
     }
 
     /**
@@ -94,9 +99,24 @@ public class modProdController implements Initializable {
     public void onModProdAddBtn(ActionEvent actionEvent) {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
             //Product.addAssociatedPart(part);
-            currentProd.addAssociatedPart(part);
-            modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
+            //currentProd.addAssociatedPart(part);
+            //modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
+            ascPartsDisplay.add(part);
+            modProdAscPartTable.setItems(ascPartsDisplay);
             modProdAscPartTable.refresh();
+
+
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setContentText(Integer.toHexString(System.identityHashCode(currentProd.getAllAssociatedParts())));
+            alert1.showAndWait();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(Integer.toString(currentProd.getAllAssociatedParts().size()));
+            alert.showAndWait();
+
+            Alert aler = new Alert(Alert.AlertType.INFORMATION);
+            aler.setContentText(currentProd.getProdName());
+            aler.showAndWait();
     }
 
     /**
@@ -114,7 +134,7 @@ public class modProdController implements Initializable {
             try {
                 Part p = (Part) modProdAscPartTable.getSelectionModel().getSelectedItem();
                 if (currentProd.getAllAssociatedParts().contains(p)) {
-                    Product.deleteAssociatedPart(p);
+                    currentProd.deleteAssociatedPart(p);
                     modProdAscPartTable.setItems(currentProd.getAllAssociatedParts());
                 }
             } catch (NullPointerException e) {
@@ -133,9 +153,9 @@ public class modProdController implements Initializable {
      * associated parts in the bottom table
      */
     public void sendProd (int index, Product prod) {
-        //ascParts = prod.getAllAssociatedParts();
+        ascPartsDisplay.addAll(prod.getAllAssociatedParts());
         currentProd = prod;
-        prodIndex = index;
+        //prodIndex = index;
         modProdID.setText(String.valueOf(currentProd.getProdID()));
         modProdName.setText(currentProd.getProdName());
         modProdStock.setText(String.valueOf(currentProd.getProdStock()));
@@ -144,7 +164,7 @@ public class modProdController implements Initializable {
         modProdMin.setText(String.valueOf(currentProd.getProdMin()));
 
         modProdAscPartTable.getItems().clear();
-        modProdAscPartTable.setItems(prod.getAllAssociatedParts());
+        modProdAscPartTable.setItems(ascPartsDisplay);
 
         modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
         modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
@@ -180,14 +200,18 @@ public class modProdController implements Initializable {
 
             else {
                 double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                /*TEST
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText(currentProd.getProdName());
-                alert.showAndWait();*/
+                currentProd.setProdID(prodID);
+                currentProd.setProdName(name);
+                currentProd.setProdPrice(roundedPrice);
+                currentProd.setProdStock(Integer.parseInt(stock));
+                currentProd.setProdMin(Integer.parseInt(min));
+                currentProd.setProdMax(Integer.parseInt(max));
+                currentProd.setProdParts(ascPartsDisplay);
+
+
                 //prod.setProdParts(currentProd.getAllAssociatedParts());
-                prod.setProdParts(modProdAscPartTable.getItems());
-                Inventory.updateProduct(prodIndex, prod); // or getModProdIndex()
+                //prod.setProdParts(modProdAscPartTable.getItems());
+                //Inventory.updateProduct(prodIndex, prod); // or getModProdIndex()
             }
         }
         catch (NumberFormatException e) {
@@ -197,6 +221,12 @@ public class modProdController implements Initializable {
             alert.setContentText("Form contains blank fields.");
             alert.showAndWait();
         }
+        //clear variables
+        ascPartsDisplay = null;
+        modProdAscPartTable.setItems(ascPartsDisplay);
+        modProdAscPartTable.refresh();
+        currentProd = null;
+        exception = "";
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

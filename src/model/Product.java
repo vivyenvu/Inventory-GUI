@@ -3,6 +3,9 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
     private int prodID;
     private String prodName;
@@ -10,7 +13,7 @@ public class Product {
     private int prodStock;
     private int prodMin;
     private int prodMax;
-    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> associatedParts;
 
     public Product(int prodID, String prodName, double prodPrice, int prodStock, int prodMin, int prodMax) {
         this.prodID = prodID;
@@ -19,6 +22,8 @@ public class Product {
         this.prodStock = prodStock;
         this.prodMin = prodMin;
         this.prodMax = prodMax;
+        List<Part> partsList = new ArrayList<Part>();
+        this.associatedParts = FXCollections.observableList(partsList);
     }
     //Getters
     public int getProdID() {
@@ -82,8 +87,8 @@ public class Product {
         associatedParts.add(part);
     }
 
-    public static boolean deleteAssociatedPart(Part selectedAssociatedPart){
-        associatedParts.remove(selectedAssociatedPart);
+    public boolean deleteAssociatedPart(Part selectedAssociatedPart){
+        this.associatedParts.remove(selectedAssociatedPart);
         return true;
     }
 

@@ -10,6 +10,9 @@ import model.Inventory;
 import model.Outsourced;
 import model.Product;
 
+/**
+ * Start by showing the Main Form
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
@@ -19,6 +22,10 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 1080, 400));
         stage.show();
     }
+
+    /**
+     *
+     */
     private static void addTestData() {
 
         InHouse OPB = new InHouse(1, "OPB", 20.99, 15, 0, 50, 1234, true);
