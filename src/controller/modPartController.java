@@ -35,6 +35,10 @@ public class modPartController implements Initializable {
     public TextField modPartMachineOrCompany;
     public TextField modPartMin;
 
+    /**
+     * Empty string to hold validation errors from Part.validPart() in the
+     * onModPartSaveBtn method
+     */
     private String exception = "";
 
     @Override
@@ -42,13 +46,23 @@ public class modPartController implements Initializable {
 
     }
 
+    /**
+     * When the radio button "In House" is selected, the bottom label will say "Machine ID"
+     */
     public void onModPartInHouseBtn(ActionEvent actionEvent) {
         modPartMachineIDLabel.setText("Machine ID");
     }
+
+    /**
+     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name"
+     */
     public void onModPartOutsourcedBtn(ActionEvent actionEvent) {
         modPartMachineIDLabel.setText("Company Name");
     }
 
+    /**
+     * When you hit Cancel, you'll be redirected to the Main Menu
+     */
     public void onModPartCancelBtn(ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -59,6 +73,11 @@ public class modPartController implements Initializable {
 
     }
 
+    /**
+     * onClickMainModPartBtn in the mainFormController.java will call this method.
+     * It takes data from that selected part to bring over to this screen so you
+     * can modify that part's information
+     */
     public void sendPart (int index, Part part) {
         modPartID.setText(String.valueOf(part.getPartID()));
         modPartName.setText(part.getPartName());
@@ -78,6 +97,13 @@ public class modPartController implements Initializable {
             modPartMachineIDLabel.setText("Company Name");
         }
     }
+
+    /**
+     * When you press "Save", this will take the data in the fields, validate them, and determine
+     * if the part is In House or Outsourced. If all data is present and valid, a new part will be
+     * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up.
+     * After completion, you are redirected back to the Main screen
+     */
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
         String partID = modPartID.getText();
         String name = modPartName.getText();

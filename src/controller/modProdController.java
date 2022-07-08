@@ -106,6 +106,12 @@ public class modProdController implements Initializable {
         }
     }
 
+    /**
+     * onClickMainModProdBtn in the mainFormController.java will call this method.
+     * It takes data from that selected product to bring over to this screen, so you
+     * can modify that product's information.It will also display that product's
+     * assocatied parts in the bottom table
+     */
     public void sendProd (int index, Product prod) {
         //ascParts = prod.getAllAssociatedParts();
         currentProd = prod;
