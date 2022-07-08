@@ -53,17 +53,17 @@ public class modProdController implements Initializable {
     //private ObservableList<Part> ascParts = FXCollections.observableArrayList();
 
     /**
-     *
+     * Index of current product that was selected from the mainFormController's method onClickMainModProdBtn
      */
     private int prodIndex = 0;
 
     /**
-     *
+     * Reference to product that was selected from the mainFormController's method onClickMainModProdBtn
      */
     private Product currentProd;
 
     /**
-     *
+     * Start the scene by populating the top table with all the parts in the Inventory
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -155,7 +155,10 @@ public class modProdController implements Initializable {
     }
 
     /**
-     *
+     * When you press the Save button, validProd will be called to validate all the data entered into the text fields
+     * If all the data is valid, then a new Product will be created to updated the currentProd at
+     * prodIndex in the Inventory.allProducts List.
+     * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen
      */
     public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
         int prodID = Integer.parseInt(modProdID.getText());
