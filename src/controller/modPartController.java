@@ -41,6 +41,8 @@ public class modPartController implements Initializable {
      */
     private String exception = "";
 
+    private int modPartIndex;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -85,6 +87,7 @@ public class modPartController implements Initializable {
         modPartPrice.setText(String.valueOf(part.getPartPrice()));
         modPartMax.setText(String.valueOf(part.getPartMax()));
         modPartMin.setText(String.valueOf(part.getPartMin()));
+        modPartIndex = index;
 
         if (part instanceof InHouse) {
             modPartInHouseBtn.setSelected(true);
@@ -119,8 +122,6 @@ public class modPartController implements Initializable {
         else if (modPartOutsourcedBtn.isSelected()){
             madeInHouse = false;
         }
-        //int machineID;
-        //String companyName;
 
         try {
             exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
@@ -136,11 +137,11 @@ public class modPartController implements Initializable {
                 double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
                 if (modPartInHouseBtn.isSelected()){
                     InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()),true);
-                    Inventory.updatePart(getModPartIndex(), inHousePart);
+                    Inventory.updatePart(modPartIndex, inHousePart);
                 }
                 else if (modPartOutsourcedBtn.isSelected()){
                     Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(),false);
-                    Inventory.updatePart(getModPartIndex(), outsourcedPart);
+                    Inventory.updatePart(modPartIndex, outsourcedPart);
                 }
             }
         }
