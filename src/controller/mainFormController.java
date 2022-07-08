@@ -155,7 +155,6 @@ public class mainFormController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                //Part p = (Part) mainPartTable.getSelectionModel().getSelectedItem();
                 Inventory.deletePart(p);
             }
             if (Inventory.getAllParts().contains(p)) {
@@ -167,7 +166,7 @@ public class mainFormController implements Initializable {
         catch (NullPointerException e){
             Alert partsAsc = new Alert(Alert.AlertType.ERROR);
             partsAsc.setTitle("Error");
-            partsAsc.setContentText("Can't delete because not part was selected.");
+            partsAsc.setContentText("Can't delete because no part was selected.");
             partsAsc.show();
         }
 
@@ -179,32 +178,37 @@ public class mainFormController implements Initializable {
      * product cannot be deleted
      */
     public void onClickMainDeleteProdBtn(ActionEvent actionEvent) {
-        Product prod = (Product) mainProdTable.getSelectionModel().getSelectedItem();
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Products");
+            alert.setContentText("Are you sure you want to delete this product?");
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Products");
-        alert.setContentText("Are you sure you want to delete this product?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            Product p = (Product) mainProdTable.getSelectionModel().getSelectedItem();
-            if (!p.getAllAssociatedParts().isEmpty()) {
-                Alert partsAsc = new Alert(Alert.AlertType.ERROR);
+            Optional<ButtonType> result = alert.showAndWait();
+            Product prod = (Product) mainProdTable.getSelectionModel().getSelectedItem();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (!prod.getAllAssociatedParts().isEmpty()) {
+                    Alert partsAsc = new Alert(Alert.AlertType.ERROR);
                     partsAsc.setTitle("Error");
                     partsAsc.setContentText("Can't delete product that has parts associated.");
                     partsAsc.showAndWait();
                 }
-            else {
-                Inventory.deleteProduct(p);
-
-                if (Inventory.getAllProducts().contains(p)) {
-                    Alert delError = new Alert(Alert.AlertType.ERROR);
-                    delError.setTitle("Error");
-                    delError.setContentText("Product could not be deleted.");
+                else {
+                    Inventory.deleteProduct(prod);
+                }
+                    if (Inventory.getAllProducts().contains(prod)) {
+                        Alert delError = new Alert(Alert.AlertType.ERROR);
+                        delError.setTitle("Error");
+                        delError.setContentText("Product could not be deleted.");
                 }
             }
+        } catch (NullPointerException e) {
+            Alert notSelected = new Alert(Alert.AlertType.ERROR);
+            notSelected.setTitle("Error");
+            notSelected.setContentText("Please select a product");
+            notSelected.show();
         }
     }
+
 
     /**
      * When you click the Modify button on the Product side, it'll call the sendProd method to take
@@ -212,6 +216,11 @@ public class mainFormController implements Initializable {
      * redirect the page to that scene. If you didn't select a product, an error will pop up.
      */
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
+        /**
+         * RUNTIME ERROR: If a Product was not selected, but the user clicked on the Modify
+         * button on the Product side, this would invoke a NullPointerException. The solution implemented
+         * is catching that error so a popup occurs, rather than it crashing the program.
+         */
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/modProd.fxml"));
