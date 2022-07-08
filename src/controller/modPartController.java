@@ -15,7 +15,6 @@ import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -40,6 +39,9 @@ public class modPartController implements Initializable {
      */
     private String exception = "";
 
+    /**
+     * Holds index of part being modified
+     */
     private int modPartIndex;
 
     @Override
@@ -62,7 +64,7 @@ public class modPartController implements Initializable {
     }
 
     /**
-     * When you hit Cancel, you'll be redirected to the Main Menu
+     * Cancel button transitions scene back to Main Menu
      */
     public void onModPartCancelBtn(ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -76,8 +78,10 @@ public class modPartController implements Initializable {
 
     /**
      * onClickMainModPartBtn in the mainFormController.java will call this method.
-     * It takes data from that selected part to bring over to this screen so you
-     * can modify that part's information
+     * It takes data from that selected part to bring over to this screen so that
+     * part's data can be modified
+     * @param index is the index of the part in Inventory.getAllParts()
+     * @param part is the part from Inventory.getAllParts()
      */
     public void sendPart (int index, Part part) {
         modPartID.setText(String.valueOf(part.getPartID()));
@@ -101,10 +105,10 @@ public class modPartController implements Initializable {
     }
 
     /**
-     * When you press "Save", this will take the data in the fields, validate them, and determine
+     * Save button will take the data in the fields, validate them, and determine
      * if the part is In House or Outsourced. If all data is present and valid, a new part will be
      * made and added to the Inventory.allParts List. Otherwise, descriptive error messages will pop up.
-     * After completion, you are redirected back to the Main screen
+     * After completion, scene transitions to the Main screen
      */
     public void onModPartSaveBtn(ActionEvent actionEvent) throws IOException {
         String partID = modPartID.getText();
