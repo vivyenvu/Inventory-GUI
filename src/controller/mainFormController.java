@@ -198,13 +198,13 @@ public class mainFormController implements Initializable {
      * Modify button calls sendProd method to take the data of the selected product
      * and send it to the Modify Product scene. Scene changes to Modify Product scene.
      * Pop up error if no product is selected.
+     * <p><b>
+     * RUNTIME ERROR: If a Product was not selected, but the user clicked on the Modify
+     * button on the Product side, this would invoke a NullPointerException. The solution implemented
+     * is catching that error so a popup occurs, rather than it crashing the program.
+     * </b></p>
      */
     public void onClickMainModProdBtn(ActionEvent actionEvent) throws IOException {
-        /**
-         * RUNTIME ERROR: If a Product was not selected, but the user clicked on the Modify
-         * button on the Product side, this would invoke a NullPointerException. The solution implemented
-         * is catching that error so a popup occurs, rather than it crashing the program.
-         */
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/modProd.fxml"));
@@ -245,8 +245,15 @@ public class mainFormController implements Initializable {
      * Closes the whole stage, ending the application.
      */
     public void onClickMainExitBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit confirmation");
+        alert.setContentText("Are you sure you want to exit?");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     /**
