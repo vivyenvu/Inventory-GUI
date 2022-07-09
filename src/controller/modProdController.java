@@ -22,6 +22,9 @@ import java.util.ResourceBundle;
 
 import static model.Inventory.getAllParts;
 
+/**
+ * Allows user to modify an existing product.
+ */
 public class modProdController implements Initializable {
     public Button modProdAddBtn;
     public Button modProdRemoveBtn;
@@ -47,23 +50,23 @@ public class modProdController implements Initializable {
 
     /**
      * Empty string to hold validation errors from Product.validProd() in the
-     * onModProdSaveBtn method
+     * onModProdSaveBtn method.
      */
     private String exception = "";
 
     /**
-     * List of associated parts with each product
+     * List of associated parts with each product.
      */
     List<Part> partsList = new ArrayList<Part>();
     private ObservableList<Part> ascPartsDisplay = FXCollections.observableList(partsList);
 
     /**
-     * Reference to product that was selected from the mainFormController's method onClickMainModProdBtn
+     * Reference to product that was selected from the mainFormController's method onClickMainModProdBtn.
      */
     private Product currentProd;
 
     /**
-     * Start the scene by populating the top table with all the parts in the Inventory
+     * Start the scene by populating the top table with all the parts in the Inventory.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,7 +81,7 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * Cancel button will transition scene to the Main Menu
+     * Cancel button will transition scene to the Main Menu.
      */
     public void onModProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -90,7 +93,7 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * Add button adds selected part to the bottom table
+     * Add button adds selected part to the bottom table.
      */
     public void onModProdAddBtn(ActionEvent actionEvent) {
             Part part = (Part) modProdMainTable.getSelectionModel().getSelectedItem();
@@ -231,10 +234,10 @@ public class modProdController implements Initializable {
     }
 
     /**
-     * Takes partial name or partial id to search for the part in the Inventory.allParts List
-     * An error pops up if part is not found
-     * Table is refreshed to display what parts match the partial search
-     * If search field is empty, the table displays all the parts in the Inventory
+     * Takes partial name or partial id to search for the part in the Inventory.allParts List.
+     * An error pops up if part is not found.
+     * Table is refreshed to display what parts match the partial search.
+     * If search field is empty, the table displays all the parts in the Inventory.
      */
     public void onClickModProdPartSearch(ActionEvent actionEvent) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
