@@ -4,38 +4,38 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This class stores Parts and Products.
+ * This class stores parts and products.
  */
 public class Inventory {
     /**
-     * List of all Parts in the Inventory
+     * List of all parts in the inventory
      */
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
 
     /**
-     * List of all Products in the Inventory
+     * List of all products in the inventory
      */
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     /**
-     * Add a new Part to the Inventory's List of Parts
-     * @param newPart, new part to be added
+     * Add a new part to the inventory's List of parts.
+     * @param newPart new part to be added
      */
     public static void addPart(Part newPart) {
         allParts.add(newPart);
     }
 
     /**
-     * Adds a new Product to the Inventory's List of Products
-     * @param newProduct, new product to be added
+     * Adds a new Product to the Inventory's List of Products.
+     * @param newProduct new product to be added
      */
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 
     /**
-     * Searches for a Part in the List of all Parts based off id
-     * @param partID, part identification number
+     * Searches for a part in the List of all parts based off id.
+     * @param partID part identification number
      * @return part if found or null if not found
      */
     public static Part lookupPart(int partID) {
@@ -48,9 +48,9 @@ public class Inventory {
     }
 
     /**
-     * Searches for a Product in the List of all Products based off id
-     * @param productID, product identification number
-     * @return produt if one is found or null if it is not found
+     * Searches for a product in the List of all products based off id.
+     * @param productID product identification number
+     * @return product if one is found or null if it is not found
      */
     public static Product lookupProduct(int productID) {
         for (Product product : allProducts) {
@@ -62,9 +62,9 @@ public class Inventory {
     }
 
     /**
-     * Searches for a Part in the List of all Parts based off name
-     * @param partName, name of the part
-     * @return foundParts, list of parts found from allParts
+     * Searches for a Part in the List of all parts based off name.
+     * @param partName name of the part
+     * @return list of parts found from allParts
      */
     public static ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -77,9 +77,9 @@ public class Inventory {
     }
 
     /**
-     * Searches for a product in the List of all Products based off of name
-     * @param productName, name of the product
-     * @return foundProds, List of Products found from allProducts
+     * Searches for a product in the List of all Products based off of name.
+     * @param productName name of the product
+     * @return List of products found from allProducts
      */
     public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> foundProds = FXCollections.observableArrayList();
@@ -92,26 +92,26 @@ public class Inventory {
     }
 
     /**
-     * Updates the part with a new part
-     * @param index, index of part to update
-     * @param selectedPart, part used to replace old part
+     * Updates the part with a new part.
+     * @param index index of part to update
+     * @param selectedPart part used to replace old part
      */
     public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
 
     /**
-     * Updates product with new product
-     * @param index, index of product to update
-     * @param newProduct, product used to replace old product
+     * Updates selected product with new product.
+     * @param index index of product to update
+     * @param newProduct product used to replace old product
      */
     public static void updateProduct(int index, Product newProduct) {
         allProducts.set(index, newProduct);
     }
 
     /**
-     * Deletes the part that is selected
-     * @param selectedPart, part to be deleted
+     * Deletes the part that is selected.
+     * @param selectedPart part to be deleted
      * @return true if deleted
      */
     public static boolean deletePart(Part selectedPart) {
@@ -120,8 +120,8 @@ public class Inventory {
     }
 
     /**
-     * Deletes the product that is selected
-     * @param selectedProduct, product to be deleted
+     * Deletes the product that is selected.
+     * @param selectedProduct product to be deleted
      * @return true if deleted
      */
     public static boolean deleteProduct(Product selectedProduct) {
@@ -130,14 +130,14 @@ public class Inventory {
     }
 
     /**
-     * @return allParts, the List of every part in the Inventory
+     * @return the List of every part in the inventory
      */
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
 
     /**
-     * @return allProducts, the list of every product in the Inventory
+     * @return the List of every product in the inventory
      */
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
