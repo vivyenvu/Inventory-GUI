@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Class type InHouse inherits from Part class. A part that was made in house and has a machine identification number.
+ * Class type InHouse inherits from Part class. A part that was made in house and has a machine identification number instead of a company name.
  */
 public class InHouse extends Part{
 
