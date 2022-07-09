@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * This class stores Parts and Products
+ * This class stores Parts and Products.
  */
 public class Inventory {
     /**

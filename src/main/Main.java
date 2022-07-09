@@ -11,7 +11,7 @@ import model.Outsourced;
 import model.Product;
 
 /**
- * Start by showing the Main Form
+ * Application starts by showing the Main Form.
  */
 public class Main extends Application {
     @Override
@@ -24,7 +24,7 @@ public class Main extends Application {
     }
 
     /**
-     * Example data to test application on
+     * This method holds example data to test application on.
      */
     private static void addTestData() {
 
@@ -46,7 +46,7 @@ public class Main extends Application {
     }
 
     /**
-     * Starts the program by adding the test data
+     * This starts the program by adding the test data.
      * @param args argument to launch application with
      */
     public static void main(String[] args) {

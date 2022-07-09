@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Supplied class Part.java
+ * Supplied class Part.java.
  */
 
 /**
