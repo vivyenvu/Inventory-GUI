@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * Allows user to modify an existing part that was selected from the main menu.
+ */
 public class modPartController implements Initializable {
     public RadioButton modPartInHouseBtn;
     public ToggleGroup addPartToggle;
@@ -35,12 +37,12 @@ public class modPartController implements Initializable {
 
     /**
      * Empty string to hold validation errors from Part.validPart() in the
-     * onModPartSaveBtn method
+     * onModPartSaveBtn method.
      */
     private String exception = "";
 
     /**
-     * Holds index of part being modified
+     * Holds index of part being modified.
      */
     private int modPartIndex;
 
@@ -50,21 +52,21 @@ public class modPartController implements Initializable {
     }
 
     /**
-     * When the radio button "In House" is selected, the bottom label will say "Machine ID"
+     * When the radio button "In House" is selected, the bottom label will say "Machine ID".
      */
     public void onModPartInHouseBtn(ActionEvent actionEvent) {
         modPartMachineIDLabel.setText("Machine ID");
     }
 
     /**
-     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name"
+     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name".
      */
     public void onModPartOutsourcedBtn(ActionEvent actionEvent) {
         modPartMachineIDLabel.setText("Company Name");
     }
 
     /**
-     * Cancel button transitions scene back to Main Menu
+     * Cancel button transitions scene back to Main Menu.
      */
     public void onModPartCancelBtn(ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
