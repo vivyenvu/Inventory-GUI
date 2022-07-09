@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
- * Allows user to add a new part.
+ * Allows user to add a new part. Includes fields name, inventory, price, max, min, and machine id or company name.
  */
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;

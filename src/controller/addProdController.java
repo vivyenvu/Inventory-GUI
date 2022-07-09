@@ -22,6 +22,10 @@ import java.util.ResourceBundle;
 
 import static model.Inventory.getAllParts;
 
+/**
+ * Allows user to add a new product. Includes fields name, inventory, price, min, max, and tables
+ * to select parts to associate.
+ */
 public class addProdController implements Initializable {
     public Button addProdAddBtn;
     public Button addProdRemoveBtn;
@@ -45,19 +49,19 @@ public class addProdController implements Initializable {
 
     /**
      * Empty string to hold validation errors from Product.validProd() in the
-     * onAddProdSaveBtn method
+     * onAddProdSaveBtn method.
      */
     private String exception = "";
 
     /**
-     * List of associated parts with each product
+     * List of associated parts with each product.
      */
     List<Part> partsList = new ArrayList<Part>();
     private ObservableList<Part> ascParts = FXCollections.observableList(partsList);
 
     /**
-     * Populates the top table with all the Parts in the inventory
-     * Populates the bottom table with all the associated parts to that Product
+     * Populates the top table with all the Parts in the inventory.
+     * Populates the bottom table with all the associated parts to that Product.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,7 +81,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Cancel button changes scene to Main menu
+     * Cancel button changes scene to Main menu.
      */
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -89,7 +93,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Add button adds selected part to the bottom table
+     * Add button adds selected part to the bottom table.
      */
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
             Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
@@ -107,7 +111,7 @@ public class addProdController implements Initializable {
     }
 
     /**
-     * Remove Associated Part button will remove that part from the bottom table
+     * Remove Associated Part button will remove that part from the bottom table.
      */
     public void onAddProdRemoveBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
