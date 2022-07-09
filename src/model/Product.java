@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Product type with List of associated parts
+ * Product type with List of associated parts.
  */
 public class Product {
     private int prodID;
@@ -19,7 +19,7 @@ public class Product {
     private ObservableList<Part> associatedParts;
 
     /**
-     * Constructor for Product object
+     * Constructor for product object.
      * @param prodID product identification number
      * @param prodName name of product
      * @param prodPrice price of product
@@ -41,49 +41,49 @@ public class Product {
     //Getters
 
     /**
-     * @return prodID, product identification number
+     * @return product identification number
      */
     public int getProdID() {
         return prodID;
     }
 
     /**
-     * @return prodName, name of product
+     * @return name of product
      */
     public String getProdName() {
         return prodName;
     }
 
     /**
-     * @return prodPrice, price of product
+     * @return price of product
      */
     public double getProdPrice() {
         return prodPrice;
     }
 
     /**
-     * @return prodStock, inventory level of product
+     * @return inventory level of product
      */
     public int getProdStock() {
         return prodStock;
     }
 
     /**
-     * @return prodMin, minimum inventory level
+     * @return minimum inventory level
      */
     public int getProdMin() {
         return prodMin;
     }
 
     /**
-     * @return prodMax, maximum inventory level
+     * @return maximum inventory level
      */
     public int getProdMax() {
         return prodMax;
     }
 
     /**
-     * @return associatedParts, List of parts associated with this product
+     * @return List of parts associated with this product
      */
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
@@ -91,65 +91,65 @@ public class Product {
     //Setters
 
     /**
-     * @param prodID, product identification number
+     * @param prodID product identification number
      */
     public void setProdID (int prodID) {
         this.prodID = prodID;
     }
 
     /**
-     * @param prodName, name of product
+     * @param prodName name of product
      */
     public void setProdName(String prodName) {
         this.prodName = prodName;
     }
 
     /**
-     * @param prodPrice, price of product
+     * @param prodPrice price of product
      */
     public void setProdPrice(double prodPrice) {
         this.prodPrice = prodPrice;
     }
 
     /**
-     * @param prodStock, inventory level of product
+     * @param prodStock inventory level of product
      */
     public void setProdStock(int prodStock) {
         this.prodStock = prodStock;
     }
 
     /**
-     * @param prodMin, minimum inventory level
+     * @param prodMin minimum inventory level
      */
     public void setProdMin(int prodMin){
         this.prodMin = prodMin;
     }
 
     /**
-     * @param prodMax, maximum inventory level
+     * @param prodMax maximum inventory level
      */
     public void setProdMax (int prodMax) {
         this.prodMax = prodMax;
     }
 
     /**
-     * @param parts, List of parts associated with product
+     * @param parts List of parts associated with product
      */
     public void setProdParts (ObservableList<Part> parts) {
         this.associatedParts = parts;
     }
 
     /**
-     * Adds one part to the List of that product's associated parts
-     * @param part, part to be added to associated parts list
+     * Adds one part to the List of that product's associated parts.
+     * @param part part to be added to associated parts list
      */
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }
 
     /**
-     * Removes specific part from product's list of associated parts
-     * @param selectedAssociatedPart, part to be removed
+     * Removes specific part from product's list of associated parts.
+     * @param selectedAssociatedPart part to be removed
      * @return true when deletion occurs
      */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart){
@@ -165,7 +165,7 @@ public class Product {
      * @param stock stock of product
      * @param min minimum inventory level
      * @param max maximum inventory level
-     * @return invalid which is a string including data validation errors
+     * @return a string including data validation errors
      */
     public static String validProd(String name,String price, String stock, String min, String max) {
         double priced = 1.00;

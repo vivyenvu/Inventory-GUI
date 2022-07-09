@@ -3,10 +3,6 @@ package model;
 /**
  * Supplied class Part.java. A part can stand alone or be associated with a product.
  */
-
-/**
- * @author Vivyen Vu
- */
 public abstract class Part {
     private int partID;
     private String partName;
