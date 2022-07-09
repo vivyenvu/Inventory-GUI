@@ -18,6 +18,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Allows user to add a new part.
+ */
 public class addPartController implements Initializable {
     public ToggleGroup addPartToggle;
     public TextField addPartMachineID;
@@ -43,7 +46,7 @@ public class addPartController implements Initializable {
     }
 
     /**
-     * Cancel button changes scene to Main Menu
+     * Cancel button changes scene to Main Menu.
      */
     public void addPartCancelBtn(ActionEvent actionEvent) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
@@ -55,14 +58,14 @@ public class addPartController implements Initializable {
     }
 
     /**
-     * When the radio button "In House" is selected, the bottom label will say "Machine ID"
+     * When the radio button "In House" is selected, the bottom label will say "Machine ID".
      */
     public void onAddPartInHouseBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Machine ID");
     }
 
     /**
-     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name"
+     * When the radio button "Outsourced" is selected, the bottom label will say "Company Name".
      */
     public void onAddPartOutsourcedBtn(ActionEvent actionEvent) {
         addPartMachineIDLabel.setText("Company Name");

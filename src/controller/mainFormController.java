@@ -21,6 +21,10 @@ import java.util.ResourceBundle;
 import static model.Inventory.getAllParts;
 import static model.Inventory.getAllProducts;
 
+/**
+ * Displays the main menu where user can add, modify, and delete parts and products,
+ * or exit the application.
+ */
 public class mainFormController implements Initializable {
     public Button mainAddPartBtn;
     public Button mainModPartBtn;
@@ -43,22 +47,22 @@ public class mainFormController implements Initializable {
     public TextField queryProdSearch;
 
     /**
-     * Holds part to be sent to Modify Part Scene using sendPart method
+     * Holds part to be sent to Modify Part Scene using sendPart method.
      */
     private static Part modPart;
 
     /**
-     * Holds part index to be sent to Modify Part Scene using sendPart method
+     * Holds part index to be sent to Modify Part Scene using sendPart method.
      */
     private static int modPartIndex;
 
     /**
-     * Holds product to be sent to Modify Product Scene using sendProd method
+     * Holds product to be sent to Modify Product Scene using sendProd method.
      */
     private static Product modProd;
 
     /**
-     * Starts the scene by populating the Part and Product Table with the test data
+     * Starts the scene by populating the Part and Product Table with the test data.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,7 +82,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Add button to transition from Main Form to Add Part Menu
+     * Add button to transition from Main Form to Add Part Menu.
      */
     public void onClickMainAddPartBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
@@ -226,7 +230,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Transitions to Add Product menu
+     * Transitions to Add Product menu.
      */
     public void onClickMainAddProdBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addProd.fxml"));
@@ -238,7 +242,7 @@ public class mainFormController implements Initializable {
     }
 
     /**
-     * Closes the whole stage, ending the application
+     * Closes the whole stage, ending the application.
      */
     public void onClickMainExitBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
