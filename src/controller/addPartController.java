@@ -78,7 +78,7 @@ public class addPartController implements Initializable {
      * After completion, scene transitions the Main screen.
      */
     public void onAddPartSaveBtn(ActionEvent actionEvent) throws IOException {
-        int partID =Inventory.getAllParts().size() + 1;
+        int partID = Inventory.getAllParts().size() + 1;
         for (int i = 0; i < Inventory.getAllParts().size(); i++) {
             if (Inventory.getAllParts().get(i).getPartID() == partID) {
                 partID++;
@@ -94,46 +94,49 @@ public class addPartController implements Initializable {
         boolean madeInHouse = true;
         if (addPartInHouseBtn.isSelected()) {
             madeInHouse = true;
-        }
-        else if (addPartOutsourcedBtn.isSelected()){
+        } else if (addPartOutsourcedBtn.isSelected()) {
             madeInHouse = false;
         }
-
         try {
-            exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
-            if (exception != "") {
+            try {
+                exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
+                if (exception != "") {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding Part");
+                    alert.setContentText(exception);
+                    alert.showAndWait();
+
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root, 600, 600);
+                    stage.setTitle("Add Part");
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+                    if (addPartInHouseBtn.isSelected()) {
+                        InHouse inHousePart = new InHouse(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(addPartMachineID.getText()), true);
+                        Inventory.addPart(inHousePart);
+                    } else if (addPartOutsourcedBtn.isSelected()) {
+                        Outsourced outsourcedPart = new Outsourced(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), addPartMachineID.getText(), false);
+                        Inventory.addPart(outsourcedPart);
+                    }
+                }
+            } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Modifying Part");
-                alert.setContentText(exception);
+                alert.setHeaderText("Error Adding Part");
+                alert.setContentText("Form contains blank fields.");
                 alert.showAndWait();
             }
-
-            else {
-                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                if (addPartInHouseBtn.isSelected()){
-                    InHouse inHousePart = new InHouse(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(addPartMachineID.getText()),true);
-                    Inventory.addPart(inHousePart);
-                }
-                else if (addPartOutsourcedBtn.isSelected()){
-                    Outsourced outsourcedPart = new Outsourced(partID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), addPartMachineID.getText(),false);
-                    Inventory.addPart(outsourcedPart);
-                }
-            }
+        } catch (NullPointerException e) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1080, 400);
+            stage.setTitle("Back to Main Screen");
+            stage.setScene(scene);
+            stage.show();
         }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Modifying Part");
-            alert.setContentText("Form contains blank fields.");
-            alert.showAndWait();
-        }
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 400);
-        stage.setTitle("Back to Main Screen");
-        stage.setScene(scene);
-        stage.show();
     }
 }
