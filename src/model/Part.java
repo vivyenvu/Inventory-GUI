@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Supplied class Part.java.
+ * Supplied class Part.java. A part can stand alone or be associated with a product.
  */
 
 /**
@@ -17,7 +17,7 @@ public abstract class Part {
     boolean madeInHouse;
 
     /**
-     * Constructor for a Part
+     * Constructor for a Part.
      * @param partID part identification number
      * @param partName name of part
      * @param partPrice price of part
@@ -81,7 +81,7 @@ public abstract class Part {
      }
 
     /**
-     * @return whether or not the part was made in house
+     * @return a boolean on whether the part was made in house
      */
      public boolean isMadeInHouse() {
         return madeInHouse;
@@ -132,16 +132,11 @@ public abstract class Part {
     }
 
     /**
-     * @param madeInHouse whether or not the part was made in house
+     * @param madeInHouse whether the part was made in house
      */
     public void setMadeInHouse (boolean madeInHouse) {
         this.madeInHouse = madeInHouse;
     }
-
-    /**
-     * FUTURE ENHANCEMENT: Incorporate validation in setters to improve readability
-     * and modularity of code.
-     */
 
     /**
      * This method takes the data input in the text fields and validates them. Eg. name has to be a string and
@@ -152,8 +147,13 @@ public abstract class Part {
      * @param min minimum inventory level
      * @param max maximum inventory level
      * @param machOrComp entered data that may either be the machineID or the companyName
-     * @param madeInHouse whether or not the part was made in house
+     * @param madeInHouse whether the part was made in house
      * @return invalid which is a string including data validation errors
+     * <p>
+     * FUTURE ENHANCEMENT: This method is very long and can look messy or redundant. In the future,
+     * I could break up the validation process, such as putting them into the variable setters,
+     * so that it would improve readability and modularity of code.
+     * </p>
      */
     public static String validPart(String name,String price, String stock, String min, String max, String machOrComp, boolean madeInHouse) {
         double priced = 1.00;
