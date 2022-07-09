@@ -69,12 +69,12 @@ public class modPartController implements Initializable {
      * Cancel button transitions scene back to Main Menu.
      */
     public void onModPartCancelBtn(ActionEvent actionEvent) throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1080, 400);
-            stage.setTitle("Back to Main Screen");
-            stage.setScene(scene);
-            stage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1080, 400);
+        stage.setTitle("Back to Main Screen");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -82,10 +82,11 @@ public class modPartController implements Initializable {
      * onClickMainModPartBtn in the mainFormController.java will call this method.
      * It takes data from that selected part to bring over to this screen so that
      * part's data can be modified
+     *
      * @param index is the index of the part in Inventory.getAllParts()
-     * @param part is the part that was selected from the main screen
+     * @param part  is the part that was selected from the main screen
      */
-    public void sendPart (int index, Part part) {
+    public void sendPart(int index, Part part) {
         modPartID.setText(String.valueOf(part.getPartID()));
         modPartName.setText(part.getPartName());
         modPartStock.setText(String.valueOf(part.getPartStock()));
@@ -98,8 +99,7 @@ public class modPartController implements Initializable {
             modPartInHouseBtn.setSelected(true);
             modPartMachineOrCompany.setText(String.valueOf(((InHouse) part).getMachineID()));
             modPartMachineIDLabel.setText("Machine ID");
-        }
-        else {
+        } else {
             modPartOutsourcedBtn.setSelected(true);
             modPartMachineOrCompany.setText(((Outsourced) part).getCompanyName());
             modPartMachineIDLabel.setText("Company Name");
@@ -123,46 +123,52 @@ public class modPartController implements Initializable {
         boolean madeInHouse = true;
         if (modPartInHouseBtn.isSelected()) {
             madeInHouse = true;
-        }
-        else if (modPartOutsourcedBtn.isSelected()){
+        } else if (modPartOutsourcedBtn.isSelected()) {
             madeInHouse = false;
         }
 
         try {
-            exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
-            if (exception != "") {
+            try {
+                exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
+                if (exception != "") {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Modifying Part");
+                    alert.setContentText(exception);
+                    alert.showAndWait();
+
+
+                    /*Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root, 600, 600);
+                    stage.setTitle("Add Part");
+                    stage.setScene(scene);
+                    stage.show();
+                     */
+                } else {
+                    double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+                    if (modPartInHouseBtn.isSelected()) {
+                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()), true);
+                        Inventory.updatePart(modPartIndex, inHousePart);
+                    } else if (modPartOutsourcedBtn.isSelected()) {
+                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(), false);
+                        Inventory.updatePart(modPartIndex, outsourcedPart);
+                    }
+                }
+            } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Modifying Part");
-                alert.setContentText(exception);
+                alert.setContentText("Form contains blank fields.");
                 alert.showAndWait();
             }
-
-            else {
-                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                if (modPartInHouseBtn.isSelected()){
-                    InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()),true);
-                    Inventory.updatePart(modPartIndex, inHousePart);
-                }
-                else if (modPartOutsourcedBtn.isSelected()){
-                    Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(),false);
-                    Inventory.updatePart(modPartIndex, outsourcedPart);
-                }
-            }
+        } catch (NullPointerException e) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1080, 400);
+            stage.setTitle("Back to Main Screen");
+            stage.setScene(scene);
+            stage.show();
         }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Modifying Part");
-            alert.setContentText("Form contains blank fields.");
-            alert.showAndWait();
-        }
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 400);
-        stage.setTitle("Back to Main Screen");
-        stage.setScene(scene);
-        stage.show();
     }
 }

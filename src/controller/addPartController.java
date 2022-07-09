@@ -107,12 +107,13 @@ public class addPartController implements Initializable {
                     alert.setContentText(exception);
                     alert.showAndWait();
 
-                    Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
+                    /*Parent root = FXMLLoader.load(getClass().getResource("/view/addPart.fxml"));
                     Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root, 600, 600);
                     stage.setTitle("Add Part");
                     stage.setScene(scene);
                     stage.show();
+                     */
                 } else {
                     double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
                     if (addPartInHouseBtn.isSelected()) {

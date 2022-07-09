@@ -190,47 +190,51 @@ public class modProdController implements Initializable {
         String min = modProdMin.getText();
         String max = modProdMax.getText();
 
-        try {
-            exception = Product.validProd(name, price, stock, min, max);
-            if (exception != "") {
+        try{
+            try {
+                exception = Product.validProd(name, price, stock, min, max);
+                if (exception != "") {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding Product");
+                    alert.setContentText(exception);
+                    alert.showAndWait();
+                }
+
+                else {
+                    double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
+                    currentProd.setProdID(prodID);
+                    currentProd.setProdName(name);
+                    currentProd.setProdPrice(roundedPrice);
+                    currentProd.setProdStock(Integer.parseInt(stock));
+                    currentProd.setProdMin(Integer.parseInt(min));
+                    currentProd.setProdMax(Integer.parseInt(max));
+                    currentProd.setProdParts(ascPartsDisplay);
+                }
+            }
+            catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Adding Product");
-                alert.setContentText(exception);
+                alert.setContentText("Form contains blank fields.");
                 alert.showAndWait();
             }
-
-            else {
-                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                currentProd.setProdID(prodID);
-                currentProd.setProdName(name);
-                currentProd.setProdPrice(roundedPrice);
-                currentProd.setProdStock(Integer.parseInt(stock));
-                currentProd.setProdMin(Integer.parseInt(min));
-                currentProd.setProdMax(Integer.parseInt(max));
-                currentProd.setProdParts(ascPartsDisplay);
-            }
         }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Adding Product");
-            alert.setContentText("Form contains blank fields.");
-            alert.showAndWait();
-        }
-        //clear variables
-        ascPartsDisplay = null;
-        modProdAscPartTable.setItems(ascPartsDisplay);
-        modProdAscPartTable.refresh();
-        currentProd = null;
-        exception = "";
+        catch (NullPointerException e) {
+            //clear variables
+            ascPartsDisplay = null;
+            modProdAscPartTable.setItems(ascPartsDisplay);
+            modProdAscPartTable.refresh();
+            currentProd = null;
+            exception = "";
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 400);
-        stage.setTitle("Back to Main Screen");
-        stage.setScene(scene);
-        stage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1080, 400);
+            stage.setTitle("Back to Main Screen");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /**

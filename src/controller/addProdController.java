@@ -149,37 +149,40 @@ public class addProdController implements Initializable {
         String min = prodMin.getText();
         String max = prodMax.getText();
 
-        try {
-            exception = Product.validProd(name, price, stock, min, max);
-            if (exception != "") {
+        try{
+            try {
+                exception = Product.validProd(name, price, stock, min, max);
+                if (exception != "") {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding Product");
+                    alert.setContentText(exception);
+                    alert.showAndWait();
+                }
+
+                else {
+                    double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
+                    Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+                    prod.setProdParts(ascParts);
+                    Inventory.addProduct(prod);
+                }
+            }
+            catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Adding Product");
-                alert.setContentText(exception);
+                alert.setContentText("Form contains blank fields.");
                 alert.showAndWait();
             }
-
-            else {
-                double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                prod.setProdParts(ascParts);
-                Inventory.addProduct(prod);
-            }
         }
-        catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Adding Product");
-            alert.setContentText("Form contains blank fields.");
-            alert.showAndWait();
+        catch (NullPointerException e){
+            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1080, 400);
+            stage.setTitle("Back to Main Screen");
+            stage.setScene(scene);
+            stage.show();
         }
-
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 1080, 400);
-        stage.setTitle("Back to Main Screen");
-        stage.setScene(scene);
-        stage.show();
     }
 
     /**
