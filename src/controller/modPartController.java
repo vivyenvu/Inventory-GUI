@@ -123,12 +123,10 @@ public class modPartController implements Initializable {
         boolean madeInHouse = true;
         if (modPartInHouseBtn.isSelected()) {
             madeInHouse = true;
-        } else if (modPartOutsourcedBtn.isSelected()) {
+        }
+        else if (modPartOutsourcedBtn.isSelected()) {
             madeInHouse = false;
         }
-
-        try {
-            try {
                 exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
                 if (exception != "") {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -137,7 +135,6 @@ public class modPartController implements Initializable {
                     alert.setContentText(exception);
                     alert.showAndWait();
 
-
                     /*Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
                     Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root, 600, 600);
@@ -145,30 +142,29 @@ public class modPartController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                      */
-                } else {
+                }
+                else {
                     double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
                     if (modPartInHouseBtn.isSelected()) {
-                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(modPartMachineOrCompany.getText()), true);
+                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(machOrComp), true);
                         Inventory.updatePart(modPartIndex, inHousePart);
-                    } else if (modPartOutsourcedBtn.isSelected()) {
-                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), modPartMachineOrCompany.getText(), false);
+                    }
+                    else if (modPartOutsourcedBtn.isSelected()) {
+                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), machOrComp, false);
                         Inventory.updatePart(modPartIndex, outsourcedPart);
                     }
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root, 1080, 400);
+                    stage.setTitle("Back to Main Screen");
+                    stage.setScene(scene);
+                    stage.show();
                 }
-            } catch (NumberFormatException e) {
+             /*catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("Form contains blank fields.");
-                alert.showAndWait();
-            }
-        } catch (NullPointerException e) {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1080, 400);
-            stage.setTitle("Back to Main Screen");
-            stage.setScene(scene);
-            stage.show();
-        }
+                alert.showAndWait(); }*/
     }
 }

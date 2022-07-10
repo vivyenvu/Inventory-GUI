@@ -85,7 +85,7 @@ public class addProdController implements Initializable {
      */
     public void onAddProdCancelBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1080, 400);
         stage.setTitle("Back to Main Screen");
         stage.setScene(scene);
@@ -96,14 +96,13 @@ public class addProdController implements Initializable {
      * Add button adds selected part to the bottom table.
      */
     public void onAddProdAddPartBtn(ActionEvent actionEvent) {
-            Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
+        Part part = (Part) prodPartMainTable.getSelectionModel().getSelectedItem();
         if (part == null) {
             Alert err = new Alert(Alert.AlertType.ERROR);
             err.setTitle("Error");
             err.setContentText("Please select a part. ");
             err.show();
-        }
-        else {
+        } else {
             ascParts.add(part);
             prodAscPartTable.setItems(ascParts);
             prodAscPartTable.refresh();
@@ -120,12 +119,12 @@ public class addProdController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-                Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
-                if (ascParts.contains(p)) {
-                    //deleteAssociatedPart(p);
-                    ascParts.remove(p);
-                    prodAscPartTable.setItems(ascParts);
-                }
+            Part p = (Part) prodAscPartTable.getSelectionModel().getSelectedItem();
+            if (ascParts.contains(p)) {
+                //deleteAssociatedPart(p);
+                ascParts.remove(p);
+                prodAscPartTable.setItems(ascParts);
+            }
         }
     }
 
@@ -135,12 +134,12 @@ public class addProdController implements Initializable {
      * that will be added to the Inventory.allProducts List.
      * Otherwise, error messages will pop up. After completion, scene transitions back to the Main screen.
      */
-    public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException{
+    public void onAddProdSaveBtn(ActionEvent actionEvent) throws IOException {
         int prodID = Inventory.getAllProducts().size() + 9;
         for (int i = 0; i < Inventory.getAllProducts().size(); i++) {
             if (Inventory.getAllProducts().get(i).getProdID() == prodID) {
-                prodID ++;
-                i=0;
+                prodID++;
+                i = 0;
             }
         }
         String name = prodName.getText();
@@ -149,41 +148,39 @@ public class addProdController implements Initializable {
         String min = prodMin.getText();
         String max = prodMax.getText();
 
-        try{
-            try {
-                exception = Product.validProd(name, price, stock, min, max);
-                if (exception != "") {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Error Adding Product");
-                    alert.setContentText(exception);
-                    alert.showAndWait();
-                }
+        exception = Product.validProd(name, price, stock, min, max);
+        if (exception != "") {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Adding Product");
+            alert.setContentText(exception);
+            alert.showAndWait();
+        } else {
+            double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+            Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
+            prod.setProdParts(ascParts);
+            Inventory.addProduct(prod);
 
-                else {
-                    double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                    Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
-                    prod.setProdParts(ascParts);
-                    Inventory.addProduct(prod);
-                }
-            }
-            catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding Product");
-                alert.setContentText("Form contains blank fields.");
-                alert.showAndWait();
-            }
-        }
-        catch (NullPointerException e){
             Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-            Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 1080, 400);
             stage.setTitle("Back to Main Screen");
             stage.setScene(scene);
             stage.show();
         }
     }
+            /*
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding Product");
+                alert.setContentText("Form contains blank fields.");
+                alert.showAndWait();
+            */
+
+
+
+
+
 
     /**
      * Takes partial name or partial id to search for the part in the Inventory.allParts List.
