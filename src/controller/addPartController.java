@@ -105,6 +105,33 @@ public class addPartController implements Initializable {
         } else if (addPartOutsourcedBtn.isSelected()) {
             madeInHouse = false;
         }
+        String errorMessages = "";
+        Double validatedPrice;
+        try {
+            validatedPrice = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Not a double. \n";
+        }
+        if (price < 0){
+            //add text to alert area of screen (dont display just yet)
+            //append to string to be displayed in alert area
+            //errorMessages += "Price has to be positive";
+        }
+        if (name.isEmpty()){
+            //another validation
+            //append to string to be displayed in alert area
+        }
+        if (true){
+            //another validation
+            //append to string to be displayed in alert area
+        }
+        if (errorMessages.compareTo("")){ //alert area of the screen is not blank .empty()? .equals()?
+            //display or refresh the mssage
+        }
+        else{ //alert area of the screen is blank
+            //save
+        }
                 exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
                 if (exception != "") {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

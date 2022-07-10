@@ -1,209 +1,110 @@
 package model;
+/**
+ * Supplied class Part.java
+ */
 
 /**
- * Supplied class Part.java. A part can stand alone or be associated with a product.
+ *
+ * @author Evan Smith
  */
 public abstract class Part {
-    private int partID;
-    private String partName;
-    private double partPrice;
-    private int partStock;
-    private int partMin;
-    private int partMax;
-    boolean madeInHouse;
-
-    /**
-     * Constructor for a Part.
-     * @param partID part identification number
-     * @param partName name of part
-     * @param partPrice price of part
-     * @param partStock inventory level of part
-     * @param partMin miniumum inventory level
-     * @param partMax maximum inventory level
-     * @param madeInHouse tells whether part was made in house or outsourced
-     */
-    public Part(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, boolean madeInHouse) {
-        this.partID = partID;
-        this.partName = partName;
-        this.partPrice = partPrice;
-        this.partStock = partStock;
-        this.partMin = partMin;
-        this.partMax = partMax;
-        this.madeInHouse = madeInHouse;
-    }
-
-    //Getters
-
-    /**
-     * @return part identification number
-     */
-     public int getPartID() {
-        return partID;
-     }
-
-    /**
-     * @return part's name
-     */
-     public String getPartName() {
-        return partName;
-     }
-
-    /**
-     * @return part's price
-     */
-     public double getPartPrice() {
-        return partPrice;
-     }
-
-    /**
-     * @return part's inventory level
-     */
-     public int getPartStock() {
-        return partStock;
-     }
-
-    /**
-     * @return part's minimum inventory level
-     */
-     public int getPartMin() {
-        return partMin;
-     }
-
-    /**
-     * @return part's maximum inventory level
-     */
-     public int getPartMax() {
-        return partMax;
-     }
-
-    /**
-     * @return a boolean on whether the part was made in house
-     */
-     public boolean isMadeInHouse() {
-        return madeInHouse;
-     }
-
-     //Setters
-
-    /**
-     * @param partID the part's identification number
-     */
-    public void setPartID (int partID){
-        this.partID = partID;
+    private int id;
+    private String name;
+    private double price;
+    private int stock;
+    private int min;
+    private int max;
+    public Part(int id, String name, double price, int stock, int min, int max) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.min = min;
+        this.max = max;
     }
 
     /**
-     * @param partName the part's name
+     * @return the id
      */
-    public void setPartName(String partName) {
-        this.partName = partName;
+    public int getId() {
+        return id;
     }
 
     /**
-     * @param partPrice the part's price
+     * @param id the id to set
      */
-    public void setPartPrice(double partPrice) {
-        this.partPrice = partPrice;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
-     * @param partStock the part's inventory level
+     * @return the name
      */
-    public void setPartStock (int partStock) {
-        this.partStock = partStock;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param partMin the part's minimum inventory level
+     * @param name the name to set
      */
-    public void setPartMin (int partMin) {
-        this.partMin = partMin;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @param partMax the part's maximum inventory level
+     * @return the price
      */
-    public void setPartMax (int partMax) {
-        this.partMax = partMax;
+    public double getPrice() {
+        return price;
     }
 
     /**
-     * @param madeInHouse whether the part was made in house
+     * @param price the price to set
      */
-    public void setMadeInHouse (boolean madeInHouse) {
-        this.madeInHouse = madeInHouse;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     /**
-     * This method takes the data input in the text fields and validates them. Eg. name has to be a string and
-     * cannot be empty, price must be a double, etc.
-     * @param name name of part
-     * @param price price of part
-     * @param stock stock of part
-     * @param min minimum inventory level
-     * @param max maximum inventory level
-     * @param machOrComp entered data that may either be the machineID or the companyName
-     * @param madeInHouse whether the part was made in house
-     * @return invalid which is a string including data validation errors
+     * @return the stock
      */
-    public static String validPart(String name,String price, String stock, String min, String max, String machOrComp, boolean madeInHouse) {
-        double priced = 1.00;
-        int stocki = 1;
-        int mini = 0;
-        int maxi =1;
-        int machi;
-        String invalid = "";
+    public int getStock() {
+        return stock;
+    }
 
-        try {
-            priced = Double.parseDouble(price);
-        }
-        catch (NumberFormatException e) {
-            invalid += "Price must be a double. ";
-        }
-        try {
-            stocki = Integer.parseInt(stock);
-        }
-        catch (NumberFormatException e) {
-            invalid += "Inventory must be an integer. ";
-            }
-        try {
-            mini = Integer.parseInt(min);
-        }
-        catch (NumberFormatException e) {
-            invalid += "Min must be an integer. ";
-        }
-        try {
-            maxi = Integer.parseInt(max);
-         }
-         catch (NumberFormatException e) {
-             invalid += "Max must be an integer. ";
-         }
-        if (madeInHouse == true) {
-            try {
-                machi = Integer.parseInt(machOrComp);
-            }
-            catch (NumberFormatException e) {
-                invalid += "Machine ID must be an integer. ";
-            }
-        }
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
-        if (madeInHouse == false && machOrComp.isEmpty()) {
-                invalid += "Machine ID must be an integer. ";
-        }
-        if (name.isEmpty()) {
-            invalid += "Name field is required. ";
-        }
-        if (priced <= 0) {
-            invalid += "Price must be greater than $0 ";
-        }
-        if (stocki < mini || stocki > maxi) {
-            invalid += "Stock must be between min and max values. ";
-        }
-        if (stocki < 1){
-            invalid += "Stock must be greater than 0. ";
-        }
-        if (mini > maxi) {
-            invalid += "Min must be less than max. ";
-        }
-            return invalid;
-    }}
+    /**
+     * @return the min
+     */
+    public int getMin() {
+        return min;
+    }
+
+    /**
+     * @param min the min to set
+     */
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    /**
+     * @return the max
+     */
+    public int getMax() {
+        return max;
+    }
+
+    /**
+     * @param max the max to set
+     */
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+}
