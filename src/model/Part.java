@@ -145,11 +145,6 @@ public abstract class Part {
      * @param machOrComp entered data that may either be the machineID or the companyName
      * @param madeInHouse whether the part was made in house
      * @return invalid which is a string including data validation errors
-     * <p><b>
-     * FUTURE ENHANCEMENT: This method is very long and can look messy or redundant. In the future,
-     * I could break up the validation process, such as putting them into the variable setters,
-     * so that it would improve readability and modularity of code.
-     * </p></b>
      */
     public static String validPart(String name,String price, String stock, String min, String max, String machOrComp, boolean madeInHouse) {
         double priced = 1.00;

@@ -166,6 +166,11 @@ public class Product {
      * @param min minimum inventory level
      * @param max maximum inventory level
      * @return a string including data validation errors
+     * <p><b>
+     * FUTURE ENHANCEMENT: This method is very long and can look messy or redundant. In the future,
+     * I could break up the validation process, such as putting them into the variable setters,
+     * so that it would improve readability and modularity of code.
+     * </p></b>
      */
     public static String validProd(String name,String price, String stock, String min, String max) {
         double priced = 1.00;
