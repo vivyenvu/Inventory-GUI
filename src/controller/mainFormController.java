@@ -192,8 +192,6 @@ public class mainFormController implements Initializable {
             notSelected.show();
         }
     }
-
-
     /**
      * Modify button calls sendProd method to take the data of the selected product
      * and send it to the Modify Product scene. Scene changes to Modify Product scene.

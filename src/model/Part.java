@@ -1,12 +1,9 @@
 package model;
 /**
- * Supplied class Part.java
- */
-
-/**
- *
+ * Supplied class Part.java.
  * @author Vivyen Vu
  */
+
 public abstract class Part {
     private int id;
     private String name;

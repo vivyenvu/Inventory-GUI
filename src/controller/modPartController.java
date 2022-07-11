@@ -48,6 +48,11 @@ public class modPartController implements Initializable {
      */
     private int modPartIndex;
 
+    /**
+     * Does nothing because scene is set up by mainFormController
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

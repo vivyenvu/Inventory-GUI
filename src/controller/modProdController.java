@@ -179,10 +179,10 @@ public class modProdController implements Initializable {
         modProdAscPartTable.getItems().clear();
         modProdAscPartTable.setItems(ascPartsDisplay);
 
-        modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        modProdAscPartTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        modProdAscPartTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        modProdAscPartTableStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        modProdAscPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         modProdAscPartTable.refresh();
     }
 

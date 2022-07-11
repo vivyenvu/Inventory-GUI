@@ -41,6 +41,12 @@ public class addPartController implements Initializable {
      * onAddPartSaveBtn method.
      */
     private String exception = "";
+
+    /**
+     * Does nothing because scene is set up by mainFormController
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

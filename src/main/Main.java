@@ -12,6 +12,13 @@ import model.Product;
 
 /**
  * Application starts by showing the Main Form.
+ * <p><b>
+ * FUTURE ENHANCEMENT: Instead of being able to add multiple instances of the same
+ * associated part in the Modify Product or Add Product menu, a better feature would be
+ * to increase the inventory of that part. For example, instead of adding Part 1 with
+ * and inventory of 3 three times (where it would have 3 different rows of the same part),
+ * I would have the table update so it only had one instance of Part 1 with an inventory of 9.
+ * </b></p>
  */
 public class Main extends Application {
     @Override
