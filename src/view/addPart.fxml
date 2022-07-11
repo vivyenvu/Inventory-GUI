@@ -37,6 +37,6 @@
       <TextField fx:id="addPartMachineID" layoutX="180.0" layoutY="315.0" prefWidth="120.0" />
       <Label fx:id="addPartMachineIDLabel" layoutX="75.0" layoutY="320.0" text="Machine ID" />
       <TextField fx:id="addPartMin" layoutX="395.0" layoutY="275.0" prefWidth="120.0" />
-      <Label fx:id="errorMessages" layoutX="50.0" layoutY="375.0" maxHeight="275.0" maxWidth="275.0" />
+      <Label fx:id="errorMessagesDisplay" layoutX="50.0" layoutY="375.0" maxHeight="275.0" maxWidth="275.0" />
    </children>
 </AnchorPane>

@@ -95,12 +95,12 @@ public class modPartController implements Initializable {
      * @param part  is the part that was selected from the main screen
      */
     public void sendPart(int index, Part part) {
-        modPartID.setText(String.valueOf(part.getPartID()));
-        modPartName.setText(part.getPartName());
-        modPartStock.setText(String.valueOf(part.getPartStock()));
-        modPartPrice.setText(String.valueOf(part.getPartPrice()));
-        modPartMax.setText(String.valueOf(part.getPartMax()));
-        modPartMin.setText(String.valueOf(part.getPartMin()));
+        modPartID.setText(String.valueOf(part.getId()));
+        modPartName.setText(part.getName());
+        modPartStock.setText(String.valueOf(part.getStock()));
+        modPartPrice.setText(String.valueOf(part.getPrice()));
+        modPartMax.setText(String.valueOf(part.getMax()));
+        modPartMin.setText(String.valueOf(part.getMin()));
         modPartIndex = index;
 
         if (part instanceof InHouse) {
@@ -154,11 +154,11 @@ public class modPartController implements Initializable {
                 else {
                     double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
                     if (modPartInHouseBtn.isSelected()) {
-                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(machOrComp), true);
+                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(machOrComp));
                         Inventory.updatePart(modPartIndex, inHousePart);
                     }
                     else if (modPartOutsourcedBtn.isSelected()) {
-                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), machOrComp, false);
+                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), machOrComp);
                         Inventory.updatePart(modPartIndex, outsourcedPart);
                     }
                     Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));

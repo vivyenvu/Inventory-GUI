@@ -40,7 +40,7 @@ public class Inventory {
      */
     public static Part lookupPart(int partID) {
         for (Part part : allParts) {
-            if (part.getPartID() == partID) {
+            if (part.getId() == partID) {
                 return part;
             }
         }
@@ -69,7 +69,7 @@ public class Inventory {
     public static ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         for (Part part : allParts) {
-            if ((part.getPartName()).contains(partName)) {
+            if ((part.getName()).contains(partName)) {
                 foundParts.add(part);
             }
         }

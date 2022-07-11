@@ -18,10 +18,9 @@ public class Outsourced extends Part{
      * @param partMin minimum inventory level
      * @param partMax maximum inventory level
      * @param companyName name of company that made the part
-     * @param madeInHouse should be false to say that this Outsourced object was not made in house
      */
-    public Outsourced(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, String companyName, boolean madeInHouse) {
-        super(partID, partName, partPrice, partStock, partMin, partMax, madeInHouse);
+    public Outsourced(int partID, String partName, double partPrice, int partStock, int partMin, int partMax, String companyName) {
+        super(partID, partName, partPrice, partStock, partMin, partMax);
         this.companyName = companyName;
     }
 
