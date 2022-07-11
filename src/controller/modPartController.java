@@ -35,6 +35,7 @@ public class modPartController implements Initializable {
     public TextField modPartMax;
     public TextField modPartMachineOrCompany;
     public TextField modPartMin;
+    public Label errorMessagesDisplay;
 
     /**
      * Empty string to hold validation errors from Part.validPart() in the
@@ -128,51 +129,90 @@ public class modPartController implements Initializable {
         String min = modPartMin.getText();
         String max = modPartMax.getText();
         String machOrComp = modPartMachineOrCompany.getText();
-        boolean madeInHouse = true;
-        if (modPartInHouseBtn.isSelected()) {
-            madeInHouse = true;
-        }
-        else if (modPartOutsourcedBtn.isSelected()) {
-            madeInHouse = false;
-        }
-                //exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
-                if (exception != "") {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Error Modifying Part");
-                    alert.setContentText(exception);
-                    alert.showAndWait();
 
-                    /*Parent root = FXMLLoader.load(getClass().getResource("/view/modPart.fxml"));
-                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root, 600, 600);
-                    stage.setTitle("Add Part");
-                    stage.setScene(scene);
-                    stage.show();
-                     */
+        String errorMessages = "";
+
+        if (name.isEmpty()){
+            errorMessages += "Name field is required. \n";
+        }
+        try {
+            Double validatedPrice = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Price must be a double. \n";
+        }
+        try {
+            int validatedStock = Integer.parseInt(stock);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Inventory must be an integer. \n";
+        }
+        try {
+            int validatedMax = Integer.parseInt(max);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Max must be an integer. \n";
+        }
+
+        try {
+            int validatedMin = Integer.parseInt(min);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Min must be an integer. \n";
+        }
+
+        if (modPartInHouseBtn.isSelected()) {
+            try {
+                int validatedMachineID = Integer.parseInt(machOrComp);
+            }
+            catch (NumberFormatException e) {
+                errorMessages += "Machine ID must be an integer. \n";
+            }
+        }
+        if (errorMessages != ""){
+            errorMessagesDisplay.setText(errorMessages);
+        }
+        else {
+            errorMessages = "";
+            int validatedStock =  Integer.parseInt(stock);
+            int validatedMin = Integer.parseInt(min);
+            int validatedMax = Integer.parseInt(max);
+            Double validatedPrice = Double.parseDouble(price);
+
+            if (validatedMin > validatedMax) {
+                errorMessages += "Min must be less than max. \n";
+            }
+            if (validatedStock < validatedMin || validatedStock > validatedMax) {
+                errorMessages += "Stock must be between min and max values. \n";
+            }
+            if (validatedStock < 1){
+                errorMessages += "Stock must be greater than 0. \n";
+            }
+            if (validatedPrice < 0){
+                errorMessages += "Price must be greater than 0. \n";
+            }
+
+            if (errorMessages != ""){
+                errorMessagesDisplay.setText("");
+                errorMessagesDisplay.setText(errorMessages);
+            }
+            else {
+                double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+                if (modPartInHouseBtn.isSelected()) {
+                    InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(machOrComp));
+                    Inventory.updatePart(modPartIndex, inHousePart);
                 }
-                else {
-                    double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
-                    if (modPartInHouseBtn.isSelected()) {
-                        InHouse inHousePart = new InHouse(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(machOrComp));
-                        Inventory.updatePart(modPartIndex, inHousePart);
-                    }
-                    else if (modPartOutsourcedBtn.isSelected()) {
-                        Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), machOrComp);
-                        Inventory.updatePart(modPartIndex, outsourcedPart);
-                    }
-                    Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root, 1080, 400);
-                    stage.setTitle("Back to Main Screen");
-                    stage.setScene(scene);
-                    stage.show();
+                else if (modPartOutsourcedBtn.isSelected()) {
+                    Outsourced outsourcedPart = new Outsourced(Integer.parseInt(partID), name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max), machOrComp);
+                    Inventory.updatePart(modPartIndex, outsourcedPart);
                 }
-             /*catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Modifying Part");
-                alert.setContentText("Form contains blank fields.");
-                alert.showAndWait(); }*/
+                Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1080, 400);
+                stage.setTitle("Back to Main Screen");
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
     }
 }

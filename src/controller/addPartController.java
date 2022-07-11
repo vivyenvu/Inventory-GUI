@@ -187,14 +187,5 @@ public class addPartController implements Initializable {
                 stage.show();
             }
         }
-
-
-            /*catch (NumberFormatException e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding Part");
-                alert.setContentText("Form contains blank fields.");
-                alert.showAndWait();
-            }*/
     }
 }
