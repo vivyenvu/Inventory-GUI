@@ -136,16 +136,16 @@ public class modPartController implements Initializable {
             errorMessages += "Name field is required. \n";
         }
         try {
-            Double validatedPrice = Double.parseDouble(price);
-        }
-        catch (NumberFormatException e) {
-            errorMessages += "Price must be a double. \n";
-        }
-        try {
             int validatedStock = Integer.parseInt(stock);
         }
         catch (NumberFormatException e) {
             errorMessages += "Inventory must be an integer. \n";
+        }
+        try {
+            Double validatedPrice = Double.parseDouble(price);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Price must be a double. \n";
         }
         try {
             int validatedMax = Integer.parseInt(max);

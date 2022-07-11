@@ -47,6 +47,7 @@ public class modProdController implements Initializable {
     public TextField modProdMin;
     public TextField modProdID;
     public TextField queryModProdPartSearch;
+    public Label errorMessagesDisplay;
 
     /**
      * Empty string to hold validation errors from Product.validProd() in the
@@ -72,10 +73,10 @@ public class modProdController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         modProdMainTable.setItems(getAllParts());
 
-        modProdMainTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        modProdMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        modProdMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        modProdMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        modProdMainTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        modProdMainTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        modProdMainTableStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        modProdMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         //modProdAscPartTable.getItems().clear();
     }
@@ -190,7 +191,7 @@ public class modProdController implements Initializable {
      * If all the data is valid, then that product's information will be updated.
      * Otherwise, error messages will pop up. After completion, you are redirected back to the Main screen.
      */
-    public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException{
+    public void onModProdSaveBtn(ActionEvent actionEvent) throws IOException {
         int prodID = Integer.parseInt(modProdID.getText());
         String name = modProdName.getText();
         String stock = modProdStock.getText();
@@ -198,46 +199,87 @@ public class modProdController implements Initializable {
         String min = modProdMin.getText();
         String max = modProdMax.getText();
 
-                exception = Product.validProd(name, price, stock, min, max);
-                if (exception != "") {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Error Adding Product");
-                    alert.setContentText(exception);
-                    alert.showAndWait();
-                }
-                else {
-                    double roundedPrice = (Math.round(Double.parseDouble(price)*100))/100.0;
-                    currentProd.setProdID(prodID);
-                    currentProd.setProdName(name);
-                    currentProd.setProdPrice(roundedPrice);
-                    currentProd.setProdStock(Integer.parseInt(stock));
-                    currentProd.setProdMin(Integer.parseInt(min));
-                    currentProd.setProdMax(Integer.parseInt(max));
-                    currentProd.setProdParts(ascPartsDisplay);
+        String errorMessages = "";
 
-                    //clear variables
-                    ascPartsDisplay = null;
-                    modProdAscPartTable.setItems(ascPartsDisplay);
-                    modProdAscPartTable.refresh();
-                    currentProd = null;
-                    exception = "";
-
-                    Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-                    Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root, 1080, 400);
-                    stage.setTitle("Back to Main Screen");
-                    stage.setScene(scene);
-                    stage.show();
-                }
-            /*
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding Product");
-                alert.setContentText("Form contains blank fields.");
-                alert.showAndWait();
-            */
+        if (name.isEmpty()) {
+            errorMessages += "Name field is required. \n";
         }
+        try {
+            int validatedStock = Integer.parseInt(stock);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Inventory must be an integer. \n";
+        }
+        try {
+            Double validatedPrice = Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            errorMessages += "Price must be a double. \n";
+        }
+        try {
+            int validatedMax = Integer.parseInt(max);
+        } catch (NumberFormatException e) {
+            errorMessages += "Max must be an integer. \n";
+        }
+
+        try {
+            int validatedMin = Integer.parseInt(min);
+        } catch (NumberFormatException e) {
+            errorMessages += "Min must be an integer. \n";
+        }
+
+        if (errorMessages != "") {
+            errorMessagesDisplay.setText(errorMessages);
+        }
+        else {
+            errorMessages = "";
+            int validatedStock = Integer.parseInt(stock);
+            int validatedMin = Integer.parseInt(min);
+            int validatedMax = Integer.parseInt(max);
+            Double validatedPrice = Double.parseDouble(price);
+
+            if (validatedMin > validatedMax) {
+                errorMessages += "Min must be less than max. \n";
+            }
+            if (validatedStock < validatedMin || validatedStock > validatedMax) {
+                errorMessages += "Stock must be between min and max values. \n";
+            }
+            if (validatedStock < 1) {
+                errorMessages += "Stock must be greater than 0. \n";
+            }
+            if (validatedPrice < 0) {
+                errorMessages += "Price must be greater than 0. \n";
+            }
+
+            if (errorMessages != "") {
+                errorMessagesDisplay.setText("");
+                errorMessagesDisplay.setText(errorMessages);
+            }
+            else {
+                double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+                currentProd.setProdID(prodID);
+                currentProd.setProdName(name);
+                currentProd.setProdPrice(roundedPrice);
+                currentProd.setProdStock(Integer.parseInt(stock));
+                currentProd.setProdMin(Integer.parseInt(min));
+                currentProd.setProdMax(Integer.parseInt(max));
+                currentProd.setProdParts(ascPartsDisplay);
+
+                //clear variables
+                ascPartsDisplay = null;
+                modProdAscPartTable.setItems(ascPartsDisplay);
+                modProdAscPartTable.refresh();
+                currentProd = null;
+                exception = "";
+
+                Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1080, 400);
+                stage.setTitle("Back to Main Screen");
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+    }
 
 
     /**

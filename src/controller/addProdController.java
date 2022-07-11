@@ -46,6 +46,7 @@ public class addProdController implements Initializable {
     public TableColumn ascPartName;
     public TableColumn ascPartStock;
     public TableColumn ascPartPrice;
+    public Label errorMessagesDisplay;
 
     /**
      * Empty string to hold validation errors from Product.validProd() in the
@@ -67,17 +68,17 @@ public class addProdController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         prodPartMainTable.setItems(getAllParts());
 
-        prodPartMainTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        prodPartMainTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        prodPartMainTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        prodPartMainTableStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        prodPartMainTablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         prodAscPartTable.setItems(ascParts);
 
-        ascPartID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        ascPartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        ascPartStock.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        ascPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ascPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ascPartStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ascPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     /**
@@ -156,14 +157,61 @@ public class addProdController implements Initializable {
         String min = prodMin.getText();
         String max = prodMax.getText();
 
-        exception = Product.validProd(name, price, stock, min, max);
-        if (exception != "") {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error Adding Product");
-            alert.setContentText(exception);
-            alert.showAndWait();
-        } else {
+        String errorMessages = "";
+
+        if (name.isEmpty()) {
+            errorMessages += "Name field is required. \n";
+        }
+        try {
+            int validatedStock = Integer.parseInt(stock);
+        } catch (NumberFormatException e) {
+            errorMessages += "Inventory must be an integer. \n";
+        }
+        try {
+            Double validatedPrice = Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            errorMessages += "Price must be a double. \n";
+        }
+        try {
+            int validatedMax = Integer.parseInt(max);
+        } catch (NumberFormatException e) {
+            errorMessages += "Max must be an integer. \n";
+        }
+
+        try {
+            int validatedMin = Integer.parseInt(min);
+        } catch (NumberFormatException e) {
+            errorMessages += "Min must be an integer. \n";
+        }
+
+        if (errorMessages != "") {
+            errorMessagesDisplay.setText(errorMessages);
+        }
+        else {
+            errorMessages = "";
+            int validatedStock = Integer.parseInt(stock);
+            int validatedMin = Integer.parseInt(min);
+            int validatedMax = Integer.parseInt(max);
+            Double validatedPrice = Double.parseDouble(price);
+
+            if (validatedMin > validatedMax) {
+                errorMessages += "Min must be less than max. \n";
+            }
+            if (validatedStock < validatedMin || validatedStock > validatedMax) {
+                errorMessages += "Stock must be between min and max values. \n";
+            }
+            if (validatedStock < 1) {
+                errorMessages += "Stock must be greater than 0. \n";
+            }
+            if (validatedPrice < 0) {
+                errorMessages += "Price must be greater than 0. \n";
+            }
+
+        if (errorMessages != "") {
+            errorMessagesDisplay.setText("");
+            errorMessagesDisplay.setText(errorMessages);
+        }
+        else {
             double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
             Product prod = new Product(prodID, name, roundedPrice, Integer.parseInt(stock), Integer.parseInt(min), Integer.parseInt(max));
             prod.setProdParts(ascParts);
@@ -175,20 +223,9 @@ public class addProdController implements Initializable {
             stage.setTitle("Back to Main Screen");
             stage.setScene(scene);
             stage.show();
+            }
         }
     }
-            /*
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding Product");
-                alert.setContentText("Form contains blank fields.");
-                alert.showAndWait();
-            */
-
-
-
-
-
 
     /**
      * Takes partial name or partial id to search for the part in the Inventory.allParts List.
