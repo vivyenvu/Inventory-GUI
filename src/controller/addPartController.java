@@ -102,91 +102,93 @@ public class addPartController implements Initializable {
         String machOrComp = addPartMachineID.getText();
 
         String errorMessages = "";
-        Double validatedPrice = Double.valueOf(0);
-        int validatedStock = 0;
-        int validatedMin = 0;
-        int validatedMax = 0;
-        int validatedMachineID = 0;
 
+        if (name.isEmpty()){
+            errorMessages += "Name field is required. \n";
+        }
         try {
-            validatedPrice = Double.parseDouble(price);
-            if (validatedPrice < 0){
-                errorMessages += "Price must be greater than 0. \n";
-            }
+            Double validatedPrice = Double.parseDouble(price);
         }
         catch (NumberFormatException e) {
             errorMessages += "Price must be a double. \n";
         }
-
         try {
-            validatedStock = Integer.parseInt(price);
-            try {
-                validatedMin = Integer.parseInt(min);
-                try {
-                    validatedMax = Integer.parseInt(max);
-
-                    if (validatedStock < validatedMin || validatedStock > validatedMax) {
-                        errorMessages += "Stock must be between min and max values. ";
-                    }
-                    if (validatedStock < 1){
-                        errorMessages += "Stock must be greater than 0. ";
-                    }
-                    if (validatedMin > validatedMax) {
-                        errorMessages += "Min must be less than max. ";
-                    }
-                }
-                catch (NumberFormatException e) {
-                    errorMessages += "Max must be an integer. \n";
-                }
-            }
-            catch (NumberFormatException e) {
-                errorMessages += "Min must be an integer. \n";
-            }
+            int validatedStock = Integer.parseInt(stock);
         }
         catch (NumberFormatException e) {
             errorMessages += "Inventory must be an integer. \n";
         }
+        try {
+            int validatedMax = Integer.parseInt(max);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Max must be an integer. \n";
+        }
+
+        try {
+            int validatedMin = Integer.parseInt(min);
+        }
+        catch (NumberFormatException e) {
+            errorMessages += "Min must be an integer. \n";
+        }
 
         if (addPartInHouseBtn.isSelected()) {
             try {
-                validatedMachineID = Integer.parseInt(machOrComp);
+                int validatedMachineID = Integer.parseInt(machOrComp);
             }
             catch (NumberFormatException e) {
                 errorMessages += "Machine ID must be an integer. \n";
             }
         }
-
-        /*if (validatedPrice < 0){
-            errorMessages += "Price must be greater than 0. \n";
-            //add text to alert area of screen (dont display just yet)
-            //append to string to be displayed in alert area
-            //errorMessages += "Price has to be positive";
-        }*/
-        if (name.isEmpty()){
-            errorMessages += "Name field is required. /n";
-        }
         if (errorMessages != ""){
             errorMessagesDisplay.setText(errorMessages);
         }
-        else{
-            double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
-            if (addPartInHouseBtn.isSelected()) {
-                InHouse inHousePart = new InHouse(partID, name, roundedPrice, validatedStock, validatedMin, validatedMax, validatedMachineID);
-                Inventory.addPart(inHousePart);
+        else {
+            errorMessages = "";
+            int validatedStock =  Integer.parseInt(stock);
+            int validatedMin = Integer.parseInt(min);
+            int validatedMax = Integer.parseInt(max);
+            Double validatedPrice = Double.parseDouble(price);
 
-
-            } else if (addPartOutsourcedBtn.isSelected()) {
-                Outsourced outsourcedPart = new Outsourced(partID, name, roundedPrice, validatedStock, validatedMin, validatedMax, machOrComp);
-                Inventory.addPart(outsourcedPart);
+            if (validatedMin > validatedMax) {
+                errorMessages += "Min must be less than max. \n";
+            }
+            if (validatedStock < validatedMin || validatedStock > validatedMax) {
+                errorMessages += "Stock must be between min and max values. \n";
+            }
+            if (validatedStock < 1){
+                errorMessages += "Stock must be greater than 0. \n";
+            }
+            if (validatedPrice < 0){
+                errorMessages += "Price must be greater than 0. \n";
             }
 
-            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1080, 400);
-            stage.setTitle("Back to Main Screen");
-            stage.setScene(scene);
-            stage.show();
+            if (errorMessages != ""){
+                errorMessagesDisplay.setText("");
+                errorMessagesDisplay.setText(errorMessages);
+            }
+            else{
+                double roundedPrice = (Math.round(Double.parseDouble(price) * 100)) / 100.0;
+                if (addPartInHouseBtn.isSelected()) {
+                    int validatedMachineID = Integer.parseInt(machOrComp);
+                    InHouse inHousePart = new InHouse(partID, name, roundedPrice, validatedStock, validatedMin, validatedMax, validatedMachineID);
+                    Inventory.addPart(inHousePart);
+
+                } else if (addPartOutsourcedBtn.isSelected()) {
+                    Outsourced outsourcedPart = new Outsourced(partID, name, roundedPrice, validatedStock, validatedMin, validatedMax, machOrComp);
+                    Inventory.addPart(outsourcedPart);
+                }
+
+                Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 1080, 400);
+                stage.setTitle("Back to Main Screen");
+                stage.setScene(scene);
+                stage.show();
+            }
         }
+
+
             /*catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");

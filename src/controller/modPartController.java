@@ -135,7 +135,7 @@ public class modPartController implements Initializable {
         else if (modPartOutsourcedBtn.isSelected()) {
             madeInHouse = false;
         }
-                exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
+                //exception = Part.validPart(name, price, stock, min, max, machOrComp, madeInHouse);
                 if (exception != "") {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Error");

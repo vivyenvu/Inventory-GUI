@@ -68,10 +68,10 @@ public class mainFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainPartTable.setItems(getAllParts());
 
-        mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("partID"));
-        mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("partName"));
-        mainPartTableInventory.setCellValueFactory(new PropertyValueFactory<>("partStock"));
-        mainPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("partPrice"));
+        mainPartTableID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        mainPartTableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        mainPartTableInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        mainPartTablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         mainProdTable.setItems(getAllProducts());
 
@@ -270,10 +270,10 @@ public class mainFormController implements Initializable {
 
         if (!q.isEmpty()) {
             for (Part p : allParts) {
-                if (p.getPartName().contains(q)) {
+                if (p.getName().contains(q)) {
                     namedParts.add(p);
                 }
-                if (q.contains(String.valueOf(p.getPartID()))){
+                if (q.contains(String.valueOf(p.getId()))){
                     namedParts.add(p);
                 }
             }

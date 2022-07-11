@@ -204,10 +204,10 @@ public class addProdController implements Initializable {
 
         if (!q.isEmpty()) {
             for (Part p : allParts) {
-                if (p.getPartName().contains(q)) {
+                if (p.getName().contains(q)) {
                     namedParts.add(p);
                 }
-                if (q.contains(String.valueOf(p.getPartID()))) {
+                if (q.contains(String.valueOf(p.getId()))) {
                     namedParts.add(p);
                 }
             }
